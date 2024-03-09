@@ -1,0 +1,7 @@
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\ASControllerAPI.exe
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\ASControllerAPI.dll
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\ASControllerAPI.deps.json
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\ASControllerAPI.runtimeconfig.json
+C:\Users\Usuario\Documents\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\PubTmp\Out\ASControllerAPI.pdb

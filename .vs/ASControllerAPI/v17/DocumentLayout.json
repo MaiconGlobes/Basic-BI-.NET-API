@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|c:\\users\\usuario\\onedrive\\documentos\\git\\base-code-api-dotnet\\src\\controllers\\verify.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|solutionrelative:src\\controllers\\verify.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|c:\\users\\usuario\\onedrive\\documentos\\git\\base-code-api-dotnet\\src\\models\\instancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|solutionrelative:src\\models\\instancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InstanceModel.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Models\\InstanceModel.cs",
+              "RelativeDocumentMoniker": "Src\\Models\\InstanceModel.cs",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Models\\InstanceModel.cs",
+              "RelativeToolTip": "Src\\Models\\InstanceModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T01:29:51.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Verify.Controller.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Verify.Controller.cs",
+              "RelativeDocumentMoniker": "Src\\Controllers\\Verify.Controller.cs",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Verify.Controller.cs",
+              "RelativeToolTip": "Src\\Controllers\\Verify.Controller.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAtwBIAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T01:29:16.815Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 54,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 54,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
