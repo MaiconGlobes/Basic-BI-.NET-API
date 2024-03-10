@@ -1,4 +1,4 @@
-﻿namespace ASControllerAPI.Src.Utils
+﻿namespace BaseCodeAPI.Src.Utils
 {
    internal class UtilsClass
    {

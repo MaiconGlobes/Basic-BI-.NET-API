@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "ASControllerAPI/1.0.0": {
+      "BaseCodeAPI/1.0.0": {
         "dependencies": {
           "BaseCodeAPI": "1.0.0",
           "FluentValidation.AspNetCore": "11.3.0",
@@ -14,7 +14,7 @@
           "System.IO.Ports": "6.0.0"
         },
         "runtime": {
-          "ASControllerAPI.dll": {}
+          "BaseCodeAPI.dll": {}
         }
       },
       "FluentValidation/11.5.1": {
@@ -1335,7 +1335,7 @@
     }
   },
   "libraries": {
-    "ASControllerAPI/1.0.0": {
+    "BaseCodeAPI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

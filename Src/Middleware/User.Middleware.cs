@@ -1,6 +1,6 @@
-﻿using ASControllerAPI.Src.Utils;
+﻿using BaseCodeAPI.Src.Utils;
 
-namespace ASControllerAPI.Src.Middleware
+namespace BaseCodeAPI.Src.Middleware
 {
    public class UserMiddleware
    {

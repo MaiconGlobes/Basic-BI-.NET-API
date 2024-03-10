@@ -13,13 +13,11 @@ namespace BaseCodeAPI.Src.Models.Entity
 
       [JsonPropertyName("apelido")]
       [Column("apelido", TypeName = "varchar")]
-      [Required]
       [MaxLength(35, ErrorMessage = "Propriedade {0} deve ter no máximo 35 caracteres")]
       public string Apelido { get; set; }
 
       [JsonPropertyName("email")]
       [Column("email", TypeName = "varchar")]
-      [Required]
       [MaxLength(255, ErrorMessage = "Propriedade {0} deve ter no máximo 255 caracteres")]
       public string Email { get; set; }
 
@@ -45,13 +43,11 @@ namespace BaseCodeAPI.Src.Models.Entity
 
       [JsonPropertyName("municipio")]
       [Column("municipio", TypeName = "varchar")]
-      [Required]
       [MaxLength(100, ErrorMessage = "Propriedade {0} deve ter no máximo 100 caracteres")]
       public string Municipio { get; set; }
 
       [JsonPropertyName("uf")]
       [Column("uf", TypeName = "varchar")]
-      [Required]
       [MaxLength(2, ErrorMessage = "Propriedade {0} deve ter no máximo 2 caracteres")]
       public string Uf { get; set; }
 

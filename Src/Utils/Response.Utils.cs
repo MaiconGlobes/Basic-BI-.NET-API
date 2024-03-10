@@ -1,6 +1,6 @@
-﻿using ASControllerAPI.Src.Enums;
+﻿using BaseCodeAPI.Src.Enums;
 
-namespace ASControllerAPI.Src.Utils
+namespace BaseCodeAPI.Src.Utils
 {
    public class ResponseUtils
    {

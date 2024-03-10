@@ -1,6 +1,6 @@
-using ASControllerAPI.Src.Middleware;
+using BaseCodeAPI.Src.Middleware;
 
-namespace ASControllerAPI
+namespace BaseCodeAPI
 {
    public class Program
    {

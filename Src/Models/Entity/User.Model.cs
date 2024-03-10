@@ -14,21 +14,13 @@ namespace BaseCodeAPI.Src.Models.Entity
          return FInstancia;
       }
 
-      [JsonPropertyName("reference")]
-      [Column("reference")]
-      [Required]
-      public Guid Reference { get; set; }
-
       [JsonPropertyName("idade")]
       [Column("idade")]
-      [Required]
-      [MaxLength(35)]
       public byte Idade { get; set; }
 
       [JsonPropertyName("senha")]
       [Column("senha", TypeName = "varchar")]
-      [Required]
-      [MaxLength(255)]
+      [MaxLength(255, ErrorMessage = "Propriedade {0} deve ter no máximo 255 caracteres")]
       public string Senha { get; set; }
-}
+   }
 }

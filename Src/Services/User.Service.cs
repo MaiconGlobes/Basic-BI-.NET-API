@@ -1,9 +1,9 @@
-﻿using ASControllerAPI.Src.Enums;
-using ASControllerAPI.Src.Utils;
+﻿using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Utils;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 
-namespace ASControllerAPI.Src.Services
+namespace BaseCodeAPI.Src.Services
 {
    public class UserService
    {
@@ -25,7 +25,22 @@ namespace ASControllerAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex.InnerException));
+         }
+      }
+
+      public async Task<(byte Status, object Json)> CreateUser(UserModel AUser)
+      {
+         try
+         {
+            var usersObject = await FUserRepository.CreateUser(AUser);
+
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
+
+         }
+         catch (Exception ex)
+         {
+            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex.InnerException));
          }
       }
    }

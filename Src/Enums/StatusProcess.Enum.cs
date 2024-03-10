@@ -1,4 +1,4 @@
-﻿namespace ASControllerAPI.Src.Enums
+﻿namespace BaseCodeAPI.Src.Enums
 {
    public class GlobalEnum
    {

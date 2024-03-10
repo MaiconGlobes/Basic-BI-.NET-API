@@ -16,5 +16,10 @@ namespace BaseCodeAPI.Src.Repositories
       {
          return await this.FRepository.GetEntity<UserModel>().ToListAsync();
       }
+
+      public async Task<int> CreateUser(UserModel AUser)
+      {
+         return await this.FRepository.InsertOneAsync(AUser);
+      }
    }
 }

@@ -1,4 +1,4 @@
-﻿namespace ASControllerAPI.Src.Middleware
+﻿namespace BaseCodeAPI.Src.Middleware
 {
    public static class WeighingTypesMiddlewareExtensions
    {

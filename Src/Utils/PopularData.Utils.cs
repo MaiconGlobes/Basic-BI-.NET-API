@@ -2,14 +2,34 @@
 
 namespace BaseCodeAPI.Src.Utils
 {
-   internal class PopularDadosUtils
+   internal class PopularDataUtils
    {
-      private static PopularDadosUtils FInstancia { get; set; }
+      private static PopularDataUtils FInstancia { get; set; }
 
-      public static PopularDadosUtils Instancia()
+      public static PopularDataUtils Instancia()
       {
-         FInstancia ??= new PopularDadosUtils();
+         FInstancia ??= new PopularDataUtils();
          return FInstancia;
+      }
+
+      public IList<PersonalModel> PopularPersonal()
+      {
+         return new List<PersonalModel>
+         {
+            new PersonalModel
+            {
+               Id = 1,
+               Apelido = "Joao",
+               Email = "joao@example.com",
+               Telefone = "123456789",
+               Endereco = "Rua A",
+               Numero = "123",
+               Bairro = "Centro",
+               Municipio = "Sao Paulo",
+               Uf = "SP",
+               CEP = "12345678"
+            },
+         };
       }
 
       public IList<UserModel> PopularUser()
@@ -19,15 +39,42 @@ namespace BaseCodeAPI.Src.Utils
             new()
             {
                Id = 1,
-               Reference = new Guid("3FDDE6C3-4F54-4A27-958F-D72F785AA593"),
-               Apelido = "Alberto Silva",
-               Email = "usuario@usuario.com",
-               Municipio = "Rio Claro",
-               Uf = "SP",
                Idade = 23,
-               Senha = "3FDDE6C3-4F54-4A27-958F-D72F785AA593",
+               Senha = Guid.NewGuid().ToString(),
+               Apelido = "Joao",
+               Email = "joao@example.com",
+               Telefone = "123456789",
+               Endereco = "Rua A",
+               Numero = "123",
+               Bairro = "Centro",
+               Municipio = "Sao Paulo",
+               Uf = "SP",
+               CEP = "12345678",
             },
          };
       }
+
+      public IList<ClientModel> PopularClient()
+      {
+         return new List<ClientModel>
+         {
+            new()
+            {
+               Id = 1,
+               Cpf_cnpj = "12345678901",
+               Limite_credito = 1000.00,
+               Apelido = "Joao",
+               Email = "joao@example.com",
+               Telefone = "123456789",
+               Endereco = "Rua A",
+               Numero = "123",
+               Bairro = "Centro",
+               Municipio = "Sao Paulo",
+               Uf = "SP",
+               CEP = "12345678",
+            },
+         };
+      }
+
    }
 }

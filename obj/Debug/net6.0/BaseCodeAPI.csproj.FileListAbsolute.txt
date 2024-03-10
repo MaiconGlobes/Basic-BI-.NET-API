@@ -127,7 +127,7 @@ C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\r
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\BaseCodeAPI.pdb
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\BaseCodeAPI.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\ref\BaseCodeAPI.dll
-C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\appsettings.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.Design.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\env_config.json

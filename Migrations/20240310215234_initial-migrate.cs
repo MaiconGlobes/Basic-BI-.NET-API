@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -45,12 +44,32 @@ namespace BaseCodeAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "cliente",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false),
+                    cpf_cnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    limite_credito = table.Column<decimal>(type: "numeric(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cliente", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_cliente_pessoa_id",
+                        column: x => x.id,
+                        principalTable: "pessoa",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "usuario",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false),
-                    reference = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    idade = table.Column<byte>(type: "tinyint unsigned", maxLength: 35, nullable: false),
+                    idade = table.Column<byte>(type: "tinyint unsigned", nullable: false),
                     senha = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -65,20 +84,13 @@ namespace BaseCodeAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.InsertData(
-                table: "pessoa",
-                columns: new[] { "id", "apelido", "bairro", "CEP", "email", "endereco", "municipio", "numero", "telefone", "uf" },
-                values: new object[] { 1, "Alberto Silva", null, null, "usuario@usuario.com", null, "Rio Claro", null, null, "SP" });
-
-            migrationBuilder.InsertData(
-                table: "usuario",
-                columns: new[] { "id", "idade", "reference", "senha" },
-                values: new object[] { 1, (byte)23, new Guid("3fdde6c3-4f54-4a27-958f-d72f785aa593"), "3FDDE6C3-4F54-4A27-958F-D72F785AA593" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "cliente");
+
             migrationBuilder.DropTable(
                 name: "usuario");
 

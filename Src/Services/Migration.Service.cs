@@ -1,9 +1,9 @@
-﻿using ASControllerAPI.Src.Enums;
-using ASControllerAPI.Src.Utils;
+﻿using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Utils;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 
-namespace ASControllerAPI.Src.Services
+namespace BaseCodeAPI.Src.Services
 {
    public class MigrationService
    {

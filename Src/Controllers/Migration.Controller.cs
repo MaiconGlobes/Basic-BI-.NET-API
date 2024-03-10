@@ -1,10 +1,10 @@
-using ASControllerAPI.Src.Enums;
-using ASControllerAPI.Src.Services;
-using ASControllerAPI.Src.Utils;
+using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Services;
+using BaseCodeAPI.Src.Utils;
 using BaseCodeAPI.Src.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASControllerAPI.Src.Controllers
+namespace BaseCodeAPI.Src.Controllers
 {
    [ApiController]
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
