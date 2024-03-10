@@ -10,28 +10,27 @@ namespace ASControllerAPI.Src.Controllers
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
    [ApiExplorerSettings(IgnoreApi = true)]
-   public class UsuarioController : ControllerBase
+   public class MigrationController : ControllerBase
    {
-      private UserService FUserService {  get; set; }
+      private MigrationService FMigrationService {  get; set; }
 
-      public UsuarioController()
+      public MigrationController()
       {
-         FUserService = new UserService();   
+         FMigrationService = new MigrationService();   
       }
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
-      [Route("user/all")]
-      public async Task<IActionResult> GetUserAllAsync()
+      [Route("migrate")]
+      public IActionResult GetUserAllAsync()
       {
          try
          {
-            var (Status, Json) = await this.FUserService.GetUserAllAsync();
+            var (Status, Json) = this.FMigrationService.ApplyMigrate();
 
             return Status switch
             {
-               (byte)GlobalEnum.eStatusProc.Sucesso => new OkObjectResult(Json),
-               (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.Sucesso => new NoContentResult(),
                (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
                _ => throw new NotImplementedException()
@@ -40,7 +39,7 @@ namespace ASControllerAPI.Src.Controllers
          }
          catch (Exception ex)
          {
-            return new ObjectResult(ResponseUtils.Instancia().RetornoInternalErrorServer(ex)){StatusCode = StatusCodes.Status500InternalServerError};
+            return new ObjectResult(ResponseUtils.Instancia().RetornoInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
          }
       }
    }

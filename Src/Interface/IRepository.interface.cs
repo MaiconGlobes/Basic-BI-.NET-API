@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ASUpdateServices.Src.Interfaces
+namespace BaseCodeAPI.Src.Interfaces
 {
    internal interface IRepository
     {

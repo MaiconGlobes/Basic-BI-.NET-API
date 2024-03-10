@@ -5,22 +5,22 @@ using BaseCodeAPI.Src.Repositories;
 
 namespace ASControllerAPI.Src.Services
 {
-   public class UserService
+   public class MigrationService
    {
-      private UserRepository FUserRepository { get; set; }
+      private MigrationRepository FMigrationRepository { get; set; }
 
-      public UserService()
+      public MigrationService()
       {
-         FUserRepository = new();
+         FMigrationRepository = new();
       }
 
-      public async Task<(byte Status, object Json)> GetUserAllAsync()
+      public (byte Status, object Json) ApplyMigrate()
       {
          try
          {
-            var usersObject = await FUserRepository.GetUserAllAsync();
+            FMigrationRepository.ApplyMigrate();
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(new object() {}));
 
          }
          catch (Exception ex)

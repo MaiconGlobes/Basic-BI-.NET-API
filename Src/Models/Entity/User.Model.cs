@@ -4,25 +4,31 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
-    public class UserModel
-    {
-        private static UserModel FInstancia { get; set; }
+   public class UserModel : PersonalModel
+   {
+      private static UserModel FInstancia { get; set; }
 
-        public static UserModel New()
-        {
-            FInstancia ??= new UserModel();
-            return FInstancia;
-        }
+      public static UserModel New()
+      {
+         FInstancia ??= new UserModel();
+         return FInstancia;
+      }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id", Order = 1)]
-        public int Id { get; set; }
+      [JsonPropertyName("reference")]
+      [Column("reference")]
+      [Required]
+      public Guid Reference { get; set; }
 
-        [JsonPropertyName("name")]
-        [Column("name", TypeName = "text", Order = 2)]
-        [Required]
-        [MaxLength(35)]
-        public string Name { get; set; }
-    }
+      [JsonPropertyName("idade")]
+      [Column("idade")]
+      [Required]
+      [MaxLength(35)]
+      public byte Idade { get; set; }
+
+      [JsonPropertyName("senha")]
+      [Column("senha", TypeName = "varchar")]
+      [Required]
+      [MaxLength(255)]
+      public string Senha { get; set; }
+}
 }
