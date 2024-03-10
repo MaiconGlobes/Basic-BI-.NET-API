@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="Src\Factory\" />
-    <Folder Include="Src\Interface\" />
   </ItemGroup>
 
 </Project>

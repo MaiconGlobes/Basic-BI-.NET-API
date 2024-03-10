@@ -12,14 +12,14 @@ namespace ASUpdateServices.Src.Utils
             return FInstancia;
          }
 
-         public IList<ParametroModel> PopularParametros()
+         public IList<UserModel> PopularParametros()
          {
-            return new List<ParametroModel>
+            return new List<UserModel>
          {
             new()
             {
                Id = 1,
-               Telefone_suporte = "19999999999",
+               Name = "Alberto Silva",
             },
          };
          }

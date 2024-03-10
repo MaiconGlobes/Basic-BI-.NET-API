@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|c:\\users\\usuario\\onedrive\\documentos\\git\\base-code-api-dotnet\\src\\controllers\\verify.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|solutionrelative:src\\controllers\\verify.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|c:\\users\\usuario\\onedrive\\documentos\\git\\base-code-api-dotnet\\src\\models\\instancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|solutionrelative:src\\models\\instancemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|c:\\users\\usuario\\onedrive\\documentos\\git\\base-code-api-dotnet\\src\\controllers\\usuario.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB9946D-50A6-4931-B935-A314F2234108}|BaseCodeAPI.csproj|solutionrelative:src\\controllers\\usuario.controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,28 +30,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InstanceModel.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Models\\InstanceModel.cs",
-              "RelativeDocumentMoniker": "Src\\Models\\InstanceModel.cs",
-              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Models\\InstanceModel.cs",
-              "RelativeToolTip": "Src\\Models\\InstanceModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T01:29:51.58Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Verify.Controller.cs",
-              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Verify.Controller.cs",
-              "RelativeDocumentMoniker": "Src\\Controllers\\Verify.Controller.cs",
-              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Verify.Controller.cs",
-              "RelativeToolTip": "Src\\Controllers\\Verify.Controller.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAtwBIAAAAkAAAA",
+              "Title": "Usuario.Controller.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Usuario.Controller.cs",
+              "RelativeDocumentMoniker": "Src\\Controllers\\Usuario.Controller.cs",
+              "ToolTip": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\Src\\Controllers\\Usuario.Controller.cs",
+              "RelativeToolTip": "Src\\Controllers\\Usuario.Controller.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T01:29:16.815Z",
+              "WhenOpened": "2024-03-09T02:47:12.909Z",
               "EditorCaption": ""
             }
           ]

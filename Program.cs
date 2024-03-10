@@ -19,7 +19,7 @@ namespace ASControllerAPI
          app.UseAuthorization();
          app.MapControllers();
 
-         app.WeighingTypesMiddlewareBuilder();
+         app.UserMiddlewareBuilder();
 
          app.Run("http://*:5005");
       }

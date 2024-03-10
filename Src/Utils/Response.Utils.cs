@@ -13,15 +13,15 @@ namespace ASControllerAPI.Src.Utils
          return FInstancia;
       }
 
-      internal virtual Object RetornoOk(Object ADados)
+      internal virtual object RetornoOk<T>(T ADado)
       {
          this.FObjJSON = new
          {
             retorno = new
             {
                status        = "Sucesso",
-               codigo_status = GeneralEnum.StatusProc.Sucesso,
-               dados         = ADados
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
+               dados         = ADado
             }
          };
 
@@ -35,7 +35,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Sucesso",
-               codigo_status = GeneralEnum.StatusProc.Sucesso,
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
                dados         = ADados
             }
          };
@@ -50,7 +50,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Sucesso",
-               codigo_status = GeneralEnum.StatusProc.Sucesso,
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
                dados         = ADados
             }
          };
@@ -65,7 +65,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Sucesso",
-               codigo_status = GeneralEnum.StatusProc.Sucesso,
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
                dados         = ADados
             }
          };
@@ -80,7 +80,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Registro não localizado",
-               codigo_status = GeneralEnum.StatusProc.NaoLocalizado,
+               codigo_status = GlobalEnum.eStatusProc.NaoLocalizado,
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
@@ -99,7 +99,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Registro não localizado",
-               codigo_status = GeneralEnum.StatusProc.SemRegistros,
+               codigo_status = GlobalEnum.eStatusProc.SemRegistros,
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
@@ -118,7 +118,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "A Consulta não retornou registros",
-               codigo_status = GeneralEnum.StatusProc.SemRegistros,
+               codigo_status = GlobalEnum.eStatusProc.SemRegistros,
                dados         = ADados
             }
          };
@@ -133,7 +133,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "A Consulta não retornou registros",
-               codigo_status = GeneralEnum.StatusProc.SemRegistros,
+               codigo_status = GlobalEnum.eStatusProc.SemRegistros,
                dados         = ADados
             }
          };
@@ -148,7 +148,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Duplicidade de registro",
-               codigo_status = GeneralEnum.StatusProc.RegistroDuplicado,
+               codigo_status = GlobalEnum.eStatusProc.RegistroDuplicado,
                mensagem = new
                {
                   descricao = "O registro que está tentando inserir já se encontra no banco de dados.",
@@ -167,7 +167,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Duplicidade de registro",
-               codigo_status = GeneralEnum.StatusProc.RegistroDuplicado,
+               codigo_status = GlobalEnum.eStatusProc.RegistroDuplicado,
                mensagem = new
                {
                   descricao = "Erro de duplicidade de registro.",
@@ -186,7 +186,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status = "Erro de processamento",
-               codigo_status = GeneralEnum.StatusProc.ErroProcessamento,
+               codigo_status = GlobalEnum.eStatusProc.ErroProcessamento,
                mensagem = new
                {
                   descricao = AExcecao?.Message
@@ -204,7 +204,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status = "Impressora offline",
-               codigo_status = GeneralEnum.StatusProc.ImpressoraOffLine,
+               codigo_status = GlobalEnum.eStatusProc.ImpressoraOffLine,
                mensagem = new
                {
                   descricao = AExcecao?.Message,
@@ -223,7 +223,7 @@ namespace ASControllerAPI.Src.Utils
             retorno = new
             {
                status        = "Erro interno de servidor",
-               codigo_status = GeneralEnum.StatusProc.ErroServidor,
+               codigo_status = GlobalEnum.eStatusProc.ErroServidor,
                mensagem = new
                {
                   descricao = AExcecao.Message,

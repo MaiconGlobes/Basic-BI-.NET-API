@@ -5,11 +5,11 @@ namespace ASUpdateServices.Src.Repositories
 {
    public class Repository : IRepository
     {
-        private Contexto FContexto { get; set; }
+        private Context FContexto { get; set; }
 
         public Repository()
         {
-            FContexto = new Contexto();
+            FContexto = new Context();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace ASUpdateServices.Src.Repositories
         /// </summary>
         public void MigrationApply()
         {
-            using (var contexto = new Contexto())
+            using (var contexto = new Context())
             {
                 contexto.Database.Migrate();
             }
@@ -108,7 +108,7 @@ namespace ASUpdateServices.Src.Repositories
         /// </summary>
         public void EnsureCreated()
         {
-            using (var contexto = new Contexto())
+            using (var contexto = new Context())
             {
                 contexto.Database.EnsureCreated();
             }

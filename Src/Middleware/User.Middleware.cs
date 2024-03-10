@@ -2,11 +2,11 @@
 
 namespace ASControllerAPI.Src.Middleware
 {
-   public class WeighingTypesMiddleware
+   public class UserMiddleware
    {
       private readonly RequestDelegate _next;
 
-      public WeighingTypesMiddleware(RequestDelegate next)
+      public UserMiddleware(RequestDelegate next)
       {
          this._next = next;
       }
@@ -15,7 +15,7 @@ namespace ASControllerAPI.Src.Middleware
       {
          try
          {
-            var (id, isNext) = UtilsClass.New().ValidateProcessPath(context, this._next, "/process/");
+            var isNext = UtilsClass.New().ValidatePathUserAll(context, this._next, "/user/all");
 
             if (isNext != null)
             {

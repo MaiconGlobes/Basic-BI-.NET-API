@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASUpdateServices.Src
 {
-    internal class Contexto : DbContext
+    internal class Context : DbContext
     {
-        public DbSet<ParametroModel> PARAMETRO { get; set; }
+        public DbSet<UserModel> PARAMETRO { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -19,9 +19,9 @@ namespace ASUpdateServices.Src
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<ParametroModel>().Property(parametro => parametro.Telefone_suporte).IsRequired();
+            modelBuilder.Entity<UserModel>().Property(parametro => parametro.Name).IsRequired();
 
-            modelBuilder.Entity<ParametroModel>().HasData(PopularDadosUtils.Instancia().PopularParametros());
+            modelBuilder.Entity<UserModel>().HasData(PopularDadosUtils.Instancia().PopularParametros());
         }
     }
 }

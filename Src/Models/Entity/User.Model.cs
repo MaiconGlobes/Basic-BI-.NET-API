@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
-    public class ParametroModel
+    public class UserModel
     {
-        private static ParametroModel FInstancia { get; set; }
+        private static UserModel FInstancia { get; set; }
 
-        public static ParametroModel New()
+        public static UserModel New()
         {
-            FInstancia ??= new ParametroModel();
+            FInstancia ??= new UserModel();
             return FInstancia;
         }
 
@@ -19,10 +19,10 @@ namespace BaseCodeAPI.Src.Models.Entity
         [Column("id", Order = 1)]
         public int Id { get; set; }
 
-        [JsonPropertyName("telefone_suporte")]
-        [Column("telefone_suporte", TypeName = "text", Order = 2)]
+        [JsonPropertyName("name")]
+        [Column("name", TypeName = "text", Order = 2)]
         [Required]
-        [MaxLength(11)]
-        public string Telefone_suporte { get; set; }
+        [MaxLength(35)]
+        public string Name { get; set; }
     }
 }
