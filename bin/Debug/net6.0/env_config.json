@@ -1,6 +1,6 @@
 {
    "ConnectionStrings": {
-      "MySQLConnection": "Server=localhost;Database=public;Uid=root;Pwd=root;",
+      "MySQLConnection": "Server=localhost;Database=dotnet;Uid=root;Pwd=root;",
    },
    "Logging": {
       "LogLevel": {

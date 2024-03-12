@@ -21,12 +21,36 @@ namespace BaseCodeAPI.Src.Controllers
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
-      [Route("migrate")]
-      public IActionResult GetUserAllAsync()
+      [Route("apply-migrate")]
+      public IActionResult GetApplyMigrate()
       {
          try
          {
             var (Status, Json) = this.FMigrationService.ApplyMigrate();
+
+            return Status switch
+            {
+               (byte)GlobalEnum.eStatusProc.Sucesso => new NoContentResult(),
+               (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
+               _ => throw new NotImplementedException()
+            };
+
+         }
+         catch (Exception ex)
+         {
+            return new ObjectResult(ResponseUtils.Instancia().RetornoInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
+         }
+      }
+
+      [HttpGet]
+      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+      [Route("revert-migrate")]
+      public IActionResult GetRevertMigrate()
+      {
+         try
+         {
+            var (Status, Json) = this.FMigrationService.RevertAllMigration();
 
             return Status switch
             {

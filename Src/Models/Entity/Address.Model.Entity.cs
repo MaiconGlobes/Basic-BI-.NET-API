@@ -4,27 +4,12 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
-   public class PersonalModel
+   public class AddressModel
    {
       [Key]
       [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
       [Column("id")]
       public int Id { get; set; }
-
-      [JsonPropertyName("apelido")]
-      [Column("apelido", TypeName = "varchar")]
-      [MaxLength(35, ErrorMessage = "Propriedade {0} deve ter no máximo 35 caracteres")]
-      public string Apelido { get; set; }
-
-      [JsonPropertyName("email")]
-      [Column("email", TypeName = "varchar")]
-      [MaxLength(255, ErrorMessage = "Propriedade {0} deve ter no máximo 255 caracteres")]
-      public string Email { get; set; }
-
-      [JsonPropertyName("telefone")]
-      [Column("telefone", TypeName = "varchar")]
-      [MaxLength(11, ErrorMessage = "Propriedade {0} deve ter no máximo 11 caracteres")]
-      public string Telefone { get; set; }
 
       [JsonPropertyName("endereco")]
       [Column("endereco", TypeName = "varchar")]
@@ -52,8 +37,16 @@ namespace BaseCodeAPI.Src.Models.Entity
       public string Uf { get; set; }
 
       [JsonPropertyName("cep")]
-      [Column("CEP", TypeName = "varchar")]
+      [Column("cep", TypeName = "varchar")]
       [MaxLength(8, ErrorMessage = "Propriedade {0} deve ter no máximo 8 caracteres")]
-      public string CEP { get; set; }
+      public string Cep { get; set; }
+
+      [JsonIgnore]
+      [JsonPropertyName("pessoa_id")]
+      [Column("pessoa_id")]
+      public int Pessoa_id { get; set; }
+
+      [JsonIgnore]
+      public virtual PersonModel Person { get; set; }
    }
 }

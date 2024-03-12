@@ -1,6 +1,5 @@
 ﻿using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Utils;
-using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 
 namespace BaseCodeAPI.Src.Services
@@ -21,6 +20,21 @@ namespace BaseCodeAPI.Src.Services
             FMigrationRepository.ApplyMigrate();
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(new object() {}));
+
+         }
+         catch (Exception ex)
+         {
+            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+         }
+      }
+
+      public (byte Status, object Json) RevertAllMigration()
+      {
+         try
+         {
+            FMigrationRepository.RevertAllMigrations();
+
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(new object() { }));
 
          }
          catch (Exception ex)

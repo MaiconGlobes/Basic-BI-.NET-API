@@ -73,9 +73,6 @@ C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API\obj\Debug\net6.0\refint\B
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API\obj\Debug\net6.0\BaseCodeAPI.pdb
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API\obj\Debug\net6.0\BaseCodeAPI.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API\obj\Debug\net6.0\ref\BaseCodeAPI.dll
-C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\ASControllerAPI.deps_.json
-C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\ASControllerAPI.Development.json
-C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\ASControllerAPI.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.exe
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.deps.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.runtimeconfig.json
@@ -131,3 +128,6 @@ C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\M
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.Design.dll
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\env_config.json
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.deps_.json
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.Development.json
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\BaseCodeAPI.json
