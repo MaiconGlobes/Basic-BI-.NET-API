@@ -254,7 +254,8 @@ namespace BaseCodeAPI.Migrations
                             Apelido = "Apelido",
                             Email = "Email1@example.com",
                             PessoaId = 1,
-                            Senha = "Senha 1"
+                            Senha = "Senha criptografada 23355049-4080-488b-abd9-3224bc783a2e",
+                            Token = "7fd94586-477d-436a-8f79-912a6c59e62f"
                         });
                 });
 

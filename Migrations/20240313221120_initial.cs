@@ -170,7 +170,7 @@ namespace BaseCodeAPI.Migrations
             migrationBuilder.InsertData(
                 table: "usuario",
                 columns: new[] { "id", "apelido", "email", "pessoa_id", "senha", "token" },
-                values: new object[] { 1, "Apelido", "Email1@example.com", 1, "Senha 1", null });
+                values: new object[] { 1, "Apelido", "Email1@example.com", 1, "Senha criptografada 23355049-4080-488b-abd9-3224bc783a2e", "7fd94586-477d-436a-8f79-912a6c59e62f" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cliente_pessoa_id",

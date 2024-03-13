@@ -30,7 +30,8 @@ namespace BaseCodeAPI.Src.Utils
             Id = 1,
             Apelido = "Apelido",
             Email = "Email1@example.com",
-            Senha = "Senha 1",
+            Senha = $"Senha criptografada {Guid.NewGuid()}",
+            Token = Guid.NewGuid().ToString(),
             PessoaId = 1,
          };
       }
