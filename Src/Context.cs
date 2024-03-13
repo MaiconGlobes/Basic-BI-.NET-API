@@ -10,6 +10,7 @@ namespace BaseCodeAPI.Src
       public DbSet<UserModel> USER { get; set; }
       public DbSet<ClientModel> CLIENT { get; set; }
       public DbSet<CarrierModel> CARRIER { get; set; }
+      public DbSet<TransporterModel> TRANSPORTER { get; set; }
       public DbSet<AddressModel> ADDRESS { get; set; }
 
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
