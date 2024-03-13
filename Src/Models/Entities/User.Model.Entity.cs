@@ -20,6 +20,11 @@ namespace BaseCodeAPI.Src.Models.Entity
       [Column("id")]
       public int Id { get; set; }
 
+      [JsonPropertyName("apelido")]
+      [Column("apelido", TypeName = "varchar")]
+      [MaxLength(35, ErrorMessage = "Propriedade {0} deve ter no máximo 35 caracteres")]
+      public string Apelido { get; set; }
+
       [Column("email", TypeName = "varchar")]
       [MaxLength(255)]
       public string Email { get; set; }
@@ -37,6 +42,7 @@ namespace BaseCodeAPI.Src.Models.Entity
 
       [JsonIgnore]
       [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
-      public virtual PersonModel Pessoa { get; set; }
+      public virtual PersonModel Person { get; set; }
+
    }
 }

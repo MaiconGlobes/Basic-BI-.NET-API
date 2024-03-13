@@ -41,7 +41,7 @@ namespace BaseCodeAPI.Src.Services
 
             if (user != null || person != null)
             {
-               user.Pessoa = person!;
+               user.Person = person!;
 
                int rowsAffect = await FUserRepository.CreateUser(user);
 

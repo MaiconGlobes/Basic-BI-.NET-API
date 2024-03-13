@@ -12,10 +12,10 @@ namespace BaseCodeAPI.Src.Models.Entity
       [Column("id")]
       public int Id { get; set; }
 
-      [JsonPropertyName("apelido")]
-      [Column("apelido", TypeName = "varchar")]
-      [MaxLength(35, ErrorMessage = "Propriedade {0} deve ter no máximo 35 caracteres")]
-      public string Apelido { get; set; }
+      [JsonPropertyName("nome")]
+      [Column("nome", TypeName = "varchar")]
+      [MaxLength(50, ErrorMessage = "Propriedade {0} deve ter no máximo 50 caracteres")]
+      public string Nome { get; set; }
 
       [JsonPropertyName("cpf_cnpj")]
       [Column("cpf_cnpj", TypeName = "varchar")]
@@ -28,9 +28,10 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(11, ErrorMessage = "Propriedade {0} deve ter no máximo 11 caracteres")]
       public string Telefone { get; set; }
 
-      public virtual ICollection<UserModel> Users { get; set; }
-      public virtual ICollection<AddressModel> Addresses { get; set; }
+      public virtual UserModel User { get; set; }
       public virtual ClientModel Client { get; set; }
       public virtual CarrierModel Carrier { get; set; }
+      public virtual TransporterModel Transporter { get; set; }
+      public virtual ICollection<AddressModel> Addresses { get; set; }
    }
 }

@@ -17,7 +17,7 @@ namespace BaseCodeAPI.Src.Utils
          return new PersonModel
          {
             Id = 1,
-            Apelido = "Apelido 1",
+            Nome = "Nome 1",
             Cpf_cnpj = "07640402948",
             Telefone = "19999999999" ,
          };
@@ -29,6 +29,7 @@ namespace BaseCodeAPI.Src.Utils
          {
             new() {
                Id = 1,
+               Apelido = "Apelido",
                Email = "Email1@example.com",
                Senha = "Senha 1",
                PessoaId = 1    ,
@@ -36,6 +37,7 @@ namespace BaseCodeAPI.Src.Utils
             new()
             {
                Id = 2,
+               Apelido = "Apelido",
                Email = "Email2@example.com",
                Senha = "Senha 2",
                PessoaId = 1

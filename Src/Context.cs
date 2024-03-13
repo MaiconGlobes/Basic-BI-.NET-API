@@ -42,9 +42,10 @@ namespace BaseCodeAPI.Src
          modelBuilder.Entity<PersonModel>().HasIndex(person => person.Cpf_cnpj).IsUnique();
          modelBuilder.Entity<UserModel>().HasIndex(user => user.Email).IsUnique();
 
-         modelBuilder.Entity<PersonModel>().Property(person => person.Apelido).IsRequired();
+         modelBuilder.Entity<PersonModel>().Property(person => person.Nome).IsRequired();
          modelBuilder.Entity<PersonModel>().Property(person => person.Cpf_cnpj).IsRequired();
 
+         modelBuilder.Entity<UserModel>().Property(user => user.Apelido).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Email).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Senha).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.PessoaId).IsRequired();
@@ -54,9 +55,10 @@ namespace BaseCodeAPI.Src
          modelBuilder.Entity<AddressModel>().Property(address => address.PessoaId).IsRequired();
 
          modelBuilder.Entity<PersonModel>()
-                     .HasMany(person => person.Users)
-                     .WithOne(user => user.Pessoa)
-                     .HasForeignKey(user => user.PessoaId)
+                     .HasOne(user => user.User)
+                     .WithOne(user => user.Person)
+                     .HasForeignKey<UserModel>(user => user.PessoaId)
+                     .IsRequired()
                      .OnDelete(DeleteBehavior.Cascade);
 
          modelBuilder.Entity<PersonModel>()
@@ -76,6 +78,13 @@ namespace BaseCodeAPI.Src
                      .HasOne(person => person.Carrier)
                      .WithOne(carrier => carrier.Person)
                      .HasForeignKey<CarrierModel>(carrier => carrier.PessoaId)
+                     .IsRequired()
+                     .OnDelete(DeleteBehavior.Cascade);
+
+         modelBuilder.Entity<PersonModel>()
+                     .HasOne(transporter => transporter.Transporter)
+                     .WithOne(transporter => transporter.Person)
+                     .HasForeignKey<TransporterModel>(transporter => transporter.PessoaId)
                      .IsRequired()
                      .OnDelete(DeleteBehavior.Cascade);
 
