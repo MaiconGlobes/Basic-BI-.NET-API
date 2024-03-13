@@ -35,10 +35,27 @@ namespace BaseCodeAPI.Src
 
          modelBuilder.Entity<PersonModel>().Property(person => person.Id).ValueGeneratedOnAdd();
          modelBuilder.Entity<UserModel>().Property(user => user.Id).ValueGeneratedOnAdd();
+         modelBuilder.Entity<ClientModel>().Property(client => client.Id).ValueGeneratedOnAdd();
+         modelBuilder.Entity<CarrierModel>().Property(carrier => carrier.Id).ValueGeneratedOnAdd();
+         modelBuilder.Entity<AddressModel>().Property(address => address.Id).ValueGeneratedOnAdd();
+
+         modelBuilder.Entity<PersonModel>().HasIndex(person => person.Cpf_cnpj).IsUnique();
+         modelBuilder.Entity<UserModel>().HasIndex(user => user.Email).IsUnique();
+
+         modelBuilder.Entity<PersonModel>().Property(person => person.Apelido).IsRequired();
+         modelBuilder.Entity<PersonModel>().Property(person => person.Cpf_cnpj).IsRequired();
+
+         modelBuilder.Entity<UserModel>().Property(user => user.Email).IsRequired();
+         modelBuilder.Entity<UserModel>().Property(user => user.Senha).IsRequired();
+         modelBuilder.Entity<UserModel>().Property(user => user.PessoaId).IsRequired();
+
+         modelBuilder.Entity<ClientModel>().Property(client => client.PessoaId).IsRequired();
+         modelBuilder.Entity<CarrierModel>().Property(carrier => carrier.PessoaId).IsRequired();
+         modelBuilder.Entity<AddressModel>().Property(address => address.PessoaId).IsRequired();
 
          modelBuilder.Entity<PersonModel>()
                      .HasMany(person => person.Users)
-                     .WithOne(user => user.Person)
+                     .WithOne(user => user.Pessoa)
                      .HasForeignKey(user => user.PessoaId)
                      .OnDelete(DeleteBehavior.Cascade);
 

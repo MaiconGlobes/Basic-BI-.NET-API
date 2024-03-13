@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "7xhAHKJ7dMAGL0s+Z7g9RQ+aTlZGiR1GqyoKF4JaPKQR6J2Rp6R6nRPK/LEgP14Fms09dgrQIRwxBDiQERXizA==",
+  "dgSpecHash": "7xoqGk5jOGOvrqd3Q7qyAsLCmDkyA5EH73zn1utJy0OgaAcGq/Dq1QTsGHcd5JcnHw/G1z1ydYEPDK19ZxzdNA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Usuario\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0\\microsoft.entityframeworkcore.6.0.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0\\microsoft.entityframeworkcore.abstractions.6.0.0.nupkg.sha512",

@@ -1,6 +1,6 @@
 ﻿using BaseCodeAPI.Src.Enums;
-using BaseCodeAPI.Src.Utils;
 using BaseCodeAPI.Src.Repositories;
+using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {

@@ -84,7 +84,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
-                  mensagem_direta = "Registro não localizado"
+                  msg_front_end = "Registro não localizado"
                }
             }
          };
@@ -103,7 +103,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
-                  mensagem_direta = "Registro não localizado"
+                  msg_front_end = "Registro não localizado"
                }
             }
          };
@@ -152,7 +152,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando inserir já se encontra no banco de dados.",
-                  mensagem_direta = "Registro duplicado"
+                  msg_front_end = "Registro duplicado"
                }
             }
          };
@@ -171,7 +171,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "Erro de duplicidade de registro.",
-                  mensagem_direta = "Registro duplicado"
+                  msg_front_end = "Registro duplicado"
                }
             }
          };
@@ -208,7 +208,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = AExcecao?.Message,
-                  mensagem_direta = "Impressora offline"
+                  msg_front_end = "Impressora offline"
                }
             }
          };
@@ -227,7 +227,7 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = AExcecao.Message,
-                  mensagem_direta = "Erro de servidor"
+                  msg_front_end = "Erro de servidor"
                }
             }
          };

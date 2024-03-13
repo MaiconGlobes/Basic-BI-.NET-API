@@ -1,7 +1,7 @@
 using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
-using BaseCodeAPI.Src.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Controllers
@@ -20,7 +20,7 @@ namespace BaseCodeAPI.Src.Controllers
       }
 
       [HttpGet]
-      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+      [ProducesResponseType(StatusCodes.Status200OK)]
       [Route("apply-migrate")]
       public IActionResult GetApplyMigrate()
       {
@@ -44,7 +44,7 @@ namespace BaseCodeAPI.Src.Controllers
       }
 
       [HttpGet]
-      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+      [ProducesResponseType(StatusCodes.Status200OK)]
       [Route("revert-migrate")]
       public IActionResult GetRevertMigrate()
       {

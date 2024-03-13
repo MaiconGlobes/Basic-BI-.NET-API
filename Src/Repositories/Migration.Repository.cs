@@ -1,5 +1,4 @@
-﻿using BaseCodeAPI.Src.Models.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BaseCodeAPI.Src.Repositories
 {

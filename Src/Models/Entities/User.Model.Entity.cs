@@ -20,21 +20,23 @@ namespace BaseCodeAPI.Src.Models.Entity
       [Column("id")]
       public int Id { get; set; }
 
-      [JsonPropertyName("email")]
       [Column("email", TypeName = "varchar")]
-      [MaxLength(255, ErrorMessage = "Propriedade {0} deve ter no máximo 255 caracteres")]
+      [MaxLength(255)]
       public string Email { get; set; }
 
-      [JsonPropertyName("senha")]
       [Column("senha", TypeName = "varchar")]
-      [MaxLength(100, ErrorMessage = "Propriedade {0} deve ter no máximo 100 caracteres")]
+      [MaxLength(100)]
       public string Senha { get; set; }
 
-      [JsonPropertyName("pessoa_id")]
+      [Column("token", TypeName = "varchar")]
+      [MaxLength(200)]
+      public string Token { get; set; }
+
       [Column("pessoa_id")]
       public int PessoaId { get; set; }
 
       [JsonIgnore]
-      public virtual PersonModel Person { get; set; }
+      [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
+      public virtual PersonModel Pessoa { get; set; }
    }
 }

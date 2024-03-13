@@ -18,9 +18,9 @@ namespace BaseCodeAPI.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    apelido = table.Column<string>(type: "varchar(35)", maxLength: 35, nullable: true)
+                    apelido = table.Column<string>(type: "varchar(35)", maxLength: 35, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cpf_cnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true)
+                    cpf_cnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -105,14 +105,36 @@ namespace BaseCodeAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "transportadora",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    pessoa_id = table.Column<int>(type: "int", nullable: false),
+                    PersonId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transportadora", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_transportadora_pessoa_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "pessoa",
+                        principalColumn: "id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "usuario",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
+                    email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    senha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                    senha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    token = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pessoa_id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -155,11 +177,11 @@ namespace BaseCodeAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "usuario",
-                columns: new[] { "id", "email", "pessoa_id", "senha" },
+                columns: new[] { "id", "email", "pessoa_id", "senha", "token" },
                 values: new object[,]
                 {
-                    { 1, "Email1@example.com", 1, "Senha 1" },
-                    { 2, "Email2@example.com", 1, "Senha 2" }
+                    { 1, "Email1@example.com", 1, "Senha 1", null },
+                    { 2, "Email2@example.com", 1, "Senha 2", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -180,6 +202,23 @@ namespace BaseCodeAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_pessoa_cpf_cnpj",
+                table: "pessoa",
+                column: "cpf_cnpj",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_transportadora_PersonId",
+                table: "transportadora",
+                column: "PersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuario_email",
+                table: "usuario",
+                column: "email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_usuario_pessoa_id",
                 table: "usuario",
                 column: "pessoa_id");
@@ -195,6 +234,9 @@ namespace BaseCodeAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "fornecedor");
+
+            migrationBuilder.DropTable(
+                name: "transportadora");
 
             migrationBuilder.DropTable(
                 name: "usuario");

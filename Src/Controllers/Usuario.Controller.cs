@@ -1,7 +1,8 @@
+using AutoMapper;
 using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
-using BaseCodeAPI.Src.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Controllers
@@ -13,14 +14,15 @@ namespace BaseCodeAPI.Src.Controllers
    public class UsuarioController : ControllerBase
    {
       private UserService FUserService {  get; set; }
+      
 
-      public UsuarioController()
+      public UsuarioController(IMapper AMapper)
       {
-         FUserService = new UserService();   
+         FUserService = new UserService(AMapper);   
       }
 
       [HttpGet]
-      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
       [Route("user/all")]
       public async Task<IActionResult> GetUserAllAsync()
       {
@@ -45,17 +47,17 @@ namespace BaseCodeAPI.Src.Controllers
       }
 
       [HttpPost]
-      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
+      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
       [Route("user/create")]
-      public async Task<IActionResult> PostCreateUser([FromBody] UserModel user)
+      public async Task<IActionResult> PostCreateUser([FromBody] UserModelDto AModel)
       {
          try
          {
-            var (Status, Json) = await this.FUserService.CreateUser(user);
+            var (Status, Json) = await this.FUserService.CreateUser(AModel);
 
             return Status switch
             {
-               (byte)GlobalEnum.eStatusProc.Sucesso => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.Sucesso => new CreatedResult(string.Empty, Json),
                (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),

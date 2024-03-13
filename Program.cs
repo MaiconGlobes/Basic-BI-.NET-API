@@ -1,4 +1,5 @@
 using BaseCodeAPI.Src.Middleware;
+using BaseCodeAPI.Src.Models.Profiles;
 
 namespace BaseCodeAPI
 {
@@ -28,6 +29,7 @@ namespace BaseCodeAPI
       {
          services.AddControllers();
          services.AddHttpContextAccessor();
+         services.AddAutoMapper(typeof(AutoMapperProfile));
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)
