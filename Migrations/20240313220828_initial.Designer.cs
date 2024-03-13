@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseCodeAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240313220304_initial")]
+    [Migration("20240313220828_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,13 +120,6 @@ namespace BaseCodeAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("fornecedor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PessoaId = 1
-                        });
                 });
 
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.ClientModel", b =>
@@ -150,14 +143,6 @@ namespace BaseCodeAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("cliente");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Limite_credito = 1000m,
-                            PessoaId = 1
-                        });
                 });
 
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.PersonModel", b =>
@@ -272,14 +257,6 @@ namespace BaseCodeAPI.Migrations
                             Email = "Email1@example.com",
                             PessoaId = 1,
                             Senha = "Senha 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Apelido = "Apelido",
-                            Email = "Email2@example.com",
-                            PessoaId = 1,
-                            Senha = "Senha 2"
                         });
                 });
 

@@ -158,11 +158,6 @@ namespace BaseCodeAPI.Migrations
                 values: new object[] { 1, "07640402948", "Nome 1", "19999999999" });
 
             migrationBuilder.InsertData(
-                table: "cliente",
-                columns: new[] { "id", "limite_credito", "pessoa_id" },
-                values: new object[] { 1, 1000m, 1 });
-
-            migrationBuilder.InsertData(
                 table: "endereco",
                 columns: new[] { "id", "bairro", "cep", "endereco", "municipio", "numero", "pessoa_id", "uf" },
                 values: new object[,]
@@ -173,14 +168,9 @@ namespace BaseCodeAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "fornecedor",
-                columns: new[] { "id", "pessoa_id" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
                 table: "usuario",
                 columns: new[] { "id", "apelido", "email", "pessoa_id", "senha", "token" },
-                values: new object[] { 2, "Apelido", "Email2@example.com", 1, "Senha 2", null });
+                values: new object[] { 1, "Apelido", "Email1@example.com", 1, "Senha 1", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cliente_pessoa_id",

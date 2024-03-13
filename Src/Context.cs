@@ -90,8 +90,6 @@ namespace BaseCodeAPI.Src
 
          modelBuilder.Entity<PersonModel>().HasData(PopularDataUtils.Instancia().PopularPerson());
          modelBuilder.Entity<UserModel>().HasData(PopularDataUtils.Instancia().PopularUsers());
-         modelBuilder.Entity<ClientModel>().HasData(PopularDataUtils.Instancia().PopularClient());
-         modelBuilder.Entity<CarrierModel>().HasData(PopularDataUtils.Instancia().PopularCarrier());
          modelBuilder.Entity<AddressModel>().HasData(PopularDataUtils.Instancia().PopularAddress());
 
          base.OnModelCreating(modelBuilder);

@@ -23,44 +23,15 @@ namespace BaseCodeAPI.Src.Utils
          };
       }
 
-      public IList<UserModel> PopularUsers()
+      public UserModel PopularUsers()
       {
-         return new List<UserModel>
-         {
-            new() {
-               Id = 1,
-               Apelido = "Apelido",
-               Email = "Email1@example.com",
-               Senha = "Senha 1",
-               PessoaId = 1    ,
-            },
-            new()
-            {
-               Id = 2,
-               Apelido = "Apelido",
-               Email = "Email2@example.com",
-               Senha = "Senha 2",
-               PessoaId = 1
-            }
-         };
-      }
-
-      public ClientModel PopularClient()
-      {
-         return new ClientModel()
+         return new UserModel()
          {
             Id = 1,
-            Limite_credito = 1000.00,
-            PessoaId = 1
-         };
-      }
-
-      public CarrierModel PopularCarrier()
-      {
-         return new CarrierModel
-         {
-            Id = 1,
-            PessoaId = 1
+            Apelido = "Apelido",
+            Email = "Email1@example.com",
+            Senha = "Senha 1",
+            PessoaId = 1,
          };
       }
 

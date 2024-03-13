@@ -1,5 +1,4 @@
 using BaseCodeAPI.Src.Enums;
-using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
 using Microsoft.AspNetCore.Mvc;
