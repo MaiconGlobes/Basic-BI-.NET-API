@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseCodeAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240312232901_initial")]
+    [Migration("20240313012259_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,7 +52,7 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("numero");
 
-                    b.Property<int>("Pessoa_id")
+                    b.Property<int>("PessoaId")
                         .HasColumnType("int")
                         .HasColumnName("pessoa_id");
 
@@ -63,9 +63,9 @@ namespace BaseCodeAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Pessoa_id");
+                    b.HasIndex("PessoaId");
 
-                    b.ToTable("endereco", (string)null);
+                    b.ToTable("endereco");
 
                     b.HasData(
                         new
@@ -76,7 +76,7 @@ namespace BaseCodeAPI.Migrations
                             Endereco = "Endereco 2",
                             Municipio = "Municipio 2",
                             Numero = "1001",
-                            Pessoa_id = 1,
+                            PessoaId = 1,
                             Uf = "SP"
                         },
                         new
@@ -87,7 +87,7 @@ namespace BaseCodeAPI.Migrations
                             Endereco = "Endereco 2",
                             Municipio = "Municipio 2",
                             Numero = "1001",
-                            Pessoa_id = 1,
+                            PessoaId = 1,
                             Uf = "SP"
                         },
                         new
@@ -98,7 +98,7 @@ namespace BaseCodeAPI.Migrations
                             Endereco = "Endereco 3",
                             Municipio = "Municipio 3",
                             Numero = "1001",
-                            Pessoa_id = 1,
+                            PessoaId = 1,
                             Uf = "SP"
                         });
                 });
@@ -110,11 +110,6 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<string>("Cnpj")
-                        .HasMaxLength(14)
-                        .HasColumnType("varchar(14)")
-                        .HasColumnName("cnpj");
-
                     b.Property<int>("PessoaId")
                         .HasColumnType("int")
                         .HasColumnName("pessoa_id");
@@ -124,13 +119,12 @@ namespace BaseCodeAPI.Migrations
                     b.HasIndex("PessoaId")
                         .IsUnique();
 
-                    b.ToTable("fornecedor", (string)null);
+                    b.ToTable("fornecedor");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Cnpj = "14011580111022",
                             PessoaId = 1
                         });
                 });
@@ -155,7 +149,7 @@ namespace BaseCodeAPI.Migrations
                     b.HasIndex("PessoaId")
                         .IsUnique();
 
-                    b.ToTable("cliente", (string)null);
+                    b.ToTable("cliente");
 
                     b.HasData(
                         new
@@ -190,24 +184,7 @@ namespace BaseCodeAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("pessoa", (string)null);
-                });
-
-            modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.UserModel", b =>
-                {
-                    b.HasBaseType("BaseCodeAPI.Src.Models.Entity.PersonModel");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Senha")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("senha");
-
-                    b.ToTable("usuario", (string)null);
+                    b.ToTable("pessoa");
 
                     b.HasData(
                         new
@@ -215,9 +192,51 @@ namespace BaseCodeAPI.Migrations
                             Id = 1,
                             Apelido = "Apelido 1",
                             Cpf_cnpj = "07640402948",
-                            Telefone = "19999999999",
+                            Telefone = "19999999999"
+                        });
+                });
+
+            modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.UserModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("email");
+
+                    b.Property<int>("PessoaId")
+                        .HasColumnType("int")
+                        .HasColumnName("pessoa_id");
+
+                    b.Property<string>("Senha")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("senha");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId");
+
+                    b.ToTable("usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
                             Email = "Email1@example.com",
+                            PessoaId = 1,
                             Senha = "Senha 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "Email2@example.com",
+                            PessoaId = 1,
+                            Senha = "Senha 2"
                         });
                 });
 
@@ -225,7 +244,7 @@ namespace BaseCodeAPI.Migrations
                 {
                     b.HasOne("BaseCodeAPI.Src.Models.Entity.PersonModel", "Person")
                         .WithMany("Addresses")
-                        .HasForeignKey("Pessoa_id")
+                        .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -235,7 +254,7 @@ namespace BaseCodeAPI.Migrations
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.CarrierModel", b =>
                 {
                     b.HasOne("BaseCodeAPI.Src.Models.Entity.PersonModel", "Person")
-                        .WithOne()
+                        .WithOne("Carrier")
                         .HasForeignKey("BaseCodeAPI.Src.Models.Entity.CarrierModel", "PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -246,7 +265,7 @@ namespace BaseCodeAPI.Migrations
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.ClientModel", b =>
                 {
                     b.HasOne("BaseCodeAPI.Src.Models.Entity.PersonModel", "Person")
-                        .WithOne()
+                        .WithOne("Client")
                         .HasForeignKey("BaseCodeAPI.Src.Models.Entity.ClientModel", "PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -256,16 +275,24 @@ namespace BaseCodeAPI.Migrations
 
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.UserModel", b =>
                 {
-                    b.HasOne("BaseCodeAPI.Src.Models.Entity.PersonModel", null)
-                        .WithOne()
-                        .HasForeignKey("BaseCodeAPI.Src.Models.Entity.UserModel", "Id")
+                    b.HasOne("BaseCodeAPI.Src.Models.Entity.PersonModel", "Person")
+                        .WithMany("Users")
+                        .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("BaseCodeAPI.Src.Models.Entity.PersonModel", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Carrier");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

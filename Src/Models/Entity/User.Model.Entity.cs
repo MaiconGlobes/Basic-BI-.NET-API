@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
-   public class UserModel : PersonModel
+   [Table("usuario")]
+   public class UserModel
    {
       private static UserModel FInstancia { get; set; }
 
@@ -13,6 +14,11 @@ namespace BaseCodeAPI.Src.Models.Entity
          FInstancia ??= new UserModel();
          return FInstancia;
       }
+
+      [Key]
+      [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+      [Column("id")]
+      public int Id { get; set; }
 
       [JsonPropertyName("email")]
       [Column("email", TypeName = "varchar")]
@@ -23,5 +29,12 @@ namespace BaseCodeAPI.Src.Models.Entity
       [Column("senha", TypeName = "varchar")]
       [MaxLength(100, ErrorMessage = "Propriedade {0} deve ter no máximo 100 caracteres")]
       public string Senha { get; set; }
+
+      [JsonPropertyName("pessoa_id")]
+      [Column("pessoa_id")]
+      public int PessoaId { get; set; }
+
+      [JsonIgnore]
+      public virtual PersonModel Person { get; set; }
    }
 }

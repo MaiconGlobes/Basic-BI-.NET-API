@@ -90,8 +90,6 @@ namespace BaseCodeAPI.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    cnpj = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     pessoa_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -110,18 +108,20 @@ namespace BaseCodeAPI.Migrations
                 name: "usuario",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false),
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     senha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    pessoa_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_usuario", x => x.id);
                     table.ForeignKey(
-                        name: "FK_usuario_pessoa_id",
-                        column: x => x.id,
+                        name: "FK_usuario_pessoa_pessoa_id",
+                        column: x => x.pessoa_id,
                         principalTable: "pessoa",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -150,13 +150,17 @@ namespace BaseCodeAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "fornecedor",
-                columns: new[] { "id", "cnpj", "pessoa_id" },
-                values: new object[] { 1, "14011580111022", 1 });
+                columns: new[] { "id", "pessoa_id" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "usuario",
-                columns: new[] { "id", "email", "senha" },
-                values: new object[] { 1, "Email1@example.com", "Senha 1" });
+                columns: new[] { "id", "email", "pessoa_id", "senha" },
+                values: new object[,]
+                {
+                    { 1, "Email1@example.com", 1, "Senha 1" },
+                    { 2, "Email2@example.com", 1, "Senha 2" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cliente_pessoa_id",
@@ -174,6 +178,11 @@ namespace BaseCodeAPI.Migrations
                 table: "fornecedor",
                 column: "pessoa_id",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuario_pessoa_id",
+                table: "usuario",
+                column: "pessoa_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

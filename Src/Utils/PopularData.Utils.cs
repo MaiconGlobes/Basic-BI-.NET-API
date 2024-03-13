@@ -12,45 +12,53 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-      public IList<UserModel> PopularUser()
+      public PersonModel PopularPerson()
+      {
+         return new PersonModel
+         {
+            Id = 1,
+            Apelido = "Apelido 1",
+            Cpf_cnpj = "07640402948",
+            Telefone = "19999999999" ,
+         };
+      }
+
+      public IList<UserModel> PopularUsers()
       {
          return new List<UserModel>
          {
             new() {
                Id = 1,
-               Senha = "Senha 1",
-               Apelido = "Apelido 1",
                Email = "Email1@example.com",
-               Cpf_cnpj = "07640402948",
-               //Addresses
-               Telefone = "19999999999"
+               Senha = "Senha 1",
+               PessoaId = 1    ,
             },
+            new()
+            {
+               Id = 2,
+               Email = "Email2@example.com",
+               Senha = "Senha 2",
+               PessoaId = 1
+            }
          };
       }
 
-      public IList<ClientModel> PopularClient()
+      public ClientModel PopularClient()
       {
-         return new List<ClientModel>
+         return new ClientModel()
          {
-            new()
-            {
-               Id = 1,
-               Limite_credito = 1000.00,
-               PessoaId = 1
-            },
+            Id = 1,
+            Limite_credito = 1000.00,
+            PessoaId = 1
          };
       }
 
-      public IList<CarrierModel> PopularCarrier()
+      public CarrierModel PopularCarrier()
       {
-         return new List<CarrierModel>
+         return new CarrierModel
          {
-            new()
-            {
-               Id = 1,
-               Cnpj = "14011580111022",
-               PessoaId = 1
-            },
+            Id = 1,
+            PessoaId = 1
          };
       }
 
@@ -67,7 +75,7 @@ namespace BaseCodeAPI.Src.Utils
                Municipio = "Municipio 2",
                Uf = "SP",
                Cep = "13545215",
-               Pessoa_id = 1
+               PessoaId = 1
             },
             new()
             {
@@ -78,7 +86,7 @@ namespace BaseCodeAPI.Src.Utils
                Municipio = "Municipio 2",
                Uf = "SP",
                Cep = "13545215",
-               Pessoa_id = 1
+               PessoaId = 1
             },
             new()
             {
@@ -89,7 +97,7 @@ namespace BaseCodeAPI.Src.Utils
                Municipio = "Municipio 3",
                Uf = "SP",
                Cep = "13545215",
-               Pessoa_id = 1
+               PessoaId = 1
             },
          };
       }

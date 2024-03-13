@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
+   [Table("endereco")]
    public class AddressModel
    {
       [Key]
@@ -41,10 +42,9 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(8, ErrorMessage = "Propriedade {0} deve ter no máximo 8 caracteres")]
       public string Cep { get; set; }
 
-      [JsonIgnore]
       [JsonPropertyName("pessoa_id")]
       [Column("pessoa_id")]
-      public int Pessoa_id { get; set; }
+      public int PessoaId { get; set; }
 
       [JsonIgnore]
       public virtual PersonModel Person { get; set; }

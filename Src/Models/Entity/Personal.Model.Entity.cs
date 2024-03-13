@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {
+   [Table("pessoa")]
    public class PersonModel
    {
       [Key]
@@ -27,6 +28,9 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(11, ErrorMessage = "Propriedade {0} deve ter no máximo 11 caracteres")]
       public string Telefone { get; set; }
 
+      public virtual ICollection<UserModel> Users { get; set; }
       public virtual ICollection<AddressModel> Addresses { get; set; }
+      public virtual ClientModel Client { get; set; }
+      public virtual CarrierModel Carrier { get; set; }
    }
 }

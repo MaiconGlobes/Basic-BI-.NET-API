@@ -16,34 +16,53 @@ namespace BaseCodeAPI.Src
       {
          if (!optionsBuilder.IsConfigured)
          {
-         IConfigurationRoot configuration = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("env_config.json")
-               .Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                  .SetBasePath(Directory.GetCurrentDirectory())
+                  .AddJsonFile("env_config.json")
+                  .Build();
 
-         var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
-         var mySQLConnection = configuration.GetConnectionString("MySQLConnection");
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
+            var mySQLConnection = configuration.GetConnectionString("MySQLConnection");
 
-         optionsBuilder.UseMySql(mySQLConnection, serverVersion);
+            optionsBuilder.EnableSensitiveDataLogging()
+                          .UseMySql(mySQLConnection, serverVersion).EnableSensitiveDataLogging();
          }
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
-         modelBuilder.Entity<UserModel>().ToTable("usuario");
-         modelBuilder.Entity<PersonModel>().ToTable("pessoa");
-         modelBuilder.Entity<ClientModel>().ToTable("cliente");
-         modelBuilder.Entity<CarrierModel>().ToTable("fornecedor");
-         modelBuilder.Entity<AddressModel>().ToTable("endereco");
 
          modelBuilder.Entity<PersonModel>().Property(person => person.Id).ValueGeneratedOnAdd();
-         modelBuilder.Entity<ClientModel>().Property(client => client.Id).ValueGeneratedOnAdd();
+         modelBuilder.Entity<UserModel>().Property(user => user.Id).ValueGeneratedOnAdd();
 
-         modelBuilder.Entity<ClientModel>().HasOne(client => client.Person).WithOne().HasForeignKey<ClientModel>(client => client.PessoaId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-         modelBuilder.Entity<CarrierModel>().HasOne(carrier => carrier.Person).WithOne().HasForeignKey<CarrierModel>(carrier => carrier.PessoaId).IsRequired().OnDelete(DeleteBehavior.Cascade);
-         modelBuilder.Entity<AddressModel>().HasOne(address => address.Person).WithMany(person => person.Addresses).HasForeignKey(address => address.Pessoa_id);
+         modelBuilder.Entity<PersonModel>()
+                     .HasMany(person => person.Users)
+                     .WithOne(user => user.Person)
+                     .HasForeignKey(user => user.PessoaId)
+                     .OnDelete(DeleteBehavior.Cascade);
 
-         modelBuilder.Entity<UserModel>().HasData(PopularDataUtils.Instancia().PopularUser());
+         modelBuilder.Entity<PersonModel>()
+                     .HasMany(person => person.Addresses)
+                     .WithOne(address => address.Person)
+                     .HasForeignKey(address => address.PessoaId)
+                     .OnDelete(DeleteBehavior.Cascade);
+
+         modelBuilder.Entity<PersonModel>()
+                     .HasOne(person => person.Client)
+                     .WithOne(client => client.Person)
+                     .HasForeignKey<ClientModel>(client => client.PessoaId)
+                     .IsRequired()
+                     .OnDelete(DeleteBehavior.Cascade);
+
+         modelBuilder.Entity<PersonModel>()
+                     .HasOne(person => person.Carrier)
+                     .WithOne(carrier => carrier.Person)
+                     .HasForeignKey<CarrierModel>(carrier => carrier.PessoaId)
+                     .IsRequired()
+                     .OnDelete(DeleteBehavior.Cascade);
+
+         modelBuilder.Entity<PersonModel>().HasData(PopularDataUtils.Instancia().PopularPerson());
+         modelBuilder.Entity<UserModel>().HasData(PopularDataUtils.Instancia().PopularUsers());
          modelBuilder.Entity<ClientModel>().HasData(PopularDataUtils.Instancia().PopularClient());
          modelBuilder.Entity<CarrierModel>().HasData(PopularDataUtils.Instancia().PopularCarrier());
          modelBuilder.Entity<AddressModel>().HasData(PopularDataUtils.Instancia().PopularAddress());
