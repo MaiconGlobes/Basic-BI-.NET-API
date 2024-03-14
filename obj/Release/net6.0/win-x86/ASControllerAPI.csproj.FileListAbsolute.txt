@@ -1,0 +1,7 @@
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.csproj.AssemblyReference.cache
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.AssemblyInfoInputs.cache
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.AssemblyInfo.cs
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\obj\Release\net6.0\win-x86\ASControllerAPI.sourcelink.json

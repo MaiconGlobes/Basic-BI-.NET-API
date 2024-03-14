@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Usuario\OneDrive\Documentos\GIT\AutoSmart\ASControllerAPI\bin\publish\</_PublishTargetUrl>
+    <History>True|2024-03-01T01:11:30.0768596Z;True|2024-02-29T22:09:43.4559835-03:00;True|2024-02-29T22:08:18.2625195-03:00;False|2024-02-29T22:04:20.3029324-03:00;True|2024-02-28T22:12:45.0790966-03:00;True|2024-02-28T22:12:39.8797043-03:00;True|2024-02-27T00:22:52.7509242-03:00;True|2024-02-27T00:16:32.2210085-03:00;True|2024-02-27T00:14:10.5104752-03:00;True|2024-02-27T00:08:26.7569714-03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
