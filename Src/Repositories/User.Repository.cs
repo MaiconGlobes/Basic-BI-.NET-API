@@ -1,25 +1,27 @@
-﻿using BaseCodeAPI.Src.Models.Entity;
+﻿using BaseCodeAPI.Src.Interfaces;
+using BaseCodeAPI.Src.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseCodeAPI.Src.Repositories
 {
-   public class UserRepository
+   public class UserRepository : IRepository
    {
-      private Repository FRepository { get; set; }
+      private RepositoryBase FRepositoryBase { get; set; }
+
 
       public UserRepository()
       {
-         FRepository = new();
+         FRepositoryBase = new();
       }
 
       public async Task<IEnumerable<UserModel>> GetUserAllAsync()
       {
-         return await this.FRepository.GetEntity<UserModel>().ToListAsync();
+         return await this.FRepositoryBase.GetEntity<UserModel>().ToListAsync();
       }
 
       public async Task<int> CreateUser(UserModel AUser)
       {
-         return await this.FRepository.InsertOneAsync(AUser);
+         return await this.FRepositoryBase.InsertOneAsync(AUser);
       }
    }
 }

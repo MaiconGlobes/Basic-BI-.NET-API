@@ -1,7 +1,6 @@
-using AutoMapper;
 using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
-using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,22 +12,21 @@ namespace BaseCodeAPI.Src.Controllers
    [ApiExplorerSettings(IgnoreApi = true)]
    public class UsuarioController : ControllerBase
    {
-      private UserService FUserService {  get; set; }
-      
+      private IServices FIServices { get; set; }
 
-      public UsuarioController(IMapper AMapper)
+      public UsuarioController(IServices AiServices)
       {
-         FUserService = new UserService(AMapper);   
+         FIServices = AiServices;
       }
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
       [Route("user/all")]
-      public async Task<IActionResult> GetUserAllAsync()
+      public async Task<IActionResult> GetAllRegisterAsync()
       {
          try
          {
-            var (Status, Json) = await this.FUserService.GetUserAllAsync();
+            var (Status, Json) = await this.FIServices.GetAllRegister();
 
             return Status switch
             {
@@ -48,12 +46,12 @@ namespace BaseCodeAPI.Src.Controllers
 
       [HttpPost]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
-      [Route("user/create")]
-      public async Task<IActionResult> PostCreateUser([FromBody] UserModelDto AModel)
+      [Route("user/register")]
+      public async Task<IActionResult> PostCreateRegisterAsync([FromBody] UserModelDto AModel)
       {
          try
          {
-            var (Status, Json) = await this.FUserService.CreateUser(AModel);
+            var (Status, Json) = await this.FIServices.CreateRegister(AModel);
 
             return Status switch
             {

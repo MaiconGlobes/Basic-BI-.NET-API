@@ -1,27 +1,29 @@
 ﻿using AutoMapper;
 using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {
-   public class UserService
+   public class UserService : IServices
    {
-      private UserRepository FUserRepository { get; set; }
       private IMapper FMapper { get; set; }
+      private IRepository FIRepository { get; set; }
 
-      public UserService(IMapper AMapper)
+
+      public UserService(IMapper AIMapper, IRepository AiRepository)
       {
-         this.FMapper = AMapper;
-         FUserRepository = new();
+         this.FMapper = AIMapper;
+         this.FIRepository = AiRepository;
       }
 
-      public async Task<(byte Status, object Json)> GetUserAllAsync()
+      public async Task<(byte Status, object Json)> GetAllRegister()
       {
          try
          {
-            var usersObject = await FUserRepository.GetUserAllAsync();
+            var usersObject = await FIRepository.GetUserAllAsync();
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
 
@@ -32,24 +34,27 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
-      public async Task<(byte Status, object Json)> CreateUser(UserModelDto AUser)
+      public async Task<(byte Status, object Json)> CreateRegister<T>(T AModel)
       {
          try
          {
-            var user = this.FMapper.Map<UserModel>(AUser);
-            var person = this.FMapper.Map<PersonModel>(AUser?.Pessoa);
+            var userModelDto = AModel as UserModelDto;
+
+            var user = this.FMapper.Map<UserModel>(userModelDto);
+            var person = this.FMapper.Map<PersonModel>(userModelDto.Pessoa);
 
             if (user != null || person != null)
             {
                user.Person = person!;
 
-               int rowsAffect = await FUserRepository.CreateUser(user);
+               int rowsAffect = await FIRepository.CreateUser(user);
 
                if (rowsAffect > 0)
                {
-                  AUser.PessoaId = person.Id;
-                  AUser.Senha = null;
-                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(AUser));
+                  userModelDto.PessoaId = person.Id;
+                  userModelDto.Senha = null;
+
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(AModel));
                }
             }
 

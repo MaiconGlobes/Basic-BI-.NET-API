@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseCodeAPI.Src.Repositories
 {
-   public class Repository : IRepository
+   public class RepositoryBase : IRepositoryBase
    {
       private Context FContexto { get; set; }
 
-      public Repository()
+      public RepositoryBase()
       {
          FContexto = new Context();
       }

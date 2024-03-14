@@ -4,7 +4,7 @@ namespace BaseCodeAPI.Src.Repositories
 {
    internal class MigrationRepository
    {
-      private Repository FRepository { get; set; }
+      private RepositoryBase FRepository { get; set; }
 
       internal MigrationRepository()
       {

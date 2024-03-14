@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BaseCodeAPI.Migrations
 {
-    public partial class initial : Migration
+   public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
