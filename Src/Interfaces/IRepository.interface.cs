@@ -4,8 +4,8 @@ namespace BaseCodeAPI.Src.Interfaces
 {
    public interface IRepository
    {
-      public Task<IEnumerable<UserModel>> GetUserAllAsync();
+      public Task<IEnumerable<UserModel>> GetAllRegister();
 
-      public Task<int> CreateUser(UserModel AUser);
+      public Task<int> CreateRegister(UserModel AUser);
    }
 }

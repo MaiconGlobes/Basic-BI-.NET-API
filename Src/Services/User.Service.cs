@@ -23,7 +23,7 @@ namespace BaseCodeAPI.Src.Services
       {
          try
          {
-            var usersObject = await FIRepository.GetUserAllAsync();
+            var usersObject = await FIRepository.GetAllRegister();
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
 
@@ -47,7 +47,7 @@ namespace BaseCodeAPI.Src.Services
             {
                user.Person = person!;
 
-               int rowsAffect = await FIRepository.CreateUser(user);
+               int rowsAffect = await FIRepository.CreateRegister(user);
 
                if (rowsAffect > 0)
                {

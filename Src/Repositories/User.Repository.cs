@@ -14,12 +14,12 @@ namespace BaseCodeAPI.Src.Repositories
          FRepositoryBase = new();
       }
 
-      public async Task<IEnumerable<UserModel>> GetUserAllAsync()
+      public async Task<IEnumerable<UserModel>> GetAllRegister()
       {
          return await this.FRepositoryBase.GetEntity<UserModel>().ToListAsync();
       }
 
-      public async Task<int> CreateUser(UserModel AUser)
+      public async Task<int> CreateRegister(UserModel AUser)
       {
          return await this.FRepositoryBase.InsertOneAsync(AUser);
       }
