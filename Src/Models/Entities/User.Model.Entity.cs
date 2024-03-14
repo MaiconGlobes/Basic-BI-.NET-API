@@ -22,7 +22,7 @@ namespace BaseCodeAPI.Src.Models.Entity
 
       [JsonPropertyName("apelido")]
       [Column("apelido", TypeName = "varchar")]
-      [MaxLength(35, ErrorMessage = "Propriedade {0} deve ter no máximo 35 caracteres")]
+      [MaxLength(35)]
       public string Apelido { get; set; }
 
       [Column("email", TypeName = "varchar")]

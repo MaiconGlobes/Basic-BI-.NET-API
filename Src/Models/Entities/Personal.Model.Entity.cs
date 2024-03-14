@@ -14,18 +14,19 @@ namespace BaseCodeAPI.Src.Models.Entity
 
       [JsonPropertyName("nome")]
       [Column("nome", TypeName = "varchar")]
-      [MaxLength(50, ErrorMessage = "Propriedade {0} deve ter no máximo 50 caracteres")]
+      [MaxLength(50)]
       public string Nome { get; set; }
 
       [JsonPropertyName("cpf_cnpj")]
       [Column("cpf_cnpj", TypeName = "varchar")]
-      [MinLength(11, ErrorMessage = "Propriedade {0} deve ter no mínimo 11 caracteres")]
-      [MaxLength(14, ErrorMessage = "Propriedade {0} deve ter no máximo 14 caracteres")]
+      [MinLength(11)]
+      [MaxLength(14)]
       public string Cpf_cnpj { get; set; }
 
       [JsonPropertyName("telefone")]
       [Column("telefone", TypeName = "varchar")]
-      [MaxLength(11, ErrorMessage = "Propriedade {0} deve ter no máximo 11 caracteres")]
+      [MinLength(10)]
+      [MaxLength(11)]
       public string Telefone { get; set; }
 
       public virtual UserModel User { get; set; }
