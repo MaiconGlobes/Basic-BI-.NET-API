@@ -26,7 +26,7 @@ namespace BaseCodeAPI.Src.Controllers
       {
          try
          {
-            var (Status, Json) = await this.FIServices.GetAllRegisters();
+            var (Status, Json) = await this.FIServices.GetAllRegistersAsync();
 
             return Status switch
             {
@@ -51,12 +51,13 @@ namespace BaseCodeAPI.Src.Controllers
       {
          try
          {
-            var (Status, Json) = await this.FIServices.CreateRegister(AModel);
+            var (Status, Json) = await this.FIServices.CreateRegisterAsync(AModel);
 
             return Status switch
             {
                (byte)GlobalEnum.eStatusProc.Sucesso => new CreatedResult(string.Empty, Json),
                (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.RegistroDuplicado => new OkObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
                _ => throw new NotImplementedException()

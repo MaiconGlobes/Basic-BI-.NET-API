@@ -132,3 +132,9 @@ C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\B
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\BaseCodeAPI.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\obj\Debug\net6.0\ref\BaseCodeAPI.dll
 C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Base-Code-API-dotnet\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

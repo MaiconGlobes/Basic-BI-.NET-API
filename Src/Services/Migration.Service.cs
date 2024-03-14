@@ -24,7 +24,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+            return UtilsClass.New().ProcessExceptionDatabase(ex);
          }
       }
 
@@ -39,7 +39,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+            return UtilsClass.New().ProcessExceptionDatabase(ex);
          }
       }
    }

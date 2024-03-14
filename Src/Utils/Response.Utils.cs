@@ -84,7 +84,6 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
-                  msg_front_end = "Registro não localizado"
                }
             }
          };
@@ -103,7 +102,6 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando realizar a operação não se encontra no banco de dados.",
-                  msg_front_end = "Registro não localizado"
                }
             }
          };
@@ -152,7 +150,6 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "O registro que está tentando inserir já se encontra no banco de dados.",
-                  msg_front_end = "Registro duplicado"
                }
             }
          };
@@ -171,7 +168,24 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = "Erro de duplicidade de registro.",
-                  msg_front_end = "Registro duplicado"
+               }
+            }
+         };
+
+         return this.FObjJSON;
+      }
+
+      internal virtual object RetornoDuplicated(Exception AExcecao)
+      {
+         this.FObjJSON = new
+         {
+            retorno = new
+            {
+               status = "Duplicidade de registro",
+               codigo_status = GlobalEnum.eStatusProc.RegistroDuplicado,
+               mensagem = new
+               {
+                  descricao = AExcecao?.Message
                }
             }
          };
@@ -208,7 +222,6 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = AExcecao?.Message,
-                  msg_front_end = "Impressora offline"
                }
             }
          };
@@ -227,7 +240,6 @@ namespace BaseCodeAPI.Src.Utils
                mensagem = new
                {
                   descricao = AExcecao.Message,
-                  msg_front_end = "Erro de servidor"
                }
             }
          };

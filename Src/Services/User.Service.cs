@@ -17,7 +17,7 @@ namespace BaseCodeAPI.Src.Services
          this.FIRepository = AiRepository;
       }
 
-      public async Task<(byte Status, object Json)> GetAllRegisters()
+      public async Task<(byte Status, object Json)> GetAllRegistersAsync()
       {
          try
          {
@@ -28,11 +28,11 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex.InnerException != null ? ex.InnerException : ex));
+            return UtilsClass.New().ProcessExceptionDatabase(ex);
          }
       }
 
-      public async Task<(byte Status, object Json)> CreateRegister<T>(T AModel)
+      public async Task<(byte Status, object Json)> CreateRegisterAsync<T>(T AModel)
       {
          try
          {
@@ -43,6 +43,7 @@ namespace BaseCodeAPI.Src.Services
 
             if (user != null || person != null)
             {
+               user.Senha = UtilsClass.New().EncryptPassword(userModelDto.Senha);
                user.Person = person!;
 
                int rowsAffect = await FIRepository.CreateRegisterAsync(user);
@@ -60,7 +61,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex.InnerException != null ? ex.InnerException : ex));
+            return UtilsClass.New().ProcessExceptionDatabase(ex);
          }
       }
    }
