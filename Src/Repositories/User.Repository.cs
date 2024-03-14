@@ -4,24 +4,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseCodeAPI.Src.Repositories
 {
-   public class UserRepository : IRepository
+   public class UserRepository : IRepository<UserModel>
    {
       private RepositoryBase FRepositoryBase { get; set; }
 
-
       public UserRepository()
       {
-         FRepositoryBase = new();
+         FRepositoryBase = new RepositoryBase();
       }
 
-      public async Task<IEnumerable<UserModel>> GetAllRegister()
+      public async Task<IEnumerable<UserModel>> GetAllRegisterAsync()
       {
-         return await this.FRepositoryBase.GetEntity<UserModel>().ToListAsync();
+         return await FRepositoryBase.GetEntity<UserModel>().ToListAsync();
       }
 
-      public async Task<int> CreateRegister(UserModel AUser)
+      public async Task<int> CreateRegisterAsync(UserModel AModel)
       {
-         return await this.FRepositoryBase.InsertOneAsync(AUser);
+         return await FRepositoryBase.InsertOneAsync(AModel);
       }
    }
 }

@@ -1,11 +1,9 @@
-﻿using BaseCodeAPI.Src.Models.Entity;
-
-namespace BaseCodeAPI.Src.Interfaces
+﻿namespace BaseCodeAPI.Src.Interfaces
 {
-   public interface IRepository
+   public interface IRepository<T>
    {
-      public Task<IEnumerable<UserModel>> GetAllRegister();
+      public Task<IEnumerable<T>> GetAllRegisterAsync();
 
-      public Task<int> CreateRegister(UserModel AUser);
+      public Task<int> CreateRegisterAsync(T AUser);
    }
 }

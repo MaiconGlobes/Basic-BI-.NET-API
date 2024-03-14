@@ -1,5 +1,6 @@
 using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Middleware;
+using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Models.Profiles;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Services;
@@ -34,7 +35,7 @@ namespace BaseCodeAPI
          services.AddHttpContextAccessor();
          services.AddAutoMapper(typeof(AutoMapperProfile));
          services.AddScoped<IServices, UserService>();
-         services.AddScoped<IRepository, UserRepository>();
+         services.AddScoped<IRepository<UserModel>, UserRepository>();
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)

@@ -2,7 +2,6 @@
 using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
-using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
@@ -10,20 +9,19 @@ namespace BaseCodeAPI.Src.Services
    public class UserService : IServices
    {
       private IMapper FMapper { get; set; }
-      private IRepository FIRepository { get; set; }
+      private IRepository<UserModel> FIRepository { get; set; }
 
-
-      public UserService(IMapper AIMapper, IRepository AiRepository)
+      public UserService(IMapper AIMapper, IRepository<UserModel> AiRepository)
       {
          this.FMapper = AIMapper;
          this.FIRepository = AiRepository;
       }
 
-      public async Task<(byte Status, object Json)> GetAllRegister()
+      public async Task<(byte Status, object Json)> GetAllRegisters()
       {
          try
          {
-            var usersObject = await FIRepository.GetAllRegister();
+            var usersObject = await FIRepository.GetAllRegisterAsync();
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
 
@@ -47,7 +45,7 @@ namespace BaseCodeAPI.Src.Services
             {
                user.Person = person!;
 
-               int rowsAffect = await FIRepository.CreateRegister(user);
+               int rowsAffect = await FIRepository.CreateRegisterAsync(user);
 
                if (rowsAffect > 0)
                {

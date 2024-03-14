@@ -26,7 +26,7 @@ namespace BaseCodeAPI.Src.Controllers
       {
          try
          {
-            var (Status, Json) = await this.FIServices.GetAllRegister();
+            var (Status, Json) = await this.FIServices.GetAllRegisters();
 
             return Status switch
             {
