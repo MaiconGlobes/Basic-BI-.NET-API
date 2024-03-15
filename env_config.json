@@ -1,6 +1,7 @@
 {
    "ConnectionStrings": {
-      "MySQLConnection": "Server=localhost;Database=dotnet;Uid=root;Pwd=root;",
+      "SecretKey": "Secret abcdefghijklmnopqrstuvxyz0123456789",
+      "MySQLConnection": "Server=localhost;Database=dotnet;Uid=root;Pwd=root;"
    },
    "Logging": {
       "LogLevel": {

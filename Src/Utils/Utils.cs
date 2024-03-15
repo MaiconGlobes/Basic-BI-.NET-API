@@ -1,4 +1,8 @@
 ﻿using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Models.Entity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,6 +11,8 @@ namespace BaseCodeAPI.Src.Utils
    internal class UtilsClass
    {
       internal static UtilsClass FInstancia { get; set; }
+      private IConfigurationRoot FIConfigurationRoot { get; set; }
+
 
       internal static UtilsClass New()
       {
@@ -14,7 +20,15 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-      internal RequestDelegate ValidatePathUserAll(HttpContext context, RequestDelegate next, string uri)
+         public UtilsClass()
+         {
+            this.FIConfigurationRoot = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("env_config.json")
+                .Build();
+   }
+
+         internal RequestDelegate ValidatePathUserAll(HttpContext context, RequestDelegate next, string uri)
       {
          var path = context.Request.Path;
 
@@ -90,8 +104,28 @@ namespace BaseCodeAPI.Src.Utils
       internal bool ComparePassword(string APassword, string AHashedPassword)
       {
          string hashedInput = this.EncryptPassword(APassword);
-
          return string.Equals(hashedInput, AHashedPassword, StringComparison.OrdinalIgnoreCase);
       }
+
+      internal string GenerateToken(UserModelDto AUser)
+      {
+         var secretKey = this.FIConfigurationRoot.GetConnectionString("SecretKey");
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var key = Encoding.ASCII.GetBytes(secretKey);
+         var tokenDescriptor = new SecurityTokenDescriptor()
+         {
+            Subject = new ClaimsIdentity(new Claim[]
+               {
+               new (ClaimTypes.Name, AUser.Apelido),
+               new (ClaimTypes.Role, AUser.Email),
+               }),
+            Expires = DateTime.UtcNow.AddSeconds(10),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+         };
+
+         var token = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(token);
+      }
+
    }
 }

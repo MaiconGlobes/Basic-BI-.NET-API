@@ -2,6 +2,7 @@ using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Controllers
@@ -46,6 +47,7 @@ namespace BaseCodeAPI.Src.Controllers
 
       [HttpPost]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
+      [AllowAnonymous]
       [Route("user/register")]
       public async Task<IActionResult> PostCreateRegisterAsync([FromBody] UserModelDto AModel)
       {
