@@ -24,8 +24,7 @@ namespace BaseCodeAPI
                            .AllowAnyMethod()
                            .AllowAnyHeader());
 
-         //app.UserMiddlewareBuilder();
-           // .TokenFailureMiddlewareBuilder();   
+         app.TokenFailureMiddlewareBuilder();   
 
          app.UseAuthentication();
          app.UseAuthorization();
