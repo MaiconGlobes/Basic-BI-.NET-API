@@ -19,29 +19,29 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-         public UtilsClass()
-         {
-            this.FIConfigurationRoot = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("settingsconfig.json")
-                .Build();
-   }
+      public UtilsClass()
+      {
+         this.FIConfigurationRoot = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("settingsconfig.json")
+               .Build();
+      }
 
-         internal RequestDelegate ValidatePathUserAll(HttpContext context, RequestDelegate next, string uri)
+      internal RequestDelegate StepValidation(HttpContext context, RequestDelegate next, string uri)
       {
          var path = context.Request.Path;
 
-         if (!path.HasValue || !path.Value.Contains(uri))
+         if (path.HasValue || path.Value.Contains(uri))
          {
             return next;
          }
 
-         var segments = path.Value.Split('/');
+         //var segments = path.Value.Split('/');
 
-         if (segments.Length > 3)
-         {
-            throw new Exception("A URL não contém o formato esperado.");
-         }
+         //if (segments.Length > 3)
+         //{
+         //   throw new Exception("A URL não contém o formato esperado.");
+         //}
 
          return null;
       }
@@ -120,7 +120,7 @@ namespace BaseCodeAPI.Src.Utils
                new (ClaimTypes.Name, AUser.Apelido.ToString()),
                new (ClaimTypes.Role, AUser.Email.ToString()),
                }),
-            Expires = DateTime.UtcNow.AddMinutes(5),
+            Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 

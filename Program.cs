@@ -1,5 +1,5 @@
 using BaseCodeAPI.Src.Interfaces;
-using BaseCodeAPI.Src.Middleware;
+using BaseCodeAPI.Src.Middlewares;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Models.Profiles;
 using BaseCodeAPI.Src.Repositories;
@@ -10,38 +10,33 @@ using System.Text;
 
 namespace BaseCodeAPI
 {
-   public class Program
+    public class Program
    {
-      public static IConfigurationRoot FIConfigurationRoot { get; set; }
-
       public static void Main(string[] args)
       {
-         FIConfigurationRoot = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())                                                         
-            .AddJsonFile("settingsconfig.json")
-            .Build();
-
          var builder = WebApplication.CreateBuilder(args);
 
          ConfigureServices(builder.Services);
 
          var app = builder.Build();
 
-         FinallyServiceAPI(app);
+         app.UseCors(x => x.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
 
-         app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+         //app.UserMiddlewareBuilder();
+           // .TokenFailureMiddlewareBuilder();   
+
          app.UseAuthentication();
          app.UseAuthorization();
+
          app.MapControllers();
-         app.UserMiddlewareBuilder();
 
          app.Run("http://*:5005");
       }
 
       public static void ConfigureServices(IServiceCollection services)
       {
-         var secretKey = FIConfigurationRoot.GetConnectionString("SecretKeyToken");
-         var key = Encoding.ASCII.GetBytes(secretKey);
 
          services.AddCors();
          services.AddControllers();
@@ -50,23 +45,39 @@ namespace BaseCodeAPI
          services.AddScoped<IServices, UserService>();
          services.AddScoped<IRepository<UserModel>, UserRepository>();
 
-         services.AddAuthentication(a => 
+         IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("settingsconfig.json")
+            .Build();
+
+         var secretKey = configuration.GetConnectionString("SecretKeyToken");
+         var key = Encoding.ASCII.GetBytes(secretKey);
+
+         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
          {
-            a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-         })
-         .AddJwtBearer(x =>
-         {
-            x.RequireHttpsMetadata = false;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters()
+            options.TokenValidationParameters = new TokenValidationParameters
             {
                ValidateIssuerSigningKey = true,
                IssuerSigningKey = new SymmetricSecurityKey(key),
                ValidateIssuer = false,
                ValidateAudience = false,
+               RequireExpirationTime = true,
+               ValidateLifetime = true,
             };
          });
+
+         services.AddAuthorization();
+
+         services.AddControllersWithViews(options =>
+         {
+            options.Filters.Add(typeof(JwtTokenFilterMiddleware));
+         });
+
+         services.AddControllers().AddJsonOptions(options =>
+         {
+            options.JsonSerializerOptions.PropertyNamingPolicy = null; // Configurações adicionais de serialização, se necessário
+         });
+
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)

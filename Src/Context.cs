@@ -32,7 +32,6 @@ namespace BaseCodeAPI.Src
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
-
          modelBuilder.Entity<PersonModel>().Property(person => person.Id).ValueGeneratedOnAdd();
          modelBuilder.Entity<UserModel>().Property(user => user.Id).ValueGeneratedOnAdd();
          modelBuilder.Entity<ClientModel>().Property(client => client.Id).ValueGeneratedOnAdd();
