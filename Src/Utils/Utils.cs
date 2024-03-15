@@ -1,4 +1,8 @@
 ﻿using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Models.Entity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,6 +11,7 @@ namespace BaseCodeAPI.Src.Utils
    internal class UtilsClass
    {
       internal static UtilsClass FInstancia { get; set; }
+      private IConfigurationRoot FIConfigurationRoot { get; set; }
 
       internal static UtilsClass New()
       {
@@ -14,7 +19,15 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-      internal RequestDelegate ValidatePathUserAll(HttpContext context, RequestDelegate next, string uri)
+         public UtilsClass()
+         {
+            this.FIConfigurationRoot = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("settingsconfig.json")
+                .Build();
+   }
+
+         internal RequestDelegate ValidatePathUserAll(HttpContext context, RequestDelegate next, string uri)
       {
          var path = context.Request.Path;
 
@@ -72,6 +85,8 @@ namespace BaseCodeAPI.Src.Utils
 
       internal string EncryptPassword(string password)
       {
+         var secretKeyPassword = this.FIConfigurationRoot.GetConnectionString("SecretKeyPassword");
+
          using (SHA256 sha256Hash = SHA256.Create())
          {
             byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
@@ -80,7 +95,7 @@ namespace BaseCodeAPI.Src.Utils
 
             for (int i = 0; i < bytes.Length; i++)
             {
-               builder.Append(bytes[i].ToString("x2"));
+               builder.Append(bytes[i].ToString(secretKeyPassword));
             }
 
             return builder.ToString();
@@ -90,8 +105,28 @@ namespace BaseCodeAPI.Src.Utils
       internal bool ComparePassword(string APassword, string AHashedPassword)
       {
          string hashedInput = this.EncryptPassword(APassword);
-
          return string.Equals(hashedInput, AHashedPassword, StringComparison.OrdinalIgnoreCase);
       }
+
+      internal string GenerateToken(UserModelDto AUser)
+      {
+         var secretKey       = this.FIConfigurationRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler    = new JwtSecurityTokenHandler();
+         var key             = Encoding.ASCII.GetBytes(secretKey);
+         var tokenDescriptor = new SecurityTokenDescriptor()
+         {
+            Subject = new ClaimsIdentity(new Claim[]
+               {
+               new (ClaimTypes.Name, AUser.Apelido.ToString()),
+               new (ClaimTypes.Role, AUser.Email.ToString()),
+               }),
+            Expires = DateTime.UtcNow.AddMinutes(5),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+         };
+
+         var token = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(token);
+      }
+
    }
 }

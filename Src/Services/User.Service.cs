@@ -44,6 +44,7 @@ namespace BaseCodeAPI.Src.Services
             if (user != null || person != null)
             {
                user.Senha = UtilsClass.New().EncryptPassword(userModelDto.Senha);
+               user.Token = UtilsClass.New().GenerateToken(userModelDto);
                user.Person = person!;
 
                int rowsAffect = await FIRepository.CreateRegisterAsync(user);
@@ -52,8 +53,9 @@ namespace BaseCodeAPI.Src.Services
                {
                   userModelDto.PessoaId = person.Id;
                   userModelDto.Senha = null;
+                  userModelDto.Token = user.Token;
 
-                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(AModel));
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
                }
             }
 

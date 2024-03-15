@@ -1,6 +1,7 @@
 using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Controllers
@@ -20,6 +21,7 @@ namespace BaseCodeAPI.Src.Controllers
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK)]
+      [AllowAnonymous]
       [Route("apply-migrate")]
       public IActionResult GetApplyMigrate()
       {
@@ -43,6 +45,7 @@ namespace BaseCodeAPI.Src.Controllers
       }
 
       [HttpGet]
+      [AllowAnonymous]
       [ProducesResponseType(StatusCodes.Status200OK)]
       [Route("revert-migrate")]
       public IActionResult GetRevertMigrate()

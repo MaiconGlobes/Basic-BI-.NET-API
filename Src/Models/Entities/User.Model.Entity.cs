@@ -33,8 +33,7 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(100)]
       public string Senha { get; set; }
 
-      [Column("token", TypeName = "varchar")]
-      [MaxLength(200)]
+      [Column("token", TypeName = "text")]
       public string Token { get; set; }
 
       [Column("pessoa_id")]

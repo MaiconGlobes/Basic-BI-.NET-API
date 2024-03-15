@@ -18,9 +18,9 @@ namespace BaseCodeAPI.Src
          if (!optionsBuilder.IsConfigured)
          {
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                  .SetBasePath(Directory.GetCurrentDirectory())
-                  .AddJsonFile("env_config.json")
-                  .Build();
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("settingsconfig.json")
+               .Build();
 
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
             var mySQLConnection = configuration.GetConnectionString("MySQLConnection");

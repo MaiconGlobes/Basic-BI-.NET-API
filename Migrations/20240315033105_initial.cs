@@ -136,7 +136,7 @@ namespace BaseCodeAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     senha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    token = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                    token = table.Column<string>(type: "text", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     pessoa_id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -170,7 +170,7 @@ namespace BaseCodeAPI.Migrations
             migrationBuilder.InsertData(
                 table: "usuario",
                 columns: new[] { "id", "apelido", "email", "pessoa_id", "senha", "token" },
-                values: new object[] { 1, "Apelido", "Email1@example.com", 1, "Senha criptografada 23355049-4080-488b-abd9-3224bc783a2e", "7fd94586-477d-436a-8f79-912a6c59e62f" });
+                values: new object[] { 1, "Apelido", "Email1@example.com", 1, "Senha criptografada 44163777-407e-40c0-a94b-c81c278809ea", "7bcfcccd-3b0e-40e0-a6db-bb3930391ed7" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cliente_pessoa_id",

@@ -233,8 +233,7 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnName("senha");
 
                     b.Property<string>("Token")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)")
+                        .HasColumnType("text")
                         .HasColumnName("token");
 
                     b.HasKey("Id");
@@ -254,8 +253,8 @@ namespace BaseCodeAPI.Migrations
                             Apelido = "Apelido",
                             Email = "Email1@example.com",
                             PessoaId = 1,
-                            Senha = "Senha criptografada 23355049-4080-488b-abd9-3224bc783a2e",
-                            Token = "7fd94586-477d-436a-8f79-912a6c59e62f"
+                            Senha = "Senha criptografada 44163777-407e-40c0-a94b-c81c278809ea",
+                            Token = "7bcfcccd-3b0e-40e0-a6db-bb3930391ed7"
                         });
                 });
 
