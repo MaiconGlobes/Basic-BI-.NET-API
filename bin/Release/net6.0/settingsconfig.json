@@ -1,0 +1,16 @@
+{
+   "ConnectionStrings": {
+      "SecretKeyToken": "Secret abcdefghijklmnopqrstuvxyz0123456789",
+      "SecretKeyPassword": "x1",
+      "MySQLConnection": "Server=localhost;Database=dotnet;Uid=root;Pwd=root;"
+   },
+   "Logging": {
+      "LogLevel": {
+         "Default": "Information",
+         "Microsoft.AspNetCore": "Warning",
+         "Microsoft": "Warning",
+         "Microsoft.Hosting.Lifetime": "Information"
+      }
+   },
+   "AllowedHosts": "*"
+}

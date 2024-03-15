@@ -120,7 +120,7 @@ namespace BaseCodeAPI.Src.Utils
                new (ClaimTypes.Name, AUser.Apelido.ToString()),
                new (ClaimTypes.Role, AUser.Email.ToString()),
                }),
-            Expires = DateTime.UtcNow.AddSeconds(5),
+            Expires = DateTime.UtcNow.AddMinutes(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
