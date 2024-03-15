@@ -1,5 +1,5 @@
 ## Rotas 🌍
-O swagger ainda não foi implementado, então as rotas estão disponiveis abaixo, lembrando que nenhum possui token no header até o moemnto.
+O swagger ainda não foi implementado, então as rotas estão disponiveis abaixo. O token é gerado ao criar um usuário em /user/register e deve ser suado inicialmente em /user/all no padrão Bearer.
 - GET    : /apply-migrate
 - GET    : /revert-migrate
 - GET    : /user/all
@@ -23,6 +23,8 @@ Reversão da migration no banco. Destroi o database e todas as dependências.
 Realiza a busca de todos os usuários no banco (sem paginação até o momento).
 - GET : http://localhost:5005/user/all
 ```bash
+Header: 
+ > Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYXBlbGlkb...seu hash
 [No Body]
 ```
 Realiza a cadastro do usuário no banco (sem authorization até o momento (nas próximas releases será exigido token no header em cada requisição).
@@ -54,7 +56,7 @@ SUCESSO: 200 OK - [Get com sucesso]
         "id": 1,
         "apelido": "Apelido qualquer",
         "email": "email.teste@example.com",
-        "token": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "token": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92...",
         "pessoaId": 1,
         "pessoa": {
           "nome": "Nome completo",
