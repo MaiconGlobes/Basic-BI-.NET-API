@@ -20,6 +20,8 @@ namespace BaseCodeAPI
 
          var app = builder.Build();
 
+         FinallyServiceAPI(app);
+
          app.UseCors(x => x.AllowAnyOrigin()
                            .AllowAnyMethod()
                            .AllowAnyHeader());
