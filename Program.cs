@@ -4,7 +4,6 @@ using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Models.Profiles;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Services;
-using Microsoft.AspNetCore.Identity;
 
 namespace BaseCodeAPI
 {

@@ -54,11 +54,11 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[2.2.0, )"
             },
-            "Microsoft.AspNetCore.Identity.UI": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.0, )"
             },
