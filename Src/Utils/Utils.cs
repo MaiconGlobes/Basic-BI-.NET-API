@@ -13,7 +13,6 @@ namespace BaseCodeAPI.Src.Utils
       internal static UtilsClass FInstancia { get; set; }
       private IConfigurationRoot FIConfigurationRoot { get; set; }
 
-
       internal static UtilsClass New()
       {
          FInstancia ??= new UtilsClass();
@@ -24,7 +23,7 @@ namespace BaseCodeAPI.Src.Utils
          {
             this.FIConfigurationRoot = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("env_config.json")
+                .AddJsonFile("settingsconfig.json")
                 .Build();
    }
 
@@ -86,6 +85,8 @@ namespace BaseCodeAPI.Src.Utils
 
       internal string EncryptPassword(string password)
       {
+         var secretKeyPassword = this.FIConfigurationRoot.GetConnectionString("SecretKeyPassword");
+
          using (SHA256 sha256Hash = SHA256.Create())
          {
             byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
@@ -94,7 +95,7 @@ namespace BaseCodeAPI.Src.Utils
 
             for (int i = 0; i < bytes.Length; i++)
             {
-               builder.Append(bytes[i].ToString("x2"));
+               builder.Append(bytes[i].ToString(secretKeyPassword));
             }
 
             return builder.ToString();
@@ -109,17 +110,17 @@ namespace BaseCodeAPI.Src.Utils
 
       internal string GenerateToken(UserModelDto AUser)
       {
-         var secretKey = this.FIConfigurationRoot.GetConnectionString("SecretKey");
-         var tokenHandler = new JwtSecurityTokenHandler();
-         var key = Encoding.ASCII.GetBytes(secretKey);
+         var secretKey       = this.FIConfigurationRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler    = new JwtSecurityTokenHandler();
+         var key             = Encoding.ASCII.GetBytes(secretKey);
          var tokenDescriptor = new SecurityTokenDescriptor()
          {
             Subject = new ClaimsIdentity(new Claim[]
                {
-               new (ClaimTypes.Name, AUser.Apelido),
-               new (ClaimTypes.Role, AUser.Email),
+               new (ClaimTypes.Name, AUser.Apelido.ToString()),
+               new (ClaimTypes.Role, AUser.Email.ToString()),
                }),
-            Expires = DateTime.UtcNow.AddSeconds(10),
+            Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 

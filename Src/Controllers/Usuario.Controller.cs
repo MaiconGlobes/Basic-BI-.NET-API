@@ -22,6 +22,7 @@ namespace BaseCodeAPI.Src.Controllers
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
+      [Authorize]
       [Route("user/all")]
       public async Task<IActionResult> GetAllRegisterAsync()
       {
