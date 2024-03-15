@@ -10,7 +10,7 @@ using System.Text;
 
 namespace BaseCodeAPI
 {
-    public class Program
+   public class Program
    {
       public static void Main(string[] args)
       {
@@ -73,12 +73,6 @@ namespace BaseCodeAPI
          {
             options.Filters.Add(typeof(JwtTokenFilterMiddleware));
          });
-
-         services.AddControllers().AddJsonOptions(options =>
-         {
-            options.JsonSerializerOptions.PropertyNamingPolicy = null; // Configurações adicionais de serialização, se necessário
-         });
-
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)
