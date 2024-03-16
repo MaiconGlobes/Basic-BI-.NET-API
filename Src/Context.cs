@@ -1,4 +1,5 @@
-﻿using BaseCodeAPI.Src.Models.Entity;
+﻿using BaseCodeAPI.Src.Models;
+using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Utils;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,22 +18,15 @@ namespace BaseCodeAPI.Src
       {
          if (!optionsBuilder.IsConfigured)
          {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-               .SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("settingsconfig.json")
-               .Build();
-
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
-            var mySQLConnection = configuration.GetConnectionString("MySQLConnection");
+            var mySQLConnection = ConfigurationModel.New().FIConfigRoot.GetConnectionString("MySQLConnection");
 
-            optionsBuilder.EnableSensitiveDataLogging()
-                          .UseMySql(mySQLConnection, serverVersion).EnableSensitiveDataLogging();
+            optionsBuilder.UseMySql(mySQLConnection, serverVersion);
          }
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
-
          modelBuilder.Entity<PersonModel>().Property(person => person.Id).ValueGeneratedOnAdd();
          modelBuilder.Entity<UserModel>().Property(user => user.Id).ValueGeneratedOnAdd();
          modelBuilder.Entity<ClientModel>().Property(client => client.Id).ValueGeneratedOnAdd();

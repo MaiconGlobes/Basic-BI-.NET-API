@@ -1,10 +1,11 @@
 ﻿using BaseCodeAPI.Src.Enums;
+using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {
-   public class MigrationService
+    public class MigrationService
    {
       private MigrationRepository FMigrationRepository { get; set; }
 
@@ -24,7 +25,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
 
@@ -39,7 +40,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
    }

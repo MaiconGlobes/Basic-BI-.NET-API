@@ -35,6 +35,7 @@ namespace BaseCodeAPI.Src.Controllers
                (byte)GlobalEnum.eStatusProc.Sucesso => new OkObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.NaoAutorizado => new UnauthorizedObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
                _ => throw new NotImplementedException()
             };

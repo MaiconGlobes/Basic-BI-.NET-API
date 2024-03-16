@@ -18,6 +18,7 @@
          RegistroDuplicado = 30,
          NaoLocalizado     = 32,
          ImpressoraOffLine = 33,
+         NaoAutorizado     = 41,
          ErroProcessamento = 98,
          ErroServidor      = 99
       }

@@ -33,13 +33,14 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(100)]
       public string Senha { get; set; }
 
-      [Column("token", TypeName = "text")]
-      public string Token { get; set; }
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+      [Column("refresh_token", TypeName = "text")]
+      public string Refresh_token { get; set; }
 
       [Column("pessoa_id")]
       public int PessoaId { get; set; }
 
-      [JsonIgnore]
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
       public virtual PersonModel Person { get; set; }
 

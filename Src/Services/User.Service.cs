@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Interfaces;
+using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {
-   public class UserService : IServices
+    public class UserService : IServices
    {
       private IMapper FMapper { get; set; }
       private IRepository<UserModel> FIRepository { get; set; }
@@ -28,7 +29,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
 
@@ -38,22 +39,22 @@ namespace BaseCodeAPI.Src.Services
          {
             var userModelDto = AModel as UserModelDto;
 
-            var user = this.FMapper.Map<UserModel>(userModelDto);
+            var user   = this.FMapper.Map<UserModel>(userModelDto);
             var person = this.FMapper.Map<PersonModel>(userModelDto.Pessoa);
 
             if (user != null || person != null)
             {
-               user.Senha = UtilsClass.New().EncryptPassword(userModelDto.Senha);
-               user.Token = UtilsClass.New().GenerateToken(userModelDto);
-               user.Person = person!;
+               user.Senha         = UtilsClass.New().EncryptPassword(userModelDto.Senha);
+               user.Refresh_token = UtilsClass.New().GenerateToken(userModelDto);
+               user.Person        = person!;
 
                int rowsAffect = await FIRepository.CreateRegisterAsync(user);
 
                if (rowsAffect > 0)
                {
                   userModelDto.PessoaId = person.Id;
-                  userModelDto.Senha = null;
-                  userModelDto.Token = user.Token;
+                  userModelDto.Senha    = null;
+                  userModelDto.Token    = UtilsClass.New().GenerateToken(userModelDto);
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
                }
@@ -63,7 +64,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
    }

@@ -29,9 +29,16 @@ namespace BaseCodeAPI.Src.Models.Entity
       [MaxLength(11)]
       public string Telefone { get; set; }
 
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public virtual UserModel User { get; set; }
+
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public virtual ClientModel Client { get; set; }
+
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public virtual CarrierModel Carrier { get; set; }
+
+      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       public virtual TransporterModel Transporter { get; set; }
       public virtual ICollection<AddressModel> Addresses { get; set; }
    }

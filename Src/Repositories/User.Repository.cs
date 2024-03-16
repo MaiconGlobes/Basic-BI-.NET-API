@@ -13,9 +13,35 @@ namespace BaseCodeAPI.Src.Repositories
          FRepositoryBase = new RepositoryBase();
       }
 
+      public async Task<IEnumerable<UserModel>> GetAllRegisterAsyncs()
+      {
+         return await FRepositoryBase.GetEntity<UserModel>().Include(u => u.Person).ToListAsync();
+      }
+
       public async Task<IEnumerable<UserModel>> GetAllRegisterAsync()
       {
-         return await FRepositoryBase.GetEntity<UserModel>().ToListAsync();
+         var users = await FRepositoryBase.GetEntity<UserModel>().Include(u => u.Person).ToListAsync();
+
+         var result = await FRepositoryBase.GetEntity<UserModel>()
+                          .Include(u => u.Person)
+                          .Select(u => new UserModel
+                          {
+                             Id = u.Id,
+                             Apelido = u.Apelido,
+                             Email = u.Email,
+                             Senha = u.Senha,
+                             PessoaId = u.PessoaId,
+                             Person = new PersonModel 
+                             {
+                                Nome = u.Person.Nome,
+                                Cpf_cnpj = u.Person.Cpf_cnpj,
+                                Telefone = u.Person.Telefone,
+                                Addresses = u.Person.Addresses,
+                             },
+                          })
+                          .ToListAsync();
+
+         return result;
       }
 
       public async Task<int> CreateRegisterAsync(UserModel AModel)
