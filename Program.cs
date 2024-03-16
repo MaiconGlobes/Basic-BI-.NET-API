@@ -1,5 +1,6 @@
 using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Middlewares;
+using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Models.Profiles;
 using BaseCodeAPI.Src.Repositories;
@@ -38,7 +39,6 @@ namespace BaseCodeAPI
 
       public static void ConfigureServices(IServiceCollection services)
       {
-
          services.AddCors();
          services.AddControllers();
          services.AddHttpContextAccessor();
@@ -46,12 +46,7 @@ namespace BaseCodeAPI
          services.AddScoped<IServices, UserService>();
          services.AddScoped<IRepository<UserModel>, UserRepository>();
 
-         IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("settingsconfig.json")
-            .Build();
-
-         var secretKey = configuration.GetConnectionString("SecretKeyToken");
+         var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
          var key = Encoding.ASCII.GetBytes(secretKey);
 
          services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -68,13 +63,6 @@ namespace BaseCodeAPI
          });
 
          services.AddAuthorization();
-
-         services.AddControllersWithViews(options =>
-         {
-            options.Filters.Add(typeof(JwtTokenFilterMiddleware));
-         });
-
-
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)
@@ -83,7 +71,7 @@ namespace BaseCodeAPI
 
          lifetime.ApplicationStopping.Register(() =>
          {
-            //Faz algo ao finalizar o serviço da api
+            
          });
       }
    }

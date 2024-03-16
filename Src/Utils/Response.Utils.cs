@@ -211,17 +211,17 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoPrintOffLine(Exception AExcecao)
+      internal virtual object RetornoUnauthorized(Exception AExcecao)
       {
          this.FObjJSON = new
          {
             retorno = new
             {
-               status = "Impressora offline",
-               codigo_status = GlobalEnum.eStatusProc.ImpressoraOffLine,
+               status = "Não autorizado",
+               codigo_status = GlobalEnum.eStatusProc.NaoAutorizado,
                mensagem = new
                {
-                  descricao = AExcecao?.Message,
+                  descricao = AExcecao?.Message
                }
             }
          };

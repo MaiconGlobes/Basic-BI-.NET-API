@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using BaseCodeAPI.Src.Models;
+using BaseCodeAPI.Src.Utils;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,13 +21,8 @@ namespace BaseCodeAPI.Src.Middlewares
 
             if (token != null)
             {
-               IConfigurationRoot configuration = new ConfigurationBuilder()
-                  .SetBasePath(Directory.GetCurrentDirectory())
-                  .AddJsonFile("settingsconfig.json")
-                  .Build();
-
-               var secretKey = configuration.GetConnectionString("SecretKeyToken");
-               var key = Encoding.ASCII.GetBytes(secretKey);
+               var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
+               var key       = Encoding.ASCII.GetBytes(secretKey);
 
                var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -43,17 +40,15 @@ namespace BaseCodeAPI.Src.Middlewares
 
                   AContext.HttpContext.User = new ClaimsPrincipal(new ClaimsIdentity(((JwtSecurityToken)validatedToken).Claims));
                }
-               catch (Exception)
+               catch (Exception ex)
                {
-                  AContext.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                  await AContext.HttpContext.Response.WriteAsync("Token inválido ou expirado.");
+                  await AContext.HttpContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().RetornoErrorProcess(ex));
                   return;
                }
             }
             else
             {
-               AContext.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-               await AContext.HttpContext.Response.WriteAsync("Token não fornecido.");
+               await AContext.HttpContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().RetornoUnauthorized(new Exception("Token inválido!")));
                return;
             }
          }

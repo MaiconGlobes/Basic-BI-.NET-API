@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Interfaces;
+using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {
-   public class UserService : IServices
+    public class UserService : IServices
    {
       private IMapper FMapper { get; set; }
       private IRepository<UserModel> FIRepository { get; set; }
@@ -28,7 +29,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
 
@@ -63,7 +64,7 @@ namespace BaseCodeAPI.Src.Services
          }
          catch (Exception ex)
          {
-            return UtilsClass.New().ProcessExceptionDatabase(ex);
+            return UtilsClass.New().ProcessExceptionMessage(ex);
          }
       }
    }
