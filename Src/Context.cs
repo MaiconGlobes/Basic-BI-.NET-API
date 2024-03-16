@@ -21,8 +21,7 @@ namespace BaseCodeAPI.Src
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 36));
             var mySQLConnection = ConfigurationModel.New().FIConfigRoot.GetConnectionString("MySQLConnection");
 
-            optionsBuilder.EnableSensitiveDataLogging()
-                          .UseMySql(mySQLConnection, serverVersion).EnableSensitiveDataLogging();
+            optionsBuilder.UseMySql(mySQLConnection, serverVersion);
          }
       }
 
