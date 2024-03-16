@@ -4,6 +4,6 @@
    {
       public Task<IEnumerable<T>> GetAllRegisterAsync();
 
-      public Task<int> CreateRegisterAsync(T AUser);
+      public Task<int> CreateRegisterAsync(T AModel);
    }
 }

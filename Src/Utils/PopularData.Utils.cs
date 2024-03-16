@@ -31,7 +31,7 @@ namespace BaseCodeAPI.Src.Utils
             Apelido = "Apelido",
             Email = "Email1@example.com",
             Senha = $"Senha criptografada {Guid.NewGuid()}",
-            Token = Guid.NewGuid().ToString(),
+            Refresh_token = Guid.NewGuid().ToString(),
             PessoaId = 1,
          };
       }

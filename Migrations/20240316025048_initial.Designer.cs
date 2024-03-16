@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseCodeAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240315033105_initial")]
+    [Migration("20240316025048_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,15 +228,15 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnType("int")
                         .HasColumnName("pessoa_id");
 
+                    b.Property<string>("Refresh_token")
+                        .HasColumnType("text")
+                        .HasColumnName("refresh_token");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)")
                         .HasColumnName("senha");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("text")
-                        .HasColumnName("token");
 
                     b.HasKey("Id");
 
@@ -255,8 +255,8 @@ namespace BaseCodeAPI.Migrations
                             Apelido = "Apelido",
                             Email = "Email1@example.com",
                             PessoaId = 1,
-                            Senha = "Senha criptografada 44163777-407e-40c0-a94b-c81c278809ea",
-                            Token = "7bcfcccd-3b0e-40e0-a6db-bb3930391ed7"
+                            Refresh_token = "1daf3d2d-0aa8-49d9-9baf-acbd60b61929",
+                            Senha = "Senha criptografada a16e91bc-dd05-493c-91ff-2905b9b3d41a"
                         });
                 });
 

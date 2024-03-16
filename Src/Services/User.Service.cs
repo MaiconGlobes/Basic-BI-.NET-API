@@ -43,17 +43,17 @@ namespace BaseCodeAPI.Src.Services
 
             if (user != null || person != null)
             {
-               user.Senha = UtilsClass.New().EncryptPassword(userModelDto.Senha);
-               user.Token = UtilsClass.New().GenerateToken(userModelDto);
-               user.Person = person!;
+               user.Senha         = UtilsClass.New().EncryptPassword(userModelDto.Senha);
+               user.Refresh_token = UtilsClass.New().GenerateToken(userModelDto);
+               user.Person        = person!;
 
                int rowsAffect = await FIRepository.CreateRegisterAsync(user);
 
                if (rowsAffect > 0)
                {
-                  userModelDto.PessoaId = person.Id;
-                  userModelDto.Senha = null;
-                  userModelDto.Token = user.Token;
+                  userModelDto.PessoaId      = person.Id;
+                  userModelDto.Senha         = null;
+                  userModelDto.Token = user.Refresh_token;
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
                }

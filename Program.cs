@@ -73,6 +73,8 @@ namespace BaseCodeAPI
          {
             options.Filters.Add(typeof(JwtTokenFilterMiddleware));
          });
+
+
       }
 
       private static void FinallyServiceAPI(WebApplication AApp)
