@@ -117,8 +117,9 @@ namespace BaseCodeAPI.Src.Utils
          {
             Subject = new ClaimsIdentity(new Claim[]
                {
-               new (ClaimTypes.Name, AUser.Apelido.ToString()),
-               new (ClaimTypes.Role, AUser.Email.ToString()),
+               new (ClaimTypes.Name, AUser.Apelido),
+               new (ClaimTypes.Role, AUser.Email),
+               new (ClaimTypes.Role, (AUser.Refresh_token?.Length > 0 ? AUser.Refresh_token : AUser.Email)),
                }),
             Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

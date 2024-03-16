@@ -38,7 +38,7 @@ namespace BaseCodeAPI.Src.Services
          {
             var userModelDto = AModel as UserModelDto;
 
-            var user = this.FMapper.Map<UserModel>(userModelDto);
+            var user   = this.FMapper.Map<UserModel>(userModelDto);
             var person = this.FMapper.Map<PersonModel>(userModelDto.Pessoa);
 
             if (user != null || person != null)
@@ -51,9 +51,9 @@ namespace BaseCodeAPI.Src.Services
 
                if (rowsAffect > 0)
                {
-                  userModelDto.PessoaId      = person.Id;
-                  userModelDto.Senha         = null;
-                  userModelDto.Token = user.Refresh_token;
+                  userModelDto.PessoaId = person.Id;
+                  userModelDto.Senha    = null;
+                  userModelDto.Token    = UtilsClass.New().GenerateToken(userModelDto);
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
                }
