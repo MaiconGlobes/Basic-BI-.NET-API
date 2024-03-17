@@ -1,11 +1,10 @@
 ﻿using BaseCodeAPI.Src.Enums;
-using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 
 namespace BaseCodeAPI.Src.Services
 {
-    public class MigrationService
+   public class MigrationService
    {
       private MigrationRepository FMigrationRepository { get; set; }
 

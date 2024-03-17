@@ -17,11 +17,9 @@ namespace BaseCodeAPI
       {
          var builder = WebApplication.CreateBuilder(args);
 
-         ConfigureServices(builder.Services);
+         ConfigServices(builder.Services);
 
          var app = builder.Build();
-
-         FinallyServiceAPI(app);
 
          app.UseCors(x => x.AllowAnyOrigin()
                            .AllowAnyMethod()
@@ -37,7 +35,7 @@ namespace BaseCodeAPI
          app.Run("http://*:5005");
       }
 
-      public static void ConfigureServices(IServiceCollection services)
+      public static void ConfigServices(IServiceCollection services)
       {
          services.AddCors();
          services.AddControllers();
@@ -63,16 +61,6 @@ namespace BaseCodeAPI
          });
 
          services.AddAuthorization();
-      }
-
-      private static void FinallyServiceAPI(WebApplication AApp)
-      {
-         var lifetime = AApp.Services.GetRequiredService<IHostApplicationLifetime>();
-
-         lifetime.ApplicationStopping.Register(() =>
-         {
-            
-         });
       }
    }
 }
