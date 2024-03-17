@@ -115,9 +115,12 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
-               status        = "A Consulta não retornou registros",
+               status        = "Registro não localizado",
                codigo_status = GlobalEnum.eStatusProc.SemRegistros,
-               dados         = ADados
+               mensagem = new
+               {
+                  descricao = "O registro que está tentando buscar não foi localizado no banco de dados.",
+               }
             }
          };
 
@@ -130,9 +133,12 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
-               status        = "A Consulta não retornou registros",
+               status        = "Registro não localizado",
                codigo_status = GlobalEnum.eStatusProc.SemRegistros,
-               dados         = ADados
+               mensagem = new
+               {
+                  descricao = "O registro que está tentando buscar não foi localizado no banco de dados.",
+               }
             }
          };
 

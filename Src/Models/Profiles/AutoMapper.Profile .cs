@@ -7,6 +7,7 @@ namespace BaseCodeAPI.Src.Models.Profiles
    {
       public AutoMapperProfile()
       {
+         CreateMap<TokenUserModelDto, UserModel>();
          CreateMap<UserModelDto, UserModel>();
          CreateMap<PersonModelDTO, PersonModel>();
       }

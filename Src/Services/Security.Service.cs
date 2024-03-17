@@ -44,8 +44,26 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
                {
-               new (ClaimTypes.Name, AUser.Apelido),
                new (ClaimTypes.Role, (AUser.Refresh_token?.Length > 0 ? AUser.Refresh_token : AUser.Email)),
+               }),
+            Expires = DateTime.UtcNow.AddSeconds(5),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+         };
+
+         var token = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(token);
+      }
+
+      internal string GenerateToken2(TokenUserModelDto AUser)
+      {
+         var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var key = Encoding.ASCII.GetBytes(secretKey);
+         var tokenDescriptor = new SecurityTokenDescriptor()
+         {
+            Subject = new ClaimsIdentity(new Claim[]
+               {
+               new (ClaimTypes.Role, (AUser.Token?.Length > 0 ? AUser.Token : AUser.Email)),
                }),
             Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
