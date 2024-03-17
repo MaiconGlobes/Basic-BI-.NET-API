@@ -11,11 +11,11 @@ namespace BaseCodeAPI.Src.Controllers
    [ProducesResponseType(StatusCodes.Status400BadRequest)]
    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
    [ApiExplorerSettings(IgnoreApi = true)]
-   public class UsuarioController : ControllerBase
+   public class UserController : ControllerBase
    {
       private IServices FIServices { get; set; }
 
-      public UsuarioController(IServices AiServices)
+      public UserController(IServices AiServices)
       {
          FIServices = AiServices;
       }
