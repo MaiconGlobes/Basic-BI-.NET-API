@@ -34,7 +34,7 @@ namespace BaseCodeAPI.Src.Controllers
             {
                (byte)GlobalEnum.eStatusProc.Sucesso => new OkObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
-               (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.ErroProcessamento => new UnprocessableEntityObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.NaoAutorizado => new UnauthorizedObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
                _ => throw new NotImplementedException()
@@ -61,7 +61,7 @@ namespace BaseCodeAPI.Src.Controllers
             {
                (byte)GlobalEnum.eStatusProc.Sucesso => new CreatedResult(string.Empty, Json),
                (byte)GlobalEnum.eStatusProc.SemRegistros => new OkObjectResult(Json),
-               (byte)GlobalEnum.eStatusProc.RegistroDuplicado => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.RegistroDuplicado => new UnprocessableEntityObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroProcessamento => new ObjectResult(Json),
                (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
                _ => throw new NotImplementedException()

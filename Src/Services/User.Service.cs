@@ -51,8 +51,8 @@ namespace BaseCodeAPI.Src.Services
                if (rowsAffect > 0)
                {
                   userModelDto.PessoaId = person.Id;
-                  userModelDto.Senha    = null;
                   userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto);
+                  userModelDto.Senha    = null;
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
                }

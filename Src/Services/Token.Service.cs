@@ -4,6 +4,7 @@ using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace BaseCodeAPI.Src.Services
 {
@@ -18,26 +19,58 @@ namespace BaseCodeAPI.Src.Services
          this.FIRepository = AiRepository;
       }
 
+      //public async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
+      //{
+      //   try
+      //   {
+      //      var tokenUserModelDto = AModel as TokenUserModelDto;
+      //      var user = this.FMapper.Map<UserModel>(tokenUserModelDto);
+
+      //      user.Senha = SecurityService.New().EncryptPassword(tokenUserModelDto.Senha);
+
+      //      var usersObject = await FIRepository.GetOneRegisterAsync(user);
+
+      //      if (usersObject != null)
+      //      { 
+      //         tokenUserModelDto.Token = SecurityService.New().GenerateToken2(tokenUserModelDto);
+      //         tokenUserModelDto.Email = null;
+      //         tokenUserModelDto.Senha = null;
+
+      //         return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
+      //      }
+            
+      //      return ((byte)GlobalEnum.eStatusProc.NaoLocalizado, ResponseUtils.Instancia().RetornoNotFound(new object()));
+      //   }
+      //   catch (Exception ex)
+      //   {
+      //      return UtilsClass.New().ProcessExceptionMessage(ex);
+      //   }
+      //}
+
       public async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
       {
          try
          {
             var tokenUserModelDto = AModel as TokenUserModelDto;
-            var user = this.FMapper.Map<UserModel>(tokenUserModelDto);
 
-            user.Senha = SecurityService.New().EncryptPassword(tokenUserModelDto.Senha);
+            JwtSecurityTokenHandler tokenHandler = new();
+            JwtSecurityToken jwtSecurityToken    = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
+
+            string email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+            string senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+
+            var user   = new UserModel { Email = email, Senha = senha };
+            user.Senha = SecurityService.New().EncryptPassword(senha);
 
             var usersObject = await FIRepository.GetOneRegisterAsync(user);
 
             if (usersObject != null)
-            { 
+            {
                tokenUserModelDto.Token = SecurityService.New().GenerateToken2(tokenUserModelDto);
-               tokenUserModelDto.Email = null;
-               tokenUserModelDto.Senha = null;
 
                return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
             }
-            
+
             return ((byte)GlobalEnum.eStatusProc.NaoLocalizado, ResponseUtils.Instancia().RetornoNotFound(new object()));
          }
          catch (Exception ex)

@@ -11,7 +11,7 @@ namespace BaseCodeAPI.Src.Middlewares
          _next = next;
       }
 
-      public async Task Invoke(HttpContext AContext)  //Quando token vencer, vai retornar "Unauthorized" e o front terá que fazer nova requisição p/ rota de geração de novo token com base no refresh token
+      public async Task Invoke(HttpContext AContext)
       {
          await _next(AContext);
 

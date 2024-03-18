@@ -43,9 +43,10 @@ namespace BaseCodeAPI.Src.Services
          var tokenDescriptor = new SecurityTokenDescriptor()
          {
             Subject = new ClaimsIdentity(new Claim[]
-               {
-               new (ClaimTypes.Role, (AUser.Refresh_token?.Length > 0 ? AUser.Refresh_token : AUser.Email)),
-               }),
+            {
+               new (ClaimTypes.Email, AUser.Email),
+               new ("secret", AUser.Senha),
+            }),
             Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
@@ -54,7 +55,7 @@ namespace BaseCodeAPI.Src.Services
          return tokenHandler.WriteToken(token);
       }
 
-      internal string GenerateToken2(TokenUserModelDto AUser)
+      internal string GenerateToken2(TokenUserModelDto AUser) //Refatorar para junção com método acima (GenerateToken)
       {
          var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
          var tokenHandler = new JwtSecurityTokenHandler();
@@ -63,7 +64,7 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
                {
-               new (ClaimTypes.Role, (AUser.Token?.Length > 0 ? AUser.Token : AUser.Email)),
+               new (ClaimTypes.Role, AUser.Token),
                }),
             Expires = DateTime.UtcNow.AddSeconds(5),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
