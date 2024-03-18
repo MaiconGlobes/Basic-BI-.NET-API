@@ -10,5 +10,10 @@ namespace BaseCodeAPI.Src.Models.Entity
    {
       [JsonPropertyName("token")]
       public string Token { get; set; }
+
+      public static explicit operator TokenUserModelDto(Stream v)
+      {
+         throw new NotImplementedException();
+      }
    }
 }

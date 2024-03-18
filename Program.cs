@@ -41,7 +41,7 @@ namespace BaseCodeAPI
          services.AddControllers();
          services.AddHttpContextAccessor();
          services.AddAutoMapper(typeof(AutoMapperProfile));
-         services.AddScoped<IToken, TokenService>();
+         //services.AddScoped<IToken, TokenService>();
          services.AddScoped<IServices, UserService>();
          services.AddScoped<IRepository<UserModel>, UserRepository>();
 
