@@ -57,9 +57,9 @@ namespace BaseCodeAPI.Src.Middlewares
                   await AContext.Response.WriteAsJsonAsync(Json);
                   break;
                case (byte)GlobalEnum.eStatusProc.ErroProcessamento:
-               AContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-               await AContext.Response.WriteAsJsonAsync(Json);
-               break;
+                  AContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                  await AContext.Response.WriteAsJsonAsync(Json);
+                  break;
                case (byte)GlobalEnum.eStatusProc.ErroServidor:
                   throw new NotImplementedException();
                default:
