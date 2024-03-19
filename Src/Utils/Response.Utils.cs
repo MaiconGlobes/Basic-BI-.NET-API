@@ -19,9 +19,24 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
+               status = "Sucesso",
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
+               dados = ADado
+            }
+         };
+
+         return this.FObjJSON;
+      }
+
+      internal virtual object RetornoOk(Object ADados)
+      {
+         this.FObjJSON = new
+         {
+            retorno = new
+            {
                status        = "Sucesso",
                codigo_status = GlobalEnum.eStatusProc.Sucesso,
-               dados         = ADado
+               dados         = ADados
             }
          };
 

@@ -1,4 +1,5 @@
 using BaseCodeAPI.Src.Interfaces;
+using BaseCodeAPI.Src.Middleware;
 using BaseCodeAPI.Src.Middlewares;
 using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Models.Entity;
@@ -21,17 +22,12 @@ namespace BaseCodeAPI
 
          var app = builder.Build();
 
-         app.UseCors(x => x.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader());
-
-         app.TokenFailureMiddlewareBuilder();   
-
+         app.UseCors(cors => cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+         //app.TokenFailureMiddlewareBuilder();
+         app.CancellationTokenMiddlewareBuilder();
          app.UseAuthentication();
          app.UseAuthorization();
-
          app.MapControllers();
-
          app.Run("http://*:5005");
       }
 
@@ -41,7 +37,6 @@ namespace BaseCodeAPI
          services.AddControllers();
          services.AddHttpContextAccessor();
          services.AddAutoMapper(typeof(AutoMapperProfile));
-         //services.AddScoped<IToken, TokenService>();
          services.AddScoped<IServices, UserService>();
          services.AddScoped<IRepository<UserModel>, UserRepository>();
 
@@ -61,7 +56,25 @@ namespace BaseCodeAPI
             };
          });
 
-         services.AddAuthorization();
+         //services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+         //{
+         //   options.Events = new JwtBearerEvents
+         //   {
+         //      OnChallenge = context =>
+         //      {
+         //         context.HandleResponse();
+         //         return Task.CompletedTask;
+         //      }
+         //   };
+         //});
+
+         //services.AddAuthorization(options =>
+         //{
+         //   options.AddPolicy("Authenticated", policy =>
+         //   {
+         //      policy.RequireAuthenticatedUser();
+         //   });
+         //});
       }
    }
 }

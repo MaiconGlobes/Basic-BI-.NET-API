@@ -17,13 +17,21 @@ namespace BaseCodeAPI.Src.Services
          this.FIRepository = AiRepository;
       }
 
-      public async Task<(byte Status, object Json)> GetAllRegistersAsync()
+      public async Task<(byte Status, object Json)> GetAllRegistersAsync(IHttpContextAccessor httpContextAccessor)
       {
          try
          {
+            var token = (string)httpContextAccessor?.HttpContext?.Items["Token"]!;
+
             var usersObject = await FIRepository.GetAllRegisterAsync();
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(usersObject));
+            var objReturn = new
+            {
+               usuario = usersObject,
+               token
+            };
+
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(objReturn));
 
          }
          catch (Exception ex)
@@ -43,7 +51,7 @@ namespace BaseCodeAPI.Src.Services
             if (user != null || person != null)
             {
                user.Senha         = SecurityService.New().EncryptPassword(userModelDto.Senha);
-               user.Refresh_token = SecurityService.New().GenerateToken(userModelDto);
+               user.Refresh_token = SecurityService.New().GenerateToken(userModelDto, 10080);
                user.Person        = person!;
 
                int rowsAffect = await FIRepository.CreateRegisterAsync(user);
@@ -51,7 +59,7 @@ namespace BaseCodeAPI.Src.Services
                if (rowsAffect > 0)
                {
                   userModelDto.PessoaId = person.Id;
-                  userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto);
+                  userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto, 1);
                   userModelDto.Senha    = null;
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));

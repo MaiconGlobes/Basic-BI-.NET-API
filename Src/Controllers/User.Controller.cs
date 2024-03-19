@@ -14,21 +14,24 @@ namespace BaseCodeAPI.Src.Controllers
    public class UserController : ControllerBase
    {
       private IServices FIServices { get; set; }
+      private IHttpContextAccessor FHttpContextAccessor { get; set; }
 
-      public UserController(IServices AiServices)
+      public UserController(IServices AiServices, IHttpContextAccessor httpContextAccessor)
       {
-         FIServices = AiServices;
+         this.FHttpContextAccessor = httpContextAccessor;
+         this.FIServices = AiServices;
       }
 
       [HttpGet]
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModelDto))]
-      [Authorize]
+      //[Authorize(Policy = "Authenticated")]
+      //[Authorize]
       [Route("user/all")]
       public async Task<IActionResult> GetAllRegisterAsync()
       {
          try
          {
-            var (Status, Json) = await this.FIServices.GetAllRegistersAsync();
+            var (Status, Json) = await this.FIServices.GetAllRegistersAsync(this.FHttpContextAccessor);
 
             return Status switch
             {

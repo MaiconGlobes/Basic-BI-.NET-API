@@ -1,6 +1,9 @@
 ﻿
+using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Models;
 using BaseCodeAPI.Src.Models.Entity;
+using BaseCodeAPI.Src.Repositories;
+using BaseCodeAPI.Src.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,6 +22,43 @@ namespace BaseCodeAPI.Src.Services
          return FInstancia;
       }
 
+      internal async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
+      {
+         try
+         {
+            var userRepository    = new UserRepository();
+            var tokenUserModelDto = AModel as TokenUserModelDto;
+            var tokenHandler      = new JwtSecurityTokenHandler();
+            var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
+
+            string email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+            string senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+
+            var user = new UserModel { Email = email, Senha = senha };
+            user.Senha = this.EncryptPassword(senha);
+
+            var usersObject = await userRepository.GetOneRegisterAsync(user);
+
+            if (usersObject != null)
+            {
+               if (!this.IsTokenExpired(usersObject.Refresh_token))
+               {
+                  tokenUserModelDto.Token = this.GenerateToken(tokenUserModelDto);
+
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
+               }
+
+               return UtilsClass.New().ProcessExceptionMessage(new Exception("Usuário não autorizado"));
+            }
+
+            return UtilsClass.New().ProcessExceptionMessage(new Exception("Token enviado é inválido"));
+         }
+         catch (Exception ex)
+         {
+            return UtilsClass.New().ProcessExceptionMessage(ex);
+         }
+      }
+
       internal string EncryptPassword(string password)
       {
          var secretKeyPassword = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyPassword");
@@ -35,7 +75,7 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
-      internal string GenerateToken(UserModelDto AUser)
+      internal virtual string GenerateToken(UserModelDto AModel, int AExpirationMinutes)
       {
          var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
          var tokenHandler = new JwtSecurityTokenHandler();
@@ -44,10 +84,10 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new (ClaimTypes.Email, AUser.Email),
-               new ("secret", AUser.Senha),
+               new (ClaimTypes.Email, AModel.Email),
+               new ("secret", AModel.Senha),
             }),
-            Expires = DateTime.UtcNow.AddSeconds(120),
+            Expires = DateTime.UtcNow.AddMinutes(AExpirationMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
@@ -55,18 +95,24 @@ namespace BaseCodeAPI.Src.Services
          return tokenHandler.WriteToken(token);
       }
 
-      internal string GenerateToken2(TokenUserModelDto AUser) //Refatorar para junção com método acima (GenerateToken)
+      internal virtual string GenerateToken(TokenUserModelDto AModel)
       {
-         var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
-         var tokenHandler = new JwtSecurityTokenHandler();
-         var key = Encoding.ASCII.GetBytes(secretKey);
+         var secretKey        = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler     = new JwtSecurityTokenHandler();
+         var jwtSecurityToken = tokenHandler.ReadJwtToken(AModel.Token);
+     
+         var key   = Encoding.ASCII.GetBytes(secretKey);
+         var email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+         var senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+
          var tokenDescriptor = new SecurityTokenDescriptor()
          {
             Subject = new ClaimsIdentity(new Claim[]
-               {
-               new (ClaimTypes.Role, AUser.Token),
-               }),
-            Expires = DateTime.UtcNow.AddSeconds(5),
+            {
+               new (ClaimTypes.Email, email),
+               new ("secret", senha),
+            }),
+            Expires = DateTime.UtcNow.AddSeconds(60),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
@@ -74,7 +120,7 @@ namespace BaseCodeAPI.Src.Services
          return tokenHandler.WriteToken(token);
       }
 
-      internal bool ComparePassword(string APassword, string AHashedPassword)
+      internal bool CompareHasch(string APassword, string AHashedPassword)
       {
          string hashedInput = this.EncryptPassword(APassword);
          return string.Equals(hashedInput, AHashedPassword, StringComparison.OrdinalIgnoreCase);

@@ -3,13 +3,13 @@ using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Middlewares
 {
    public class TokenFailureMiddleware
    {
       private readonly RequestDelegate _next;
-      private IToken FIToken { get; set; }
 
       public TokenFailureMiddleware(RequestDelegate next)
       {
@@ -18,14 +18,13 @@ namespace BaseCodeAPI.Src.Middlewares
 
       public async Task Invoke(HttpContext AContext)
       {
+
          await _next(AContext);
 
          var utils = UtilsClass.New();
 
-         if (AContext.Response.StatusCode == StatusCodes.Status401Unauthorized)
+         if (AContext.Response.StatusCode != StatusCodes.Status401Unauthorized)
          {
-            var tokenService = new TokenService();
-
             string authorizationHeader = AContext.Request.Headers["Authorization"];
 
             if (string.IsNullOrEmpty(authorizationHeader))
@@ -39,33 +38,22 @@ namespace BaseCodeAPI.Src.Middlewares
                Token = authorizationHeader.Split(' ')[1]
             };
 
-            var (Status, Json) = await tokenService.CreateNewToken(tokenUserModelDto);
+            var (Status, Json) = await SecurityService.New().CreateNewToken(tokenUserModelDto);
 
-            switch (Status)
+            ActionResult result = Status switch
             {
-               case (byte)GlobalEnum.eStatusProc.Sucesso:
-                  AContext.Response.StatusCode = StatusCodes.Status201Created;
-                  await AContext.Response.WriteAsJsonAsync(Json);
-                  break;
-               case (byte)GlobalEnum.eStatusProc.NaoLocalizado:
-                  AContext.Response.StatusCode = StatusCodes.Status200OK;
-                  await AContext.Response.WriteAsJsonAsync(Json);
-                  break;
-               case (byte)GlobalEnum.eStatusProc.NaoAutorizado:
-                  AContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                  await AContext.Response.WriteAsJsonAsync(Json);
-                  break;
-               case (byte)GlobalEnum.eStatusProc.ErroProcessamento:
-                  AContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                  await AContext.Response.WriteAsJsonAsync(Json);
-                  break;
-               case (byte)GlobalEnum.eStatusProc.ErroServidor:
-                  throw new NotImplementedException();
-               default:
-                  throw new NotImplementedException();
-            }
+               (byte)GlobalEnum.eStatusProc.Sucesso => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.NaoLocalizado => new OkObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.NaoAutorizado => new UnauthorizedObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.ErroProcessamento => new UnprocessableEntityObjectResult(Json),
+               (byte)GlobalEnum.eStatusProc.ErroServidor => throw new NotImplementedException(),
+               _ => throw new NotImplementedException()
+            };
 
-            return;
+            await result.ExecuteResultAsync(new ActionContext
+            {
+               HttpContext = AContext
+            });
          }
       }
    }
