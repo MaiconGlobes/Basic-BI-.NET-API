@@ -18,7 +18,7 @@ namespace BaseCodeAPI.Src.Utils
       /// <returns>Uma função que recebe uma exceção e retorna uma resposta não autorizada.</returns>
       private Func<Exception, object> GetUnauthorized()
       {
-         return ex => ResponseUtils.Instancia().RetornoUnauthorized(new Exception(ex.Message));
+         return ex => ResponseUtils.Instancia().ReturnUnauthorized(new Exception(ex.Message));
       }
 
       /// <summary>
@@ -34,7 +34,7 @@ namespace BaseCodeAPI.Src.Utils
 
             var exceptionReturn = new Exception(errorMessage);
 
-            return ResponseUtils.Instancia().RetornoDuplicated(exceptionReturn);
+            return ResponseUtils.Instancia().ReturnDuplicated(exceptionReturn);
          };
       }
 
@@ -67,7 +67,7 @@ namespace BaseCodeAPI.Src.Utils
             }
          }
 
-         return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+         return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().ReturnErrorProcess(ex));
       }
    }
 }

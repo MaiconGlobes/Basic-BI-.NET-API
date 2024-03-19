@@ -45,7 +45,7 @@ namespace BaseCodeAPI.Src.Controllers
          }
          catch (Exception ex)
          {
-            return new ObjectResult(ResponseUtils.Instancia().RetornoInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
+            return new ObjectResult(ResponseUtils.Instancia().ReturnInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
          }
       }
 
@@ -72,7 +72,7 @@ namespace BaseCodeAPI.Src.Controllers
          }
          catch (Exception ex)
          {
-            return new ObjectResult(ResponseUtils.Instancia().RetornoInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
+            return new ObjectResult(ResponseUtils.Instancia().ReturnInternalErrorServer(ex)) { StatusCode = StatusCodes.Status500InternalServerError };
          }
       }
    }

@@ -23,7 +23,7 @@ namespace BaseCodeAPI.Src.Services
          {
             FMigrationRepository.ApplyMigrate();
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(new object() {}));
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(new object() {}));
 
          }
          catch (Exception ex)
@@ -42,7 +42,7 @@ namespace BaseCodeAPI.Src.Services
          {
             FMigrationRepository.RevertAllMigrations();
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(new object() { }));
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(new object() { }));
 
          }
          catch (Exception ex)

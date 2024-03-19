@@ -32,11 +32,11 @@ namespace BaseCodeAPI.Src.Services
 
             var objReturn = new
             {
-               usuario = usersObject,
-               token = (string.IsNullOrEmpty(token) ? null : token)
+               token = (string.IsNullOrEmpty(token) ? null : token),
+               usuario = usersObject
             };
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(objReturn));
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(objReturn));
 
          }
          catch (Exception ex)
@@ -73,7 +73,7 @@ namespace BaseCodeAPI.Src.Services
                   userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto, 1);
                   userModelDto.Senha    = null;
 
-                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(userModelDto));
                }
             }
 

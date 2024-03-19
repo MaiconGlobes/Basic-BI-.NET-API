@@ -51,7 +51,7 @@ namespace BaseCodeAPI.Src.Services
                {
                   tokenUserModelDto.Token = this.GenerateToken(tokenUserModelDto);
 
-                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(tokenUserModelDto));
                }
 
                return UtilsClass.New().ProcessExceptionMessage(new Exception("Usuário não autorizado"));

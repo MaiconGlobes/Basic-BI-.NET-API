@@ -106,7 +106,7 @@ namespace BaseCodeAPI.Src.Middlewares
          catch (OperationCanceledException ex)
          {
             AContext.Response.StatusCode = StatusCodes.Status408RequestTimeout;
-            await AContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().RetornoErrorProcess(ex));
+            await AContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().ReturnErrorProcess(ex));
          }
       }
    }
