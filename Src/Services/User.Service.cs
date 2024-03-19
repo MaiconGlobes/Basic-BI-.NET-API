@@ -10,11 +10,13 @@ namespace BaseCodeAPI.Src.Services
    {
       private IMapper FMapper { get; set; }
       private IRepository<UserModel> FIRepository { get; set; }
+      private string FToken { get; set; }
 
-      public UserService(IMapper AIMapper, IRepository<UserModel> AiRepository)
+      public UserService(IMapper AIMapper, IRepository<UserModel> AiRepository, IHttpContextAccessor httpContextAccessor)
       {
          this.FMapper = AIMapper;
          this.FIRepository = AiRepository;
+         this.FToken = (string)httpContextAccessor?.HttpContext?.Items["Token"]!;
       }
 
       /// <summary>
@@ -22,22 +24,19 @@ namespace BaseCodeAPI.Src.Services
       /// </summary>
       /// <param name="httpContextAccessor">O acessador de contexto HTTP para obter o token de autorização.</param>
       /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma tupla contendo o status da operação e o objeto JSON correspondente aos registros de usuários.</returns>
-      public async Task<(byte Status, object Json)> GetAllRegistersAsync(IHttpContextAccessor httpContextAccessor)
+      public async Task<(byte Status, object Json)> GetAllRegistersAsync()
       {
          try
          {
-            var token = (string)httpContextAccessor?.HttpContext?.Items["Token"]!;
-
             var usersObject = await FIRepository.GetAllRegisterAsync();
 
             var objReturn = new
             {
-               token = (string.IsNullOrEmpty(token) ? null : token),
+               token = (string.IsNullOrEmpty(this.FToken) ? null : this.FToken),
                usuario = usersObject
             };
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(objReturn));
-
          }
          catch (Exception ex)
          {

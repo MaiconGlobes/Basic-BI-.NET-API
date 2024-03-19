@@ -14,11 +14,9 @@ namespace BaseCodeAPI.Src.Controllers
    public class UserController : ControllerBase
    {
       private IServices FIServices { get; set; }
-      private IHttpContextAccessor FHttpContextAccessor { get; set; }
 
-      public UserController(IServices AiServices, IHttpContextAccessor httpContextAccessor)
+      public UserController(IServices AiServices)
       {
-         this.FHttpContextAccessor = httpContextAccessor;
          this.FIServices = AiServices;
       }
 
@@ -30,7 +28,7 @@ namespace BaseCodeAPI.Src.Controllers
       {
          try
          {
-            var (Status, Json) = await this.FIServices.GetAllRegistersAsync(this.FHttpContextAccessor);
+            var (Status, Json) = await this.FIServices.GetAllRegistersAsync();
 
             return Status switch
             {
