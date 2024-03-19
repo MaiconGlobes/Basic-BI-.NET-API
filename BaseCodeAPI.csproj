@@ -7,6 +7,13 @@
 	  <Company>No Company</Company>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Src\Factory\**" />
+    <Content Remove="Src\Factory\**" />
+    <EmbeddedResource Remove="Src\Factory\**" />
+    <None Remove="Src\Factory\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
@@ -26,9 +33,5 @@
 		<PackageReference Include="System.IO.Ports" Version="6.0.0" />
 		<PackageReference Include="System.Management" Version="7.0.2" />
 	</ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Src\Factory\" />
-  </ItemGroup>
 
 </Project>

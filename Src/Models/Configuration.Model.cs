@@ -1,13 +1,4 @@
-﻿using BaseCodeAPI.Src.Enums;
-using BaseCodeAPI.Src.Models.Entity;
-using BaseCodeAPI.Src.Utils;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace BaseCodeAPI.Src.Models
+﻿namespace BaseCodeAPI.Src.Models
 {
    internal class ConfigurationModel
    {

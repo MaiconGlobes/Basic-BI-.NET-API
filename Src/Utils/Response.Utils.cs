@@ -19,9 +19,24 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
+               status = "Sucesso",
+               codigo_status = GlobalEnum.eStatusProc.Sucesso,
+               dados = ADado
+            }
+         };
+
+         return this.FObjJSON;
+      }
+
+      internal virtual object RetornoOk(Object ADados)
+      {
+         this.FObjJSON = new
+         {
+            retorno = new
+            {
                status        = "Sucesso",
                codigo_status = GlobalEnum.eStatusProc.Sucesso,
-               dados         = ADado
+               dados         = ADados
             }
          };
 
@@ -115,9 +130,12 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
-               status        = "A Consulta não retornou registros",
+               status        = "Registro não localizado",
                codigo_status = GlobalEnum.eStatusProc.SemRegistros,
-               dados         = ADados
+               mensagem = new
+               {
+                  descricao = "O registro que está tentando buscar não foi localizado no banco de dados.",
+               }
             }
          };
 
@@ -130,9 +148,12 @@ namespace BaseCodeAPI.Src.Utils
          {
             retorno = new
             {
-               status        = "A Consulta não retornou registros",
+               status        = "Registro não localizado",
                codigo_status = GlobalEnum.eStatusProc.SemRegistros,
-               dados         = ADados
+               mensagem = new
+               {
+                  descricao = "O registro que está tentando buscar não foi localizado no banco de dados.",
+               }
             }
          };
 
