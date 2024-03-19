@@ -17,6 +17,11 @@ namespace BaseCodeAPI.Src.Services
          this.FIRepository = AiRepository;
       }
 
+      /// <summary>
+      /// Obtém todos os registros de usuários do banco de dados de forma assíncrona e retorna um status e um objeto JSON correspondente aos registros.
+      /// </summary>
+      /// <param name="httpContextAccessor">O acessador de contexto HTTP para obter o token de autorização.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma tupla contendo o status da operação e o objeto JSON correspondente aos registros de usuários.</returns>
       public async Task<(byte Status, object Json)> GetAllRegistersAsync(IHttpContextAccessor httpContextAccessor)
       {
          try
@@ -40,6 +45,12 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
+      /// <summary>
+      /// Cria um novo registro de usuário de forma assíncrona no banco de dados com base nos dados do modelo fornecido e retorna um status e um objeto JSON correspondente ao resultado da operação.
+      /// </summary>
+      /// <typeparam name="T">O tipo do modelo.</typeparam>
+      /// <param name="AModel">O modelo de dados a ser utilizado para criar o registro de usuário.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma tupla contendo o status da operação e o objeto JSON correspondente ao novo registro de usuário.</returns>
       public async Task<(byte Status, object Json)> CreateRegisterAsync<T>(T AModel)
       {
          try

@@ -23,11 +23,11 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Cria um novo token JWT com base nas informações do modelo fornecido.
       /// </summary>
-      /// <typeparam name="T"></typeparam>
-      /// <param name="AModel"></param>
-      /// <returns></returns>
+      /// <typeparam name="T">O tipo do modelo.</typeparam>
+      /// <param name="AModel">O modelo utilizado para criar o token.</param>
+      /// <returns>Uma tarefa representando a operação assíncrona, retornando uma tupla contendo o status e o objeto JSON correspondente.</returns>
       internal async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
       {
          try
@@ -66,10 +66,10 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Criptografa uma senha usando o algoritmo de hash SHA256 com uma chave secreta.
       /// </summary>
-      /// <param name="password"></param>
-      /// <returns></returns>
+      /// <param name="password">A senha a ser criptografada.</param>
+      /// <returns>A senha criptografada.</returns>
       internal string EncryptPassword(string password)
       {
          var secretKeyPassword = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyPassword");
@@ -87,11 +87,11 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Gera um token JWT com base nas informações do modelo de usuário e no tempo de expiração especificado.
       /// </summary>
-      /// <param name="AModel"></param>
-      /// <param name="AExpirationMinutes"></param>
-      /// <returns></returns>
+      /// <param name="AModel">O modelo de usuário contendo as informações necessárias para gerar o token.</param>
+      /// <param name="AExpirationMinutes">O tempo de expiração do token em minutos.</param>
+      /// <returns>O token JWT gerado como uma string.</returns>
       internal virtual string GenerateToken(UserModelDto AModel, int AExpirationMinutes)
       {
          var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
@@ -113,10 +113,10 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Gera um token JWT com base nas informações do modelo de token do usuário.
       /// </summary>
-      /// <param name="AModel"></param>
-      /// <returns></returns>
+      /// <param name="AModel">O modelo de token do usuário contendo as informações necessárias para gerar o token.</param>
+      /// <returns>O token JWT gerado como uma string.</returns>
       internal virtual string GenerateToken(TokenUserModelDto AModel)
       {
          var secretKey        = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
@@ -143,11 +143,11 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Compara uma senha em texto plano com uma senha criptografada para verificar se são iguais.
       /// </summary>
-      /// <param name="APassword"></param>
-      /// <param name="AHashedPassword"></param>
-      /// <returns></returns>
+      /// <param name="APassword">A senha em texto plano a ser comparada.</param>
+      /// <param name="AHashedPassword">A senha criptografada a ser comparada.</param>
+      /// <returns>True se as senhas forem iguais, false caso contrário.</returns>
       internal bool CompareHasch(string APassword, string AHashedPassword)
       {
          string hashedInput = this.EncryptPassword(APassword);
@@ -155,10 +155,10 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// 
+      /// Verifica se um token JWT expirou.
       /// </summary>
-      /// <param name="AToken"></param>
-      /// <returns></returns>
+      /// <param name="AToken">O token JWT a ser verificado.</param>
+      /// <returns>True se o token estiver expirado, false caso contrário.</returns>
       internal bool IsTokenExpired(string AToken)
       {
          try

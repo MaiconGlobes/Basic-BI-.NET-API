@@ -13,6 +13,11 @@ namespace BaseCodeAPI.Src.Repositories
          FRepositoryBase = new RepositoryBase();
       }
 
+      /// <summary>
+      /// Obtém um registro de usuário do banco de dados de forma assíncrona com base no email e senha fornecidos.
+      /// </summary>
+      /// <param name="AModel">O modelo de usuário contendo o email e senha para a consulta.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna o registro de usuário encontrado.</returns>
       public async Task<UserModel> GetOneRegisterAsync(UserModel AModel)
       {
          return await FRepositoryBase.GetEntity<UserModel>()
@@ -20,6 +25,10 @@ namespace BaseCodeAPI.Src.Repositories
                                      .SingleOrDefaultAsync();
       }
 
+      /// <summary>
+      /// Obtém todos os registros de usuários do banco de dados de forma assíncrona, incluindo informações relacionadas à pessoa associada a cada usuário.
+      /// </summary>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma coleção de objetos UserModel contendo os dados dos usuários e suas respectivas informações de pessoa.</returns>
       public async Task<IEnumerable<UserModel>> GetAllRegisterAsync()
       {
          var users = await FRepositoryBase.GetEntity<UserModel>().Include(u => u.Person).ToListAsync();
@@ -46,6 +55,11 @@ namespace BaseCodeAPI.Src.Repositories
          return result;
       }
 
+      /// <summary>
+      /// Cria um novo registro de usuário de forma assíncrona no banco de dados.
+      /// </summary>
+      /// <param name="AModel">O modelo de usuário a ser criado.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna o número de registros afetados.</returns>
       public async Task<int> CreateRegisterAsync(UserModel AModel)
       {
          return await FRepositoryBase.InsertOneAsync(AModel);

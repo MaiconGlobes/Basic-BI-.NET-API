@@ -13,6 +13,10 @@ namespace BaseCodeAPI.Src.Services
          FMigrationRepository = new();
       }
 
+      /// <summary>
+      /// Aplica as migrações pendentes no banco de dados e retorna um status e um objeto JSON correspondente ao resultado da operação.
+      /// </summary>
+      /// <returns>Uma tupla contendo o status da operação e o objeto JSON correspondente ao resultado.</returns>
       public (byte Status, object Json) ApplyMigrate()
       {
          try
@@ -28,6 +32,10 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
+      /// <summary>
+      /// Reverte todas as migrações aplicadas no banco de dados, excluindo o histórico de migrações, e retorna um status e um objeto JSON correspondente ao resultado da operação.
+      /// </summary>
+      /// <returns>Uma tupla contendo o status da operação e o objeto JSON correspondente ao resultado.</returns>
       public (byte Status, object Json) RevertAllMigration()
       {
          try

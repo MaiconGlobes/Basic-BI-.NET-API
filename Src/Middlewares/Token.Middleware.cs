@@ -15,6 +15,11 @@ namespace BaseCodeAPI.Src.Middlewares
          this._next = next;
       }
 
+      /// <summary>
+      /// Middleware para processar a autenticação do token JWT em uma solicitação HTTP.
+      /// </summary>
+      /// <param name="AContext">O contexto HTTP da solicitação.</param>
+      /// <returns>Uma tarefa representando a operação assíncrona.</returns>
       public async Task InvokeAsync(HttpContext AContext)
       {
          try

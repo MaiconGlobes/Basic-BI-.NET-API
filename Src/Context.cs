@@ -14,6 +14,10 @@ namespace BaseCodeAPI.Src
       public DbSet<TransporterModel> TRANSPORTER { get; set; }
       public DbSet<AddressModel> ADDRESS { get; set; }
 
+      /// <summary>
+      /// Sobrescreve o método OnConfiguring para configurar as opções do provedor de banco de dados MySQL no Entity Framework Core, se as opções não estiverem configuradas.
+      /// </summary>
+      /// <param name="optionsBuilder">O construtor de opções do DbContext para configurar as opções do provedor de banco de dados.</param>
       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
       {
          if (!optionsBuilder.IsConfigured)
@@ -25,6 +29,10 @@ namespace BaseCodeAPI.Src
          }
       }
 
+      /// <summary>
+      /// Sobrescreve o método OnModelCreating para configurar o modelo de dados do Entity Framework Core usando o Fluent API.
+      /// </summary>
+      /// <param name="modelBuilder">O construtor de modelos usado para configurar as entidades e relacionamentos no contexto do banco de dados.</param>
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
          modelBuilder.Entity<PersonModel>().Property(person => person.Id).ValueGeneratedOnAdd();
