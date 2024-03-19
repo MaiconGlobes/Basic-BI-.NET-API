@@ -12,30 +12,19 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-      internal RequestDelegate StepValidation(HttpContext context, RequestDelegate next, string uri)
-      {
-         var path = context.Request.Path;
-
-         if (path.HasValue || path.Value.Contains(uri))
-         {
-            return next;
-         }
-
-         //var segments = path.Value.Split('/');
-
-         //if (segments.Length > 3)
-         //{
-         //   throw new Exception("A URL não contém o formato esperado.");
-         //}
-
-         return null;
-      }
-
+      /// <summary>
+      /// Retorna uma função que recebe uma exceção e retorna uma resposta não autorizada.
+      /// </summary>
+      /// <returns>Uma função que recebe uma exceção e retorna uma resposta não autorizada.</returns>
       private Func<Exception, object> GetUnauthorized()
       {
-         return ex => ResponseUtils.Instancia().RetornoUnauthorized(new Exception(ex.Message));
+         return ex => ResponseUtils.Instancia().ReturnUnauthorized(new Exception(ex.Message));
       }
 
+      /// <summary>
+      /// Retorna uma função que recebe uma exceção e retorna uma resposta de erro por entrada duplicada.
+      /// </summary>
+      /// <returns>Uma função que recebe uma exceção e retorna uma resposta de erro por entrada duplicada.</returns>
       private Func<Exception, object> GetDuplicateEntryError()
       {
          return ex => {
@@ -45,10 +34,15 @@ namespace BaseCodeAPI.Src.Utils
 
             var exceptionReturn = new Exception(errorMessage);
 
-            return ResponseUtils.Instancia().RetornoDuplicated(exceptionReturn);
+            return ResponseUtils.Instancia().ReturnDuplicated(exceptionReturn);
          };
       }
 
+      /// <summary>
+      /// Processa uma exceção e retorna um status e um objeto JSON correspondente ao erro.
+      /// </summary>
+      /// <param name="ex">A exceção a ser processada.</param>
+      /// <returns>Uma tupla contendo o status do erro e o objeto JSON correspondente.</returns>
       internal (byte Status, object Json) ProcessExceptionMessage(Exception ex)
       {
          Dictionary<string, (byte, Func<Exception, object>)> errorMappings = new()
@@ -73,7 +67,7 @@ namespace BaseCodeAPI.Src.Utils
             }
          }
 
-         return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().RetornoErrorProcess(ex));
+         return ((byte)GlobalEnum.eStatusProc.ErroProcessamento, ResponseUtils.Instancia().ReturnErrorProcess(ex));
       }
    }
 }

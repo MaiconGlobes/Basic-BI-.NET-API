@@ -13,7 +13,13 @@ namespace BaseCodeAPI.Src.Utils
          return FInstancia;
       }
 
-      internal virtual object RetornoOk<T>(T ADado)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de sucesso e os dados fornecidos.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADado">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de sucesso e os dados fornecidos.</returns>
+      internal virtual object ReturnOk<T>(T ADado)
       {
          this.FObjJSON = new
          {
@@ -28,7 +34,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoOk(Object ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de sucesso e os dados fornecidos.
+      /// </summary>
+      /// <param name="ADados">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de sucesso e os dados fornecidos.</returns>
+      internal virtual object ReturnOk(Object ADados)
       {
          this.FObjJSON = new
          {
@@ -43,7 +54,13 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoOk<T>(List<T> ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de sucesso e uma lista de dados fornecidos.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados na lista a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADados">A lista de dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de sucesso e a lista de dados fornecidos.</returns>
+      internal virtual object ReturnOk<T>(List<T> ADados)
       {
          this.FObjJSON = new
          {
@@ -58,11 +75,17 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoCreated<T>(List<T> ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de sucesso e uma lista de dados fornecidos para indicar que um recurso foi criado com sucesso.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados na lista a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADados">A lista de dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de sucesso e a lista de dados fornecidos.</returns>
+      internal virtual object ReturnCreated<T>(List<T> ADados)
       {
          this.FObjJSON = new
          {
-            retorno = new
+            Return = new
             {
                status        = "Sucesso",
                codigo_status = GlobalEnum.eStatusProc.Sucesso,
@@ -73,11 +96,16 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoCreated(Object ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de sucesso e os dados fornecidos para indicar que um recurso foi criado com sucesso.
+      /// </summary>
+      /// <param name="ADados">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de sucesso e os dados fornecidos.</returns>
+      internal virtual object ReturnCreated(Object ADados)
       {
          this.FObjJSON = new
          {
-            retorno = new
+            Return = new
             {
                status        = "Sucesso",
                codigo_status = GlobalEnum.eStatusProc.Sucesso,
@@ -88,7 +116,13 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoNotAcceptable<T>(List<T> ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Registro não localizado" e uma mensagem indicando que o registro não foi encontrado no banco de dados.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados na lista a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADados">A lista de dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Registro não localizado" e a mensagem correspondente.</returns>
+      internal virtual object ReturnNotAcceptable<T>(List<T> ADados)
       {
          this.FObjJSON = new
          {
@@ -106,7 +140,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoNotAcceptable(Object ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Registro não localizado" e uma mensagem indicando que o registro não foi encontrado no banco de dados.
+      /// </summary>
+      /// <param name="ADados">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Registro não localizado" e a mensagem correspondente.</returns>
+      internal virtual object ReturnNotAcceptable(Object ADados)
       {
          this.FObjJSON = new
          {
@@ -124,7 +163,13 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoNotFound<T>(List<T> ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Registro não localizado" e uma mensagem indicando que o registro não foi encontrado no banco de dados.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados na lista a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADados">A lista de dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Registro não localizado" e a mensagem correspondente.</returns>
+      internal virtual object ReturnNotFound<T>(List<T> ADados)
       {
          this.FObjJSON = new
          {
@@ -142,7 +187,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoNotFound(Object ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Registro não localizado" e uma mensagem indicando que o registro não foi encontrado no banco de dados.
+      /// </summary>
+      /// <param name="ADados">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Registro não localizado" e a mensagem correspondente.</returns>
+      internal virtual object ReturnNotFound(Object ADados)
       {
          this.FObjJSON = new
          {
@@ -160,7 +210,13 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoDuplicated<T>(List<T> ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Duplicidade de registro" e uma mensagem indicando que o registro que está sendo inserido já existe no banco de dados.
+      /// </summary>
+      /// <typeparam name="T">O tipo dos dados na lista a serem incluídos no objeto JSON.</typeparam>
+      /// <param name="ADados">A lista de dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Duplicidade de registro" e a mensagem correspondente.</returns>
+      internal virtual object ReturnDuplicated<T>(List<T> ADados)
       {
          this.FObjJSON = new
          {
@@ -178,7 +234,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoDuplicated(Object ADados)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Duplicidade de registro" e uma mensagem genérica indicando um erro de duplicidade de registro.
+      /// </summary>
+      /// <param name="ADados">Os dados a serem incluídos no objeto JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Duplicidade de registro" e a mensagem genérica de erro.</returns>
+      internal virtual object ReturnDuplicated(Object ADados)
       {
          this.FObjJSON = new
          {
@@ -196,7 +257,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoDuplicated(Exception AExcecao)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Duplicidade de registro" e uma mensagem com a descrição da exceção especificada.
+      /// </summary>
+      /// <param name="AExcecao">A exceção que contém a mensagem a ser incluída na resposta JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Duplicidade de registro" e a mensagem da exceção.</returns>
+      internal virtual object ReturnDuplicated(Exception AExcecao)
       {
          this.FObjJSON = new
          {
@@ -214,7 +280,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoErrorProcess(Exception AExcecao)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Erro de processamento" e uma mensagem com a descrição da exceção especificada.
+      /// </summary>
+      /// <param name="AExcecao">A exceção que contém a mensagem a ser incluída na resposta JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Erro de processamento" e a mensagem da exceção.</returns>
+      internal virtual object ReturnErrorProcess(Exception AExcecao)
       {
          this.FObjJSON = new
          {
@@ -232,7 +303,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoUnauthorized(Exception AExcecao)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Não autorizado" e uma mensagem com a descrição da exceção especificada.
+      /// </summary>
+      /// <param name="AExcecao">A exceção que contém a mensagem a ser incluída na resposta JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Não autorizado" e a mensagem da exceção.</returns>
+      internal virtual object ReturnUnauthorized(Exception AExcecao)
       {
          this.FObjJSON = new
          {
@@ -250,7 +326,12 @@ namespace BaseCodeAPI.Src.Utils
          return this.FObjJSON;
       }
 
-      internal virtual object RetornoInternalErrorServer(Exception AExcecao)
+      /// <summary>
+      /// Retorna um objeto JSON contendo um status de "Erro interno de servidor" e uma mensagem com a descrição da exceção especificada.
+      /// </summary>
+      /// <param name="AExcecao">A exceção que contém a mensagem a ser incluída na resposta JSON.</param>
+      /// <returns>O objeto JSON contendo o status de "Erro interno de servidor" e a mensagem da exceção.</returns>
+      internal virtual object ReturnInternalErrorServer(Exception AExcecao)
       {
          this.FObjJSON = new
          {

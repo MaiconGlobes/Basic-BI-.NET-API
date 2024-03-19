@@ -15,6 +15,11 @@ namespace BaseCodeAPI.Src.Middlewares
          this._next = next;
       }
 
+      /// <summary>
+      /// Middleware para processar a autenticação do token JWT em uma solicitação HTTP.
+      /// </summary>
+      /// <param name="AContext">O contexto HTTP da solicitação.</param>
+      /// <returns>Uma tarefa representando a operação assíncrona.</returns>
       public async Task InvokeAsync(HttpContext AContext)
       {
          try
@@ -101,7 +106,7 @@ namespace BaseCodeAPI.Src.Middlewares
          catch (OperationCanceledException ex)
          {
             AContext.Response.StatusCode = StatusCodes.Status408RequestTimeout;
-            await AContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().RetornoErrorProcess(ex));
+            await AContext.Response.WriteAsJsonAsync(ResponseUtils.Instancia().ReturnErrorProcess(ex));
          }
       }
    }

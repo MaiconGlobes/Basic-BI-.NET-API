@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseCodeAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240316025048_initial")]
+    [Migration("20240319223856_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,8 +255,8 @@ namespace BaseCodeAPI.Migrations
                             Apelido = "Apelido",
                             Email = "Email1@example.com",
                             PessoaId = 1,
-                            Refresh_token = "1daf3d2d-0aa8-49d9-9baf-acbd60b61929",
-                            Senha = "Senha criptografada a16e91bc-dd05-493c-91ff-2905b9b3d41a"
+                            Refresh_token = "fd8d18a4-434e-48f4-bc06-4ff77dffe85b",
+                            Senha = "Senha criptografada 43f73388-5505-47fb-8dc4-e7f9ab782eb0"
                         });
                 });
 

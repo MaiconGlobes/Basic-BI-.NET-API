@@ -10,29 +10,33 @@ namespace BaseCodeAPI.Src.Services
    {
       private IMapper FMapper { get; set; }
       private IRepository<UserModel> FIRepository { get; set; }
+      private string FToken { get; set; }
 
-      public UserService(IMapper AIMapper, IRepository<UserModel> AiRepository)
+      public UserService(IMapper AIMapper, IRepository<UserModel> AiRepository, IHttpContextAccessor httpContextAccessor)
       {
          this.FMapper = AIMapper;
          this.FIRepository = AiRepository;
+         this.FToken = (string)httpContextAccessor?.HttpContext?.Items["Token"]!;
       }
 
-      public async Task<(byte Status, object Json)> GetAllRegistersAsync(IHttpContextAccessor httpContextAccessor)
+      /// <summary>
+      /// Obtém todos os registros de usuários do banco de dados de forma assíncrona e retorna um status e um objeto JSON correspondente aos registros.
+      /// </summary>
+      /// <param name="httpContextAccessor">O acessador de contexto HTTP para obter o token de autorização.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma tupla contendo o status da operação e o objeto JSON correspondente aos registros de usuários.</returns>
+      public async Task<(byte Status, object Json)> GetAllRegistersAsync()
       {
          try
          {
-            var token = (string)httpContextAccessor?.HttpContext?.Items["Token"]!;
-
             var usersObject = await FIRepository.GetAllRegisterAsync();
 
             var objReturn = new
             {
-               usuario = usersObject,
-               token = (string.IsNullOrEmpty(token) ? null : token)
+               token = (string.IsNullOrEmpty(this.FToken) ? null : this.FToken),
+               usuario = usersObject
             };
 
-            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(objReturn));
-
+            return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(objReturn));
          }
          catch (Exception ex)
          {
@@ -40,6 +44,12 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
+      /// <summary>
+      /// Cria um novo registro de usuário de forma assíncrona no banco de dados com base nos dados do modelo fornecido e retorna um status e um objeto JSON correspondente ao resultado da operação.
+      /// </summary>
+      /// <typeparam name="T">O tipo do modelo.</typeparam>
+      /// <param name="AModel">O modelo de dados a ser utilizado para criar o registro de usuário.</param>
+      /// <returns>Uma tarefa que representa a operação assíncrona e retorna uma tupla contendo o status da operação e o objeto JSON correspondente ao novo registro de usuário.</returns>
       public async Task<(byte Status, object Json)> CreateRegisterAsync<T>(T AModel)
       {
          try
@@ -62,7 +72,7 @@ namespace BaseCodeAPI.Src.Services
                   userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto, 1);
                   userModelDto.Senha    = null;
 
-                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(userModelDto));
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(userModelDto));
                }
             }
 

@@ -11,11 +11,17 @@ namespace BaseCodeAPI.Src.Repositories
          FRepository = new();
       }
 
+      /// <summary>
+      /// Aplica as migrações pendentes no banco de dados.
+      /// </summary>
       internal void ApplyMigrate()
       {
          this.FRepository.MigrationApply();
       }
 
+      /// <summary>
+      /// Reverte todas as migrações aplicadas no banco de dados, excluindo o histórico de migrações.
+      /// </summary>
       internal void RevertAllMigrations()
       {
          var dbContext = new Context();
