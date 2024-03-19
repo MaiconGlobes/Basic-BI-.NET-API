@@ -41,10 +41,6 @@ namespace BaseCodeAPI.Src.Models.Entity
       public int PessoaId { get; set; }
 
       [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-      [NotMapped]
-      public string Token { get; set; }
-
-      [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
       [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
       public virtual PersonModel Person { get; set; }
 

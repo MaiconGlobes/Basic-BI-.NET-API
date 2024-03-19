@@ -22,6 +22,12 @@ namespace BaseCodeAPI.Src.Services
          return FInstancia;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <typeparam name="T"></typeparam>
+      /// <param name="AModel"></param>
+      /// <returns></returns>
       internal async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
       {
          try
@@ -59,6 +65,11 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="password"></param>
+      /// <returns></returns>
       internal string EncryptPassword(string password)
       {
          var secretKeyPassword = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyPassword");
@@ -75,6 +86,12 @@ namespace BaseCodeAPI.Src.Services
          }
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="AModel"></param>
+      /// <param name="AExpirationMinutes"></param>
+      /// <returns></returns>
       internal virtual string GenerateToken(UserModelDto AModel, int AExpirationMinutes)
       {
          var secretKey = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
@@ -95,6 +112,11 @@ namespace BaseCodeAPI.Src.Services
          return tokenHandler.WriteToken(token);
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="AModel"></param>
+      /// <returns></returns>
       internal virtual string GenerateToken(TokenUserModelDto AModel)
       {
          var secretKey        = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
@@ -120,12 +142,23 @@ namespace BaseCodeAPI.Src.Services
          return tokenHandler.WriteToken(token);
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="APassword"></param>
+      /// <param name="AHashedPassword"></param>
+      /// <returns></returns>
       internal bool CompareHasch(string APassword, string AHashedPassword)
       {
          string hashedInput = this.EncryptPassword(APassword);
          return string.Equals(hashedInput, AHashedPassword, StringComparison.OrdinalIgnoreCase);
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="AToken"></param>
+      /// <returns></returns>
       internal bool IsTokenExpired(string AToken)
       {
          try

@@ -55,6 +55,7 @@ namespace BaseCodeAPI.Src.Utils
          {
             { "Token enviado é inválido", ((byte)GlobalEnum.eStatusProc.NaoAutorizado, GetUnauthorized())},
             { "Token inexistente no header", ((byte)GlobalEnum.eStatusProc.NaoAutorizado, GetUnauthorized())},
+            { "Usuário não autorizado", ((byte)GlobalEnum.eStatusProc.NaoAutorizado, GetUnauthorized())},
             { "Duplicate entry", ((byte)GlobalEnum.eStatusProc.RegistroDuplicado, GetDuplicateEntryError())},
          };
      

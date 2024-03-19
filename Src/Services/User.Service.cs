@@ -28,7 +28,7 @@ namespace BaseCodeAPI.Src.Services
             var objReturn = new
             {
                usuario = usersObject,
-               token
+               token = (string.IsNullOrEmpty(token) ? null : token)
             };
 
             return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(objReturn));
