@@ -3,7 +3,6 @@ using BaseCodeAPI.Src.Interfaces;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Services;
 using BaseCodeAPI.Src.Utils;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BaseCodeAPI.Src.Middlewares
 {

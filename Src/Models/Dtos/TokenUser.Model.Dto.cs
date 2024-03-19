@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
+﻿using System.Text.Json.Serialization;
 
 namespace BaseCodeAPI.Src.Models.Entity
 {

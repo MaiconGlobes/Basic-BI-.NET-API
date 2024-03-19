@@ -47,7 +47,7 @@ namespace BaseCodeAPI.Src.Services
                new (ClaimTypes.Email, AUser.Email),
                new ("secret", AUser.Senha),
             }),
-            Expires = DateTime.UtcNow.AddSeconds(5),
+            Expires = DateTime.UtcNow.AddSeconds(120),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
@@ -78,6 +78,24 @@ namespace BaseCodeAPI.Src.Services
       {
          string hashedInput = this.EncryptPassword(APassword);
          return string.Equals(hashedInput, AHashedPassword, StringComparison.OrdinalIgnoreCase);
+      }
+
+      internal bool IsTokenExpired(string AToken)
+      {
+         try
+         {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtSecurityToken = tokenHandler.ReadJwtToken(AToken);
+
+            if (jwtSecurityToken.ValidTo > DateTime.UtcNow)
+               return false;
+
+            return true;
+         }
+         catch
+         {
+            return true;
+         }
       }
    }
 }

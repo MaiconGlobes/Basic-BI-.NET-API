@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using BaseCodeAPI.Src.Enums;
-using BaseCodeAPI.Src.Interfaces;
+﻿using BaseCodeAPI.Src.Enums;
 using BaseCodeAPI.Src.Models.Entity;
 using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
@@ -10,19 +8,17 @@ namespace BaseCodeAPI.Src.Services
 {
    public class TokenService
    {
-      private IMapper FMapper { get; set; }
       private UserRepository FIRepository { get; set; }
 
-      public TokenService(/*IMapper AIMapper, IRepository<UserModel> AiRepository*/)
+      public TokenService()
       {
-         //this.FMapper = AIMapper;
          this.FIRepository = new UserRepository();
       }
 
-      public async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
+      internal async Task<(byte Status, object Json)> CreateNewToken<T>(T AModel)
       {
          try
-         {
+         {            
             var tokenUserModelDto = AModel as TokenUserModelDto;
 
             JwtSecurityTokenHandler tokenHandler = new();
@@ -38,9 +34,14 @@ namespace BaseCodeAPI.Src.Services
 
             if (usersObject != null)
             {
-               tokenUserModelDto.Token = SecurityService.New().GenerateToken2(tokenUserModelDto);
+               if (!SecurityService.New().IsTokenExpired(usersObject.Refresh_token))
+               {
+                  tokenUserModelDto.Token = SecurityService.New().GenerateToken2(tokenUserModelDto);
 
-               return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
+                  return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().RetornoOk(tokenUserModelDto));
+               }
+
+               return UtilsClass.New().ProcessExceptionMessage(new Exception("Usuário não autorizado"));
             }
 
             return UtilsClass.New().ProcessExceptionMessage(new Exception("Token enviado é inválido"));
