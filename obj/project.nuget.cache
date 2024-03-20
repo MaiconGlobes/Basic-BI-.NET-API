@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JQbor7SIs12Ck8xla6EUQTZ8qiNw8vj47Ip/iClYqiYZpruqTYi9MlFHqxzx5nBLteFedJlgF1CLlwJSaJ2vtA==",
+  "dgSpecHash": "eRxFN7oEW1FnjhiPDMIwWJCsHZ/6NJvFBOp+Vare9RlKKX0EssNPYq2p3fiofi9ip8XCv5BUodz98Bw3Zf0u4w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

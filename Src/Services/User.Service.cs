@@ -30,6 +30,11 @@ namespace BaseCodeAPI.Src.Services
          {
             var usersObject = await FIRepository.GetAllRegisterAsync();
 
+            foreach (var user in usersObject)
+            {
+               user.Senha = null;
+            };
+
             var objReturn = new
             {
                token = (string.IsNullOrEmpty(this.FToken) ? null : this.FToken),
