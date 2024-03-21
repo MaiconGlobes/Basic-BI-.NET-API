@@ -121,10 +121,11 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Gera um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | user = value | email = value | senha = value}
+      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | user = value | email = value | senha = value}
       /// </summary>
-      /// <param name="AModel">O modelo de token do usuário contendo as informações necessárias para gerar o token.</param>
-      /// <returns>O token JWT gerado como uma string.</returns>
+      /// <typeparam name="T">O tipo de modelo de dados usado para o login.</typeparam>
+      /// <param name="AModel">O modelo de dados contendo as informações de login do usuário.</param>
+      /// <returns>Um objeto contendo o status da operação e o token de acesso em caso de sucesso, ou uma mensagem de erro em caso de falha.</returns>
       internal virtual string GenerateToken(object AObject)
       {
          var secretKey    = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
