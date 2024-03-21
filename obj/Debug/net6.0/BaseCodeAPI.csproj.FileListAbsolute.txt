@@ -219,3 +219,4 @@ C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\obj\Debug\net6.0\refi
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\obj\Debug\net6.0\BaseCodeAPI.pdb
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\obj\Debug\net6.0\BaseCodeAPI.genruntimeconfig.cache
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\obj\Debug\net6.0\ref\BaseCodeAPI.dll
+C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Insomnia_2024-03-19.json

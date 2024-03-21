@@ -6,6 +6,7 @@ using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -37,19 +38,25 @@ namespace BaseCodeAPI.Src.Services
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
 
-            string email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-            string senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+            string user     = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "user")?.Value;
+            string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+            string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
 
-            var user = new UserModel { Email = email, Senha = senha };
-            user.Senha = this.EncryptPassword(senha);
+            var userModel   = new UserModel { Apelido = user, Email = email, Senha = password };
+            userModel.Senha = this.EncryptPassword(password);
 
-            var usersObject = await userRepository.GetOneRegisterAsync(user);
+            var usersObject = await userRepository.GetOneRegisterAsync(userModel);
 
             if (usersObject != null)
             {
                if (!this.IsTokenExpired(usersObject.Refresh_token))
                {
-                  tokenUserModelDto.Token = this.GenerateToken(tokenUserModelDto);
+                  var newObject = new
+                  {
+                     token = tokenUserModelDto.Token
+                  };
+
+                  tokenUserModelDto.Token = this.GenerateToken(newObject);
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(tokenUserModelDto));
                }
@@ -101,7 +108,8 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new (ClaimTypes.Email, AModel.Email),
+               new ("user", AModel.Apelido),
+               new ("email", AModel.Email),
                new ("secret", AModel.Senha),
             }),
             Expires = DateTime.UtcNow.AddMinutes(AExpirationMinutes),
@@ -113,33 +121,58 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Gera um token JWT com base nas informações do modelo de token do usuário.
+      /// Gera um token JWT com base nas informações do modelo de token do usuário no formato new {token = value | user = value | email = value | senha = value}
       /// </summary>
       /// <param name="AModel">O modelo de token do usuário contendo as informações necessárias para gerar o token.</param>
       /// <returns>O token JWT gerado como uma string.</returns>
-      internal virtual string GenerateToken(TokenUserModelDto AModel)
+      internal virtual string GenerateToken(object AObject)
       {
-         var secretKey        = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
-         var tokenHandler     = new JwtSecurityTokenHandler();
-         var jwtSecurityToken = tokenHandler.ReadJwtToken(AModel.Token);
-     
-         var key   = Encoding.ASCII.GetBytes(secretKey);
-         var email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-         var senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+         var secretKey    = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var key          = Encoding.ASCII.GetBytes(secretKey);
+         var user         = string.Empty;
+         var email        = string.Empty;
+         var password     = string.Empty;
+         var token        = string.Empty;
+
+         Type objectType = AObject.GetType();
+         PropertyInfo userProperty     = objectType.GetProperty("user");
+         PropertyInfo emailProperty    = objectType.GetProperty("email");
+         PropertyInfo passwordProperty = objectType.GetProperty("password");
+         PropertyInfo tokenProperty    = objectType.GetProperty("token");
+
+         if (userProperty != null && emailProperty != null && passwordProperty != null)
+         {
+            user     = userProperty.GetValue(AObject).ToString();
+            email    = emailProperty.GetValue(AObject).ToString();
+            password = passwordProperty.GetValue(AObject).ToString();
+         }
+
+         if (tokenProperty != null)
+            token = tokenProperty.GetValue(AObject).ToString();
+
+         if (!string.IsNullOrEmpty(token))
+         {
+            var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
+            user     = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "user")?.Value;
+            email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+            password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+         }
 
          var tokenDescriptor = new SecurityTokenDescriptor()
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new (ClaimTypes.Email, email),
-               new ("secret", senha),
+               new ("user", user),
+               new ("email", email),
+               new ("secret", password),
             }),
             Expires = DateTime.UtcNow.AddSeconds(60),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
-         var token = tokenHandler.CreateToken(tokenDescriptor);
-         return tokenHandler.WriteToken(token);
+         var newToken = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(newToken);
       }
 
       /// <summary>
