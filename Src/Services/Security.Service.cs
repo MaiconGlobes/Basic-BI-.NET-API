@@ -150,7 +150,7 @@ namespace BaseCodeAPI.Src.Services
          }
 
          if (tokenProperty != null)
-            token = tokenProperty.GetValue(AObject).ToString().ToLower();
+            token = tokenProperty.GetValue(AObject).ToString();
 
          if (!string.IsNullOrEmpty(token))
          {
