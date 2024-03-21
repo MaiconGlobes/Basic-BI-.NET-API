@@ -121,7 +121,7 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Gera um token JWT com base nas informações do modelo de token do usuário no formato new {token = value | user = value | email = value | senha = value}
+      /// Gera um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | user = value | email = value | senha = value}
       /// </summary>
       /// <param name="AModel">O modelo de token do usuário contendo as informações necessárias para gerar o token.</param>
       /// <returns>O token JWT gerado como uma string.</returns>
