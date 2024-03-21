@@ -38,11 +38,11 @@ namespace BaseCodeAPI.Src.Services
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
 
-            string user     = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "user")?.Value;
+            string login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value;
             string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
             string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
 
-            var userModel   = new UserModel { Apelido = user, Email = email, Senha = password };
+            var userModel   = new UserModel { Login = login, Email = email, Senha = password };
             userModel.Senha = this.EncryptPassword(password);
 
             var usersObject = await userRepository.GetOneRegisterAsync(userModel);
@@ -108,7 +108,7 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new ("user", AModel.Apelido),
+               new ("login", AModel.Login),
                new ("email", AModel.Email),
                new ("secret", AModel.Senha),
             }),
@@ -121,7 +121,7 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | user = value | email = value | senha = value}
+      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | login = value | email = value | senha = value}
       /// </summary>
       /// <typeparam name="T">O tipo de modelo de dados usado para o login.</typeparam>
       /// <param name="AModel">O modelo de dados contendo as informações de login do usuário.</param>
@@ -131,20 +131,20 @@ namespace BaseCodeAPI.Src.Services
          var secretKey    = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
          var tokenHandler = new JwtSecurityTokenHandler();
          var key          = Encoding.ASCII.GetBytes(secretKey);
-         var user         = string.Empty;
+         var login        = string.Empty;
          var email        = string.Empty;
          var password     = string.Empty;
          var token        = string.Empty;
 
          Type objectType = AObject.GetType();
-         PropertyInfo userProperty     = objectType.GetProperty("user");
+         PropertyInfo loginProperty    = objectType.GetProperty("login");
          PropertyInfo emailProperty    = objectType.GetProperty("email");
          PropertyInfo passwordProperty = objectType.GetProperty("password");
          PropertyInfo tokenProperty    = objectType.GetProperty("token");
 
-         if (userProperty != null && emailProperty != null && passwordProperty != null)
+         if (loginProperty != null && emailProperty != null && passwordProperty != null)
          {
-            user     = userProperty.GetValue(AObject).ToString();
+            login     = loginProperty.GetValue(AObject).ToString();
             email    = emailProperty.GetValue(AObject).ToString();
             password = passwordProperty.GetValue(AObject).ToString();
          }
@@ -155,7 +155,7 @@ namespace BaseCodeAPI.Src.Services
          if (!string.IsNullOrEmpty(token))
          {
             var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
-            user     = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "user")?.Value;
+            login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value;
             email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
             password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
          }
@@ -164,7 +164,7 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new ("user", user),
+               new ("login", login),
                new ("email", email),
                new ("secret", password),
             }),

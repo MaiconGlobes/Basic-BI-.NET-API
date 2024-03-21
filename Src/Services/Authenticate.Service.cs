@@ -38,7 +38,7 @@ namespace BaseCodeAPI.Src.Services
             {
                var newObject = new
                {
-                  user     = userModelDto.Apelido,
+                  login    = userModelDto.Login,
                   email    = userModelDto.Email,
                   password = userModelDto.Senha,
                };

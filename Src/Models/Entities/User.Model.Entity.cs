@@ -20,10 +20,10 @@ namespace BaseCodeAPI.Src.Models.Entity
       [Column("id")]
       public int Id { get; set; }
 
-      [JsonPropertyName("apelido")]
-      [Column("apelido", TypeName = "varchar")]
-      [MaxLength(35)]
-      public string Apelido { get; set; }
+      [JsonPropertyName("login")]
+      [Column("login", TypeName = "varchar")]
+      [MaxLength(15)]
+      public string Login { get; set; }
 
       [Column("email", TypeName = "varchar")]
       [MaxLength(255)]
