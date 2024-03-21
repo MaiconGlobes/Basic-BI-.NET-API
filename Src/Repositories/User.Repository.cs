@@ -21,7 +21,7 @@ namespace BaseCodeAPI.Src.Repositories
       public async Task<UserModel> GetOneRegisterAsync(UserModel AModel)
       {
          return await FRepositoryBase.GetEntity<UserModel>()
-                                     .Where(user => user.Login == AModel.Login && user.Email == AModel.Email && user.Senha == AModel.Senha)
+                                     .Where(user => user.Login == AModel.Login.ToLower() && user.Email == AModel.Email && user.Senha == AModel.Senha)
                                      .SingleOrDefaultAsync();
       }
 

@@ -38,9 +38,9 @@ namespace BaseCodeAPI.Src.Services
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
 
-            string login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value;
-            string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-            string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+            string login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value?.ToLower();
+            string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value?.ToLower();
+            string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value?.ToLower();
 
             var userModel   = new UserModel { Login = login, Email = email, Senha = password };
             userModel.Senha = this.EncryptPassword(password);
@@ -108,9 +108,9 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new ("login", AModel.Login),
-               new ("email", AModel.Email),
-               new ("secret", AModel.Senha),
+               new ("login", AModel.Login.ToLower()),
+               new ("email", AModel.Email.ToLower()),
+               new ("secret", AModel.Senha.ToLower()),
             }),
             Expires = DateTime.UtcNow.AddMinutes(AExpirationMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -144,13 +144,13 @@ namespace BaseCodeAPI.Src.Services
 
          if (loginProperty != null && emailProperty != null && passwordProperty != null)
          {
-            login     = loginProperty.GetValue(AObject).ToString();
-            email    = emailProperty.GetValue(AObject).ToString();
-            password = passwordProperty.GetValue(AObject).ToString();
+            login     = loginProperty.GetValue(AObject).ToString().ToLower();
+            email     = emailProperty.GetValue(AObject).ToString().ToLower();
+            password  = passwordProperty.GetValue(AObject).ToString().ToLower();
          }
 
          if (tokenProperty != null)
-            token = tokenProperty.GetValue(AObject).ToString();
+            token = tokenProperty.GetValue(AObject).ToString().ToLower();
 
          if (!string.IsNullOrEmpty(token))
          {
