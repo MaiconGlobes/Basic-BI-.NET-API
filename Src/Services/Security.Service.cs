@@ -37,15 +37,11 @@ namespace BaseCodeAPI.Src.Services
             var tokenUserModelDto = AModel as TokenUserModelDto;
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
-
-            string login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value?.ToLower();
-            string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value?.ToLower();
-            string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value?.ToLower();
-
-            var userModel   = new UserModel { Login = login, Email = email, Senha = password };
-            userModel.Senha = this.EncryptPassword(password);
-
-            var usersObject = await userRepository.GetOneRegisterAsync(userModel);
+            var login             = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value?.ToLower();
+            var email             = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value?.ToLower();
+            var password          = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value?.ToLower();
+            var userModel         = new UserModel { Login = login, Email = email, Senha = password };
+            var usersObject       = await userRepository.GetOneRegisterAsync(userModel);
 
             if (usersObject != null)
             {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("No Company")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ea242d3a5889f55f1dab89b3ec8dd9a43858e9d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39b38400cd673bcf85d702b8b6a0d45d8b34b2c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Basic-BI-.NET-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Basic-BI-.NET-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
