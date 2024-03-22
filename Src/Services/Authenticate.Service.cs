@@ -29,6 +29,9 @@ namespace BaseCodeAPI.Src.Services
          {
             var userModelDto = AModel as UserModelDto;
             var user         = this.FMapper.Map<UserModel>(userModelDto);
+
+            user.Senha = SecurityService.New().EncryptPassword(userModelDto.Senha);
+
             var usersObject  = await FIRepository.GetOneRegisterAsync(user);
 
             if (usersObject != null)
@@ -37,7 +40,7 @@ namespace BaseCodeAPI.Src.Services
                {
                   login    = userModelDto.Login,
                   email    = userModelDto.Email,
-                  password = userModelDto.Senha,
+                  password = user.Senha,
                };
 
                var newToken = SecurityService.New().GenerateToken(newObject);
@@ -50,7 +53,7 @@ namespace BaseCodeAPI.Src.Services
                return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(objReturn));
             }
 
-            return UtilsClass.New().ProcessExceptionMessage(new Exception("Ooops! Acesso não autorizado."));
+            return UtilsClass.New().ProcessExceptionMessage(new Exception("Dados de autenticação inválidos!"));
          }
          catch (Exception ex)
          {
