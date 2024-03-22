@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Basic-BI-.NET-API.props" />
+</Project>

@@ -12,11 +12,11 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("No Company")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ea242d3a5889f55f1dab89b3ec8dd9a43858e9d")]
-[assembly: System.Reflection.AssemblyProductAttribute("BaseCodeAPI")]
-[assembly: System.Reflection.AssemblyTitleAttribute("BaseCodeAPI")]
+[assembly: System.Reflection.AssemblyProductAttribute("Basic-BI-.NET-API")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Basic-BI-.NET-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.

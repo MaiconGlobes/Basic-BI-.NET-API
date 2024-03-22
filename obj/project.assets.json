@@ -8208,9 +8208,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj",
-      "projectName": "BaseCodeAPI",
-      "projectPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\Basic-BI-.NET-API.csproj",
+      "projectName": "Basic-BI-.NET-API",
+      "projectPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\Basic-BI-.NET-API.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\obj\\",
       "projectStyle": "PackageReference",

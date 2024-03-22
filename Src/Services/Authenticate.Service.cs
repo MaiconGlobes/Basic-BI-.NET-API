@@ -28,11 +28,8 @@ namespace BaseCodeAPI.Src.Services
          try
          {
             var userModelDto = AModel as UserModelDto;
-            var user = this.FMapper.Map<UserModel>(userModelDto);
-
-            user.Senha = SecurityService.New().EncryptPassword(userModelDto.Senha);
-
-            var usersObject = await FIRepository.GetOneRegisterAsync(user);
+            var user         = this.FMapper.Map<UserModel>(userModelDto);
+            var usersObject  = await FIRepository.GetOneRegisterAsync(user);
 
             if (usersObject != null)
             {
@@ -89,6 +86,7 @@ namespace BaseCodeAPI.Src.Services
                if (rowsAffect > 0)
                {
                   userModelDto.PessoaId = person.Id;
+                  userModelDto.Senha    = user.Senha;
                   userModelDto.Token    = SecurityService.New().GenerateToken(userModelDto, 1);
                   userModelDto.Senha    = null;
 
