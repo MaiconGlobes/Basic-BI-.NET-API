@@ -31,7 +31,7 @@ Realiza a cadastro do usuário no banco (sem authorization até o momento (nas p
 - POST : http://localhost:5005/user/register
 ```bash
 {
-  "apelido": "apelido",
+  "login": "login",
   "email": "email.teste@example.com",
   "senha": "123456",
   "pessoa": {
@@ -54,7 +54,7 @@ SUCESSO: 200 OK - [Get com sucesso]
     "dados": [
       {
         "id": 1,
-        "apelido": "Apelido qualquer",
+        "login": "Login qualquer",
         "email": "email.teste@example.com",
         "token": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92...",
         "pessoaId": 1,
@@ -77,7 +77,7 @@ SUCESSO: 201 Created - [Criar registro]
     "codigo_status": 3,
     "dados": [
       {
-        "apelido": "Apelido qualquer",
+        "login": "Login qualquer",
         "email": "email.teste@example.com",
         "token": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
         "pessoaId": 1,

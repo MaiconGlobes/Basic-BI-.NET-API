@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj": {}
+    "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj": {
+    "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj",
         "projectName": "BaseCodeAPI",
-        "projectPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\BaseCodeAPI.csproj",
+        "projectPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\BaseCodeAPI.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Base-Code-API-dotnet\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\OneDrive\\Documentos\\GIT\\Basic-BI-.NET-API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -128,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

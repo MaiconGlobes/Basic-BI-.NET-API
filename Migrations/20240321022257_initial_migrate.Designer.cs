@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseCodeAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240319223856_initial")]
-    partial class initial
+    [Migration("20240321022257_initial_migrate")]
+    partial class initial_migrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,17 +212,17 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<string>("Apelido")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("varchar(35)")
-                        .HasColumnName("apelido");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)")
                         .HasColumnName("email");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar(15)")
+                        .HasColumnName("login");
 
                     b.Property<int>("PessoaId")
                         .HasColumnType("int")
@@ -252,11 +252,11 @@ namespace BaseCodeAPI.Migrations
                         new
                         {
                             Id = 1,
-                            Apelido = "Apelido",
                             Email = "Email1@example.com",
+                            Login = "Login",
                             PessoaId = 1,
-                            Refresh_token = "fd8d18a4-434e-48f4-bc06-4ff77dffe85b",
-                            Senha = "Senha criptografada 43f73388-5505-47fb-8dc4-e7f9ab782eb0"
+                            Refresh_token = "34eb7234-e2eb-4133-a3ad-e55c047c0fe4",
+                            Senha = "Senha criptografada 531bfc60-1314-4d31-a098-9e150472f30c"
                         });
                 });
 

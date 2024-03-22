@@ -47,7 +47,7 @@ namespace BaseCodeAPI.Src
          modelBuilder.Entity<PersonModel>().Property(person => person.Nome).IsRequired();
          modelBuilder.Entity<PersonModel>().Property(person => person.Cpf_cnpj).IsRequired();
 
-         modelBuilder.Entity<UserModel>().Property(user => user.Apelido).IsRequired();
+         modelBuilder.Entity<UserModel>().Property(user => user.Login).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Email).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Senha).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.PessoaId).IsRequired();

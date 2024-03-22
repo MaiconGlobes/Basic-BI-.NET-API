@@ -6,6 +6,7 @@ using BaseCodeAPI.Src.Repositories;
 using BaseCodeAPI.Src.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -37,19 +38,25 @@ namespace BaseCodeAPI.Src.Services
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
 
-            string email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-            string senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+            string login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value?.ToLower();
+            string email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value?.ToLower();
+            string password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value?.ToLower();
 
-            var user = new UserModel { Email = email, Senha = senha };
-            user.Senha = this.EncryptPassword(senha);
+            var userModel   = new UserModel { Login = login, Email = email, Senha = password };
+            userModel.Senha = this.EncryptPassword(password);
 
-            var usersObject = await userRepository.GetOneRegisterAsync(user);
+            var usersObject = await userRepository.GetOneRegisterAsync(userModel);
 
             if (usersObject != null)
             {
                if (!this.IsTokenExpired(usersObject.Refresh_token))
                {
-                  tokenUserModelDto.Token = this.GenerateToken(tokenUserModelDto);
+                  var newObject = new
+                  {
+                     token = tokenUserModelDto.Token
+                  };
+
+                  tokenUserModelDto.Token = this.GenerateToken(newObject);
 
                   return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(tokenUserModelDto));
                }
@@ -101,8 +108,9 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new (ClaimTypes.Email, AModel.Email),
-               new ("secret", AModel.Senha),
+               new ("login", AModel.Login.ToLower()),
+               new ("email", AModel.Email.ToLower()),
+               new ("secret", AModel.Senha.ToLower()),
             }),
             Expires = DateTime.UtcNow.AddMinutes(AExpirationMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -113,33 +121,59 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Gera um token JWT com base nas informações do modelo de token do usuário.
+      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | login = value | email = value | senha = value}
       /// </summary>
-      /// <param name="AModel">O modelo de token do usuário contendo as informações necessárias para gerar o token.</param>
-      /// <returns>O token JWT gerado como uma string.</returns>
-      internal virtual string GenerateToken(TokenUserModelDto AModel)
+      /// <typeparam name="T">O tipo de modelo de dados usado para o login.</typeparam>
+      /// <param name="AModel">O modelo de dados contendo as informações de login do usuário.</param>
+      /// <returns>Um objeto contendo o status da operação e o token de acesso em caso de sucesso, ou uma mensagem de erro em caso de falha.</returns>
+      internal virtual string GenerateToken(object AObject)
       {
-         var secretKey        = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
-         var tokenHandler     = new JwtSecurityTokenHandler();
-         var jwtSecurityToken = tokenHandler.ReadJwtToken(AModel.Token);
-     
-         var key   = Encoding.ASCII.GetBytes(secretKey);
-         var email = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
-         var senha = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+         var secretKey    = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var key          = Encoding.ASCII.GetBytes(secretKey);
+         var login        = string.Empty;
+         var email        = string.Empty;
+         var password     = string.Empty;
+         var token        = string.Empty;
+
+         Type objectType = AObject.GetType();
+         PropertyInfo loginProperty    = objectType.GetProperty("login");
+         PropertyInfo emailProperty    = objectType.GetProperty("email");
+         PropertyInfo passwordProperty = objectType.GetProperty("password");
+         PropertyInfo tokenProperty    = objectType.GetProperty("token");
+
+         if (loginProperty != null && emailProperty != null && passwordProperty != null)
+         {
+            login     = loginProperty.GetValue(AObject).ToString().ToLower();
+            email     = emailProperty.GetValue(AObject).ToString().ToLower();
+            password  = passwordProperty.GetValue(AObject).ToString().ToLower();
+         }
+
+         if (tokenProperty != null)
+            token = tokenProperty.GetValue(AObject).ToString();
+
+         if (!string.IsNullOrEmpty(token))
+         {
+            var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
+            login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value;
+            email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
+            password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
+         }
 
          var tokenDescriptor = new SecurityTokenDescriptor()
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new (ClaimTypes.Email, email),
-               new ("secret", senha),
+               new ("login", login),
+               new ("email", email),
+               new ("secret", password),
             }),
             Expires = DateTime.UtcNow.AddSeconds(60),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
          };
 
-         var token = tokenHandler.CreateToken(tokenDescriptor);
-         return tokenHandler.WriteToken(token);
+         var newToken = tokenHandler.CreateToken(tokenDescriptor);
+         return tokenHandler.WriteToken(newToken);
       }
 
       /// <summary>
