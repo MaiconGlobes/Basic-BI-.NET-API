@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BaseCodeAPI.Migrations
+namespace BasicBI.NETAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240321022257_initial_migrate")]
+    [Migration("20240323011202_initial_migrate")]
     partial class initial_migrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -218,12 +218,6 @@ namespace BaseCodeAPI.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("email");
 
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)")
-                        .HasColumnName("login");
-
                     b.Property<int>("PessoaId")
                         .HasColumnType("int")
                         .HasColumnName("pessoa_id");
@@ -253,10 +247,9 @@ namespace BaseCodeAPI.Migrations
                         {
                             Id = 1,
                             Email = "Email1@example.com",
-                            Login = "Login",
                             PessoaId = 1,
-                            Refresh_token = "34eb7234-e2eb-4133-a3ad-e55c047c0fe4",
-                            Senha = "Senha criptografada 531bfc60-1314-4d31-a098-9e150472f30c"
+                            Refresh_token = "70c44aa7-af41-49f4-b7fd-88274d6e48b9",
+                            Senha = "Senha criptografada e7ee71bc-bf70-47bd-8f70-7002076c05fa"
                         });
                 });
 

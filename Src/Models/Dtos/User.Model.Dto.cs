@@ -11,11 +11,6 @@ namespace BaseCodeAPI.Src.Models.Entity
       [JsonIgnoreAttribute]
       public int Id { get; set; }
 
-      [JsonPropertyName("login")]
-      [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
-      [MaxLength(15, ErrorMessage = "Propriedade {0} deve ter no máximo 15 caracteres")]
-      public string Login { get; set; }
-
       [JsonPropertyName("email")]
       [Required(ErrorMessage = "Propriedade {0} é obrigatória")]
       [MaxLength(255, ErrorMessage = "Propriedade {0} deve ter no máximo 255 caracteres")]

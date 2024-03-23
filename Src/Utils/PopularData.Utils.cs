@@ -28,7 +28,6 @@ namespace BaseCodeAPI.Src.Utils
          return new UserModel()
          {
             Id = 1,
-            Login = "Login",
             Email = "Email1@example.com",
             Senha = $"Senha criptografada {Guid.NewGuid()}",
             Refresh_token = Guid.NewGuid().ToString(),

@@ -37,10 +37,9 @@ namespace BaseCodeAPI.Src.Services
             var tokenUserModelDto = AModel as TokenUserModelDto;
             var tokenHandler      = new JwtSecurityTokenHandler();
             var jwtSecurityToken  = tokenHandler.ReadJwtToken(tokenUserModelDto.Token);
-            var login             = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value?.ToLower();
             var email             = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value?.ToLower();
             var password          = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value?.ToLower();
-            var userModel         = new UserModel { Login = login, Email = email, Senha = password };
+            var userModel         = new UserModel {Email = email, Senha = password };
             var usersObject       = await userRepository.GetOneRegisterAsync(userModel);
 
             if (usersObject != null)
@@ -104,7 +103,6 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new ("login", AModel.Login.ToLower()),
                new ("email", AModel.Email.ToLower()),
                new ("secret", AModel.Senha.ToLower()),
             }),
@@ -117,7 +115,7 @@ namespace BaseCodeAPI.Src.Services
       }
 
       /// <summary>
-      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | login = value | email = value | senha = value}
+      /// Processa o login do usuário com base nos dados fornecidos no modelo especificado gerando um token JWT com base nas informações do modelo de token do usuário no formato de objeto => new {token = value | email = value | senha = value}
       /// </summary>
       /// <typeparam name="T">O tipo de modelo de dados usado para o login.</typeparam>
       /// <param name="AModel">O modelo de dados contendo as informações de login do usuário.</param>
@@ -127,20 +125,17 @@ namespace BaseCodeAPI.Src.Services
          var secretKey    = ConfigurationModel.New().FIConfigRoot.GetConnectionString("SecretKeyToken");
          var tokenHandler = new JwtSecurityTokenHandler();
          var key          = Encoding.ASCII.GetBytes(secretKey);
-         var login        = string.Empty;
          var email        = string.Empty;
          var password     = string.Empty;
          var token        = string.Empty;
 
          Type objectType = AObject.GetType();
-         PropertyInfo loginProperty    = objectType.GetProperty("login");
          PropertyInfo emailProperty    = objectType.GetProperty("email");
          PropertyInfo passwordProperty = objectType.GetProperty("password");
          PropertyInfo tokenProperty    = objectType.GetProperty("token");
 
-         if (loginProperty != null && emailProperty != null && passwordProperty != null)
+         if (emailProperty != null && passwordProperty != null)
          {
-            login     = loginProperty.GetValue(AObject).ToString().ToLower();
             email     = emailProperty.GetValue(AObject).ToString().ToLower();
             password  = passwordProperty.GetValue(AObject).ToString().ToLower();
          }
@@ -151,7 +146,6 @@ namespace BaseCodeAPI.Src.Services
          if (!string.IsNullOrEmpty(token))
          {
             var jwtSecurityToken = tokenHandler.ReadJwtToken(token);
-            login    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "login")?.Value;
             email    = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "email")?.Value;
             password = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "secret")?.Value;
          }
@@ -160,7 +154,6 @@ namespace BaseCodeAPI.Src.Services
          {
             Subject = new ClaimsIdentity(new Claim[]
             {
-               new ("login", login),
                new ("email", email),
                new ("secret", password),
             }),

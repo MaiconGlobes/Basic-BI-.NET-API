@@ -38,7 +38,6 @@ namespace BaseCodeAPI.Src.Services
             {
                var newObject = new
                {
-                  login    = userModelDto.Login,
                   email    = userModelDto.Email,
                   password = user.Senha,
                };
@@ -53,7 +52,7 @@ namespace BaseCodeAPI.Src.Services
                return ((byte)GlobalEnum.eStatusProc.Sucesso, ResponseUtils.Instancia().ReturnOk(objReturn));
             }
 
-            return UtilsClass.New().ProcessExceptionMessage(new Exception("Dados de autenticação inválidos!"));
+            return UtilsClass.New().ProcessExceptionMessage(new Exception("Email e/ou senha inválidos!"));
          }
          catch (Exception ex)
          {

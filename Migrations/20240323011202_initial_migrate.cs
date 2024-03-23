@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BaseCodeAPI.Migrations
+namespace BasicBI.NETAPI.Migrations
 {
     public partial class initial_migrate : Migration
     {
@@ -130,8 +130,6 @@ namespace BaseCodeAPI.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    login = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     senha = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
@@ -169,8 +167,8 @@ namespace BaseCodeAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "usuario",
-                columns: new[] { "id", "email", "login", "pessoa_id", "refresh_token", "senha" },
-                values: new object[] { 1, "Email1@example.com", "Login", 1, "34eb7234-e2eb-4133-a3ad-e55c047c0fe4", "Senha criptografada 531bfc60-1314-4d31-a098-9e150472f30c" });
+                columns: new[] { "id", "email", "pessoa_id", "refresh_token", "senha" },
+                values: new object[] { 1, "Email1@example.com", 1, "70c44aa7-af41-49f4-b7fd-88274d6e48b9", "Senha criptografada e7ee71bc-bf70-47bd-8f70-7002076c05fa" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cliente_pessoa_id",

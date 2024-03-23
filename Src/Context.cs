@@ -47,7 +47,6 @@ namespace BaseCodeAPI.Src
          modelBuilder.Entity<PersonModel>().Property(person => person.Nome).IsRequired();
          modelBuilder.Entity<PersonModel>().Property(person => person.Cpf_cnpj).IsRequired();
 
-         modelBuilder.Entity<UserModel>().Property(user => user.Login).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Email).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.Senha).IsRequired();
          modelBuilder.Entity<UserModel>().Property(user => user.PessoaId).IsRequired();
@@ -90,9 +89,9 @@ namespace BaseCodeAPI.Src
                      .IsRequired()
                      .OnDelete(DeleteBehavior.Cascade);
 
-         modelBuilder.Entity<PersonModel>().HasData(PopularDataUtils.Instancia().PopularPerson());
-         modelBuilder.Entity<UserModel>().HasData(PopularDataUtils.Instancia().PopularUsers());
-         modelBuilder.Entity<AddressModel>().HasData(PopularDataUtils.Instancia().PopularAddress());
+         //modelBuilder.Entity<PersonModel>().HasData(PopularDataUtils.Instancia().PopularPerson());
+         //modelBuilder.Entity<UserModel>().HasData(PopularDataUtils.Instancia().PopularUsers());
+         //modelBuilder.Entity<AddressModel>().HasData(PopularDataUtils.Instancia().PopularAddress());
 
          base.OnModelCreating(modelBuilder);
       }
