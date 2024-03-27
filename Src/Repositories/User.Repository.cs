@@ -34,22 +34,22 @@ namespace BaseCodeAPI.Src.Repositories
          var users = await FRepositoryBase.GetEntity<UserModel>().Include(u => u.Person).ToListAsync();
 
          var result = await FRepositoryBase.GetEntity<UserModel>()
-                          .Include(u => u.Person)
-                          .Select(u => new UserModel
-                          {
-                             Id = u.Id,
-                             Email = u.Email,
-                             Senha = u.Senha,
-                             PessoaId = u.PessoaId,
-                             Person = new PersonModel 
-                             {
-                                Nome = u.Person.Nome,
-                                Cpf_cnpj = u.Person.Cpf_cnpj,
-                                Telefone = u.Person.Telefone,
-                                Addresses = u.Person.Addresses,
-                             },
-                          })
-                          .ToListAsync();
+                                           .Include(u => u.Person)
+                                           .Select(u => new UserModel
+                                           {
+                                              Id = u.Id,
+                                              Email = u.Email,
+                                              Senha = u.Senha,
+                                              PessoaId = u.PessoaId,
+                                              Person = new PersonModel 
+                                              {
+                                                 Nome = u.Person.Nome,
+                                                 Cpf_cnpj = u.Person.Cpf_cnpj,
+                                                 Telefone = u.Person.Telefone,
+                                                 Addresses = u.Person.Addresses,
+                                              },
+                                           })
+                                           .ToListAsync();
 
          return result;
       }

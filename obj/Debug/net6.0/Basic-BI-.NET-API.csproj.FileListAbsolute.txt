@@ -1,8 +1,8 @@
-C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Insomnia_2024-03-19.json
-C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\settingsconfig.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.deps_.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.Development.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.json
+C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Insomnia_2024-03-19.json
+C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\settingsconfig.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.exe
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.deps.json
 C:\Users\Usuario\OneDrive\Documentos\GIT\Basic-BI-.NET-API\bin\Debug\net6.0\Basic-BI-.NET-API.runtimeconfig.json
