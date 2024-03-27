@@ -28,8 +28,8 @@ namespace BaseCodeAPI.Src.Utils
       private Func<Exception, object> GetDuplicateEntryError()
       {
          return ex => {
-            int indexForKey = ex.InnerException.Message.IndexOf("for key");
-            string errorMessage = ex.InnerException.Message[..indexForKey].Trim();
+            var indexForKey  = ex.InnerException.Message.IndexOf("for key");
+            var errorMessage = ex.InnerException.Message[..indexForKey].Trim();
             errorMessage = errorMessage.Replace("Duplicate entry", "Registro já cadastrado para");
 
             var exceptionReturn = new Exception(errorMessage);
